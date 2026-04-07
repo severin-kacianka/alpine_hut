@@ -3,15 +3,16 @@ Alpine Hut Search
 Find huts near a location and rank them by 5-day weather forecast.
 
 Usage:
-    python hut_search.py <location> <distance_km> [--source CSV]
+    python hut_search.py <location> <distance_km> [--source CSV] [--min-elevation M]
 
     e.g.  python hut_search.py "Innsbruck" 50
           python hut_search.py "Chamonix, France" 25
           python hut_search.py "8001" 100 --source data/alpine_huts_full.csv
+          python hut_search.py "Innsbruck" 50 --min-elevation 1500
 
 Output:
     Pretty-printed ranked table on stdout.
-    CSV saved to results/<location>_<distance>km_weather.csv
+    CSV saved to results/<location>_<distance>km[_<elev>m]_weather.csv
 
 Tune DAY_WEIGHTS to emphasize specific days, e.g.:
     [1, 1, 1, 1, 1]  — equal weight across all 5 days
@@ -104,8 +105,9 @@ def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return R * 2 * math.asin(math.sqrt(a))
 
 
-def filter_huts(source_csv: str, lat: float, lon: float, radius_km: float) -> list[dict]:
-    """Load CSV, filter by radius, return sorted list of HutRecord dicts."""
+def filter_huts(source_csv: str, lat: float, lon: float, radius_km: float,
+                min_elevation: float | None = None) -> list[dict]:
+    """Load CSV, filter by radius (and optionally elevation), return sorted list of HutRecord dicts."""
     df = pd.read_csv(source_csv)
     df = df[df["official_name"].notna() & df["latitude"].notna() & df["longitude"].notna()].copy()
 
@@ -113,6 +115,9 @@ def filter_huts(source_csv: str, lat: float, lon: float, radius_km: float) -> li
         lambda row: haversine_km(lat, lon, row["latitude"], row["longitude"]), axis=1
     )
     nearby = df[df["distance_km"] <= radius_km].sort_values("distance_km").reset_index(drop=True)
+
+    if min_elevation is not None:
+        nearby = nearby[nearby["elevation_m"].notna() & (nearby["elevation_m"] >= min_elevation)]
 
     records = []
     for _, row in nearby.iterrows():
@@ -292,7 +297,8 @@ def _day_summary(day_index: int, forecast: dict) -> str:
     return f"{label:<14}{temp_str}"
 
 
-def print_table(hut_records: list[dict], location_name: str, radius_km: float) -> None:
+def print_table(hut_records: list[dict], location_name: str, radius_km: float,
+                min_elev: float | None = None) -> None:
     day_headers = []
     for h in hut_records:
         if h.get("forecast") and h["forecast"].get("time"):
@@ -320,7 +326,8 @@ def print_table(hut_records: list[dict], location_name: str, radius_km: float) -
     )
 
     weights_str = str(DAY_WEIGHTS)
-    print(f"\nHuts within {radius_km:.0f} km of {location_name}  |  day weights: {weights_str}")
+    elev_str = f"  |  min elevation: {min_elev:.0f}m" if min_elev is not None else ""
+    print(f"\nHuts within {radius_km:.0f} km of {location_name}{elev_str}  |  day weights: {weights_str}")
     print(sep)
     print(header)
     print(sep)
@@ -394,6 +401,10 @@ def main() -> None:
         "--source", default=DEFAULT_SOURCE,
         help=f"Huts CSV to search (default: {DEFAULT_SOURCE})"
     )
+    parser.add_argument(
+        "--min-elevation", type=float, default=None, metavar="M",
+        help="Exclude huts below this elevation in metres (e.g. --min-elevation 1500)"
+    )
     args = parser.parse_args()
 
     # Geocode
@@ -402,17 +413,20 @@ def main() -> None:
     print(f"Coords:   {lat:.5f}, {lon:.5f}")
 
     # Filter huts
-    huts = filter_huts(args.source, lat, lon, args.distance)
+    huts = filter_huts(args.source, lat, lon, args.distance, args.min_elevation)
     if not huts:
-        sys.exit(f"No huts found within {args.distance} km of {args.location!r}.")
-    print(f"Found {len(huts)} huts within {args.distance:.0f} km")
+        elev_hint = f" above {args.min_elevation:.0f}m" if args.min_elevation else ""
+        sys.exit(f"No huts found within {args.distance} km of {args.location!r}{elev_hint}.")
+    elev_hint = f" above {args.min_elevation:.0f}m" if args.min_elevation else ""
+    print(f"Found {len(huts)} huts within {args.distance:.0f} km{elev_hint}")
 
-    # Cache path: results/<slug>_<distance>km_cache.json
+    # Cache and output paths: results/<slug>_<distance>km[_<elev>m]_*
     os.makedirs(RESULTS_DIR, exist_ok=True)
-    slug       = re.sub(r"[^\w]+", "_", args.location).strip("_").lower()
-    stem       = f"{slug}_{args.distance:.0f}km"
-    cache_path = os.path.join(RESULTS_DIR, f"{stem}_cache.json")
-    out_csv    = os.path.join(RESULTS_DIR, f"{stem}_weather.csv")
+    slug        = re.sub(r"[^\w]+", "_", args.location).strip("_").lower()
+    elev_suffix = f"_{args.min_elevation:.0f}m" if args.min_elevation else ""
+    stem        = f"{slug}_{args.distance:.0f}km{elev_suffix}"
+    cache_path  = os.path.join(RESULTS_DIR, f"{stem}_cache.json")
+    out_csv     = os.path.join(RESULTS_DIR, f"{stem}_weather.csv")
 
     # Fetch forecasts
     huts = load_or_fetch_forecasts(huts, cache_path)
@@ -421,7 +435,7 @@ def main() -> None:
     huts = score_all_huts(huts)
 
     # Output
-    print_table(huts, display_name.split(",")[0], args.distance)
+    print_table(huts, display_name.split(",")[0], args.distance, args.min_elevation)
     save_csv(huts, out_csv)
 
 
