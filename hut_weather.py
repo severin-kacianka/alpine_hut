@@ -30,8 +30,9 @@ DAY_WEIGHTS         = [1, 1, 1, 1, 1]   # change to e.g. [1,2,3,4,5] to weight f
 CACHE_MAX_AGE_HOURS = 6
 API_BASE_URL        = "https://api.open-meteo.com/v1/forecast"
 API_TIMEOUT_SEC     = 30
-MAX_WORKERS         = 3
+MAX_WORKERS         = 1
 BATCH_SIZE          = 17
+BATCH_PAUSE_SEC     = 1.5   # pause between Open-Meteo batch requests to avoid 429s
 
 # Component weights within a single day's score (must sum to 1.0)
 SCORE_WEIGHTS = {
@@ -194,6 +195,8 @@ def fetch_all_forecasts(hut_records: list[dict]) -> list[dict]:
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         for idx, chunk in enumerate(chunks):
             futures_map[executor.submit(fetch_batch, chunk)] = idx
+            if idx < len(chunks) - 1:
+                time.sleep(BATCH_PAUSE_SEC)
 
         for future in as_completed(futures_map):
             chunk_idx = futures_map[future]
