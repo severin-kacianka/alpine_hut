@@ -1,93 +1,158 @@
-# alpine_hut
+# Alpine Hut Weather Planner
 
+Find alpine huts near a location and rank them by forecast weather quality. Uses free, no-signup APIs throughout.
 
+## Scripts
 
-## Getting started
+| Script | Purpose |
+|---|---|
+| `hut_search.py` | Main tool: geocode a location, filter huts by distance/elevation, rank by weather |
+| `hut_weather.py` | Rank huts from any CSV by weather (no location filter) |
+| `filter_huts.py` | Create distance-filtered CSVs (10/25/50/100 km) without weather data |
+| `data/get_huts.py` | Data collection: fetch hut data from SAC API and OpenStreetMap |
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Quick start
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+```bash
+# Activate the virtual environment
+source .venv/bin/activate
 
-## Add your files
+# Find huts within 50 km of Innsbruck, ranked by weather
+python hut_search.py "Innsbruck" 50
 
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+# Only show huts above 1500m
+python hut_search.py "Innsbruck" 50 --min-elevation 1500
+
+# Works with place names, postcodes, regions
+python hut_search.py "Chamonix, France" 25
+python hut_search.py "6020" 40
+```
+
+## hut_search.py
+
+The main entry point. Combines geocoding, distance filtering, weather fetching, and ranking.
 
 ```
-cd existing_repo
-git remote add origin https://git.fortiss.org/CCE/alpine_hut.git
-git branch -M main
-git push -uf origin main
+python hut_search.py <location> <distance_km> [options]
+
+Arguments:
+  location        Place name or postcode (quoted if it contains spaces)
+  distance_km     Search radius in kilometres
+
+Options:
+  --min-elevation M   Exclude huts below M metres (huts with unknown elevation
+                      are also excluded when this flag is set)
+  --source CSV        Huts database to search (default: data/alpine_huts_full.csv)
 ```
 
-## Integrate with your tools
+**Output:**
+- Ranked table printed to stdout
+- CSV saved to `results/<location>_<distance>km[_<elev>m]_weather.csv`
 
-* [Set up project integrations](https://git.fortiss.org/CCE/alpine_hut/-/settings/integrations)
+**Example output:**
+```
+Huts within 25 km of Innsbruck  |  min elevation: 1800m  |  day weights: [1, 1, 1, 1, 1]
+──────────────────────────────────────────────────────────────────────────────────
+   #  Hut                              Dist  Elev Score  04-07    04-08    ...
+──────────────────────────────────────────────────────────────────────────────────
+   1  Poltnalm                       19.1km 1860m  91.6  Overcast 11°  ...
+   2  Stöcklalm                      19.5km 1882m  91.5  Overcast 11°  ...
+```
 
-## Collaborate with your team
+## hut_weather.py
 
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+Ranks all huts in a given CSV by weather. Useful for working with pre-filtered CSV files.
 
-## Test and Deploy
+```
+python hut_weather.py <input.csv>
+```
 
-Use the built-in continuous integration in GitLab.
+```bash
+# Rank all huts in a file
+python hut_weather.py data/sample_huts.csv
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
+# Combine with filter_huts.py output
+python hut_weather.py data/innsbruck/innsbruck_50km.csv
+```
 
-***
+## filter_huts.py
 
-# Editing this README
+Creates four distance-filtered CSVs (10/25/50/100 km) from the full database.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```
+python filter_huts.py <location> <huts.csv>
+```
 
-## Suggestions for a good README
+```bash
+python filter_huts.py "Innsbruck" data/alpine_huts_full.csv
+# → data/innsbruck/innsbruck_10km.csv
+# → data/innsbruck/innsbruck_25km.csv
+# → data/innsbruck/innsbruck_50km.csv
+# → data/innsbruck/innsbruck_100km.csv
+```
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Each output CSV includes all original columns plus `distance_km`, sorted nearest-first.
 
-## Name
-Choose a self-explaining name for your project.
+## Tuning the weather score
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Open `hut_search.py` or `hut_weather.py` and edit the constants at the top of the file.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**`DAY_WEIGHTS`** — controls how much each of the 5 forecast days contributes to the final score:
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+```python
+DAY_WEIGHTS = [1, 1, 1, 1, 1]   # equal — default
+DAY_WEIGHTS = [1, 2, 3, 4, 5]   # weight weekend / later days more
+DAY_WEIGHTS = [5, 4, 3, 2, 1]   # trust near-term forecast more
+DAY_WEIGHTS = [0, 0, 1, 1, 1]   # ignore today and tomorrow
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+**`SCORE_WEIGHTS`** — controls how each weather variable contributes to a day's score:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+```python
+SCORE_WEIGHTS = {
+    "precipitation": 0.35,   # rain/snow (most important)
+    "wind":          0.25,   # wind speed
+    "weathercode":   0.25,   # WMO weather condition code
+    "temperature":   0.15,   # max temperature (peak score: 5–25°C)
+}
+```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+**Scoring thresholds:**
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+| Variable | Best (100) | Worst (0) |
+|---|---|---|
+| Precipitation | 0 mm | ≥ 20 mm |
+| Wind | ≤ 20 km/h | ≥ 80 km/h |
+| Weather code | Clear (0–2) | Thunderstorm (95+) |
+| Temperature | 5–25°C | < 0°C or > 35°C |
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Data
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**`data/alpine_huts_full.csv`** — ~4,100 alpine huts across the Alps, combining:
+- Swiss Alpine Club (SAC) official data
+- OpenStreetMap (via Overpass API)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Columns: `official_name`, `operating_club`, `hut_id`, `latitude`, `longitude`, `elevation_m`, `email`, `phone_number`, `official_website_url`, `capacity_beds`, `source_url`
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Re-fetch fresh data:
+```bash
+python data/get_huts.py
+```
 
-## License
-For open source projects, say how it is licensed.
+## APIs used
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+| API | Used for | Key required |
+|---|---|---|
+| [Open-Meteo](https://open-meteo.com) | 5-day weather forecasts | No |
+| [Nominatim / OSM](https://nominatim.org) | Geocoding place names to lat/lon | No |
+| SAC API / Overpass | Hut data collection (`get_huts.py`) | No |
+
+Forecast data is cached for 6 hours in `results/*_cache.json` to avoid redundant API calls. Delete a cache file to force a fresh fetch.
+
+## Dependencies
+
+```bash
+pip install requests pandas
+```
+
+Python 3.10+ required (uses `float | None` union syntax).

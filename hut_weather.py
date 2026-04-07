@@ -1,9 +1,12 @@
 """
 Alpine Hut Weather Ranker
-Fetches 5-day forecasts for a sample of alpine huts and ranks them by weather quality.
+Fetches 5-day forecasts for alpine huts from a CSV and ranks them by weather quality.
 
 Usage:
-    python hut_weather.py
+    python hut_weather.py <input.csv>
+
+    e.g.  python hut_weather.py data/sample_huts.csv
+          python hut_weather.py data/alpine_huts_full.csv
 
 Tune DAY_WEIGHTS to emphasize specific days, e.g.:
     [1, 1, 1, 1, 1]  — equal weight across all 5 days
@@ -11,6 +14,7 @@ Tune DAY_WEIGHTS to emphasize specific days, e.g.:
     [5, 4, 3, 2, 1]  — weight nearer days more heavily
 """
 
+import argparse
 import json
 import math
 import os
@@ -21,18 +25,14 @@ import pandas as pd
 import requests
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-SAMPLE_SIZE         = 50
-RANDOM_SEED         = 42
 FORECAST_DAYS       = 5
 DAY_WEIGHTS         = [1, 1, 1, 1, 1]   # change to e.g. [1,2,3,4,5] to weight future days more
-CACHE_FILE          = "data/weather_cache.json"
 CACHE_MAX_AGE_HOURS = 6
-SAMPLE_FILE         = "data/sample_huts.csv"
-SOURCE_CSV          = "data/alpine_huts_full.csv"
 API_BASE_URL        = "https://api.open-meteo.com/v1/forecast"
 API_TIMEOUT_SEC     = 30
-MAX_WORKERS         = 3
-BATCH_SIZE          = 17   # 50 huts → 3 batches of ~17
+MAX_WORKERS         = 1
+BATCH_SIZE          = 17
+BATCH_PAUSE_SEC     = 1.5   # pause between Open-Meteo batch requests to avoid 429s
 
 # Component weights within a single day's score (must sum to 1.0)
 SCORE_WEIGHTS = {
@@ -84,18 +84,16 @@ WMO_DESCRIPTIONS = {
 }
 
 
-# ── Step 0: Sampling ───────────────────────────────────────────────────────────
+# ── Step 0: Load CSV ──────────────────────────────────────────────────────────
 
-def load_and_sample(csv_path: str, n: int, seed: int, output_path: str) -> list[dict]:
-    """Load the huts CSV, sample n huts, save sample, return as list of HutRecord dicts."""
+def load_huts(csv_path: str) -> list[dict]:
+    """Load all huts from a CSV file and return as a list of HutRecord dicts."""
     df = pd.read_csv(csv_path)
-    df = df[df["official_name"].notna()]
-    sample = df.sample(n=n, random_state=seed).reset_index(drop=True)
-    sample.to_csv(output_path, index=False)
-    print(f"Sampled {len(sample)} huts → {output_path}")
+    df = df[df["official_name"].notna()].reset_index(drop=True)
+    print(f"Loaded {len(df)} huts from {csv_path}")
 
     records = []
-    for _, row in sample.iterrows():
+    for _, row in df.iterrows():
         elev = row.get("elevation_m")
         records.append({
             "official_name":  str(row["official_name"]),
@@ -197,6 +195,8 @@ def fetch_all_forecasts(hut_records: list[dict]) -> list[dict]:
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         for idx, chunk in enumerate(chunks):
             futures_map[executor.submit(fetch_batch, chunk)] = idx
+            if idx < len(chunks) - 1:
+                time.sleep(BATCH_PAUSE_SEC)
 
         for future in as_completed(futures_map):
             chunk_idx = futures_map[future]
@@ -422,8 +422,16 @@ def print_summary_stats(hut_records: list[dict]) -> None:
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    huts = load_and_sample(SOURCE_CSV, SAMPLE_SIZE, RANDOM_SEED, SAMPLE_FILE)
-    huts = load_or_fetch_forecasts(huts, CACHE_FILE, CACHE_MAX_AGE_HOURS)
+    parser = argparse.ArgumentParser(description="Rank alpine huts by 5-day weather forecast.")
+    parser.add_argument("csv", help="Path to huts CSV file (e.g. data/sample_huts.csv)")
+    args = parser.parse_args()
+
+    # Derive cache file name from the input CSV (e.g. data/sample_huts.csv → data/sample_huts_cache.json)
+    base = os.path.splitext(args.csv)[0]
+    cache_path = base + "_cache.json"
+
+    huts = load_huts(args.csv)
+    huts = load_or_fetch_forecasts(huts, cache_path, CACHE_MAX_AGE_HOURS)
     huts = score_all_huts(huts, DAY_WEIGHTS)
     print_ranked_table(huts)
     print_summary_stats(huts)
