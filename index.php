@@ -15,7 +15,7 @@ define('BATCH_SIZE',     17);
 define('BATCH_PAUSE',    1.5);   // seconds between Open-Meteo batch requests
 define('CACHE_TTL',      86400); // 24 hours in seconds
 define('NOMINATIM_URL',  'https://nominatim.openstreetmap.org/search');
-define('OPENMETEO_URL',  'https://api.open-meteo.com/v1/forecast');
+define('OPENMETEO_URL',  'http://api.open-meteo.com/v1/forecast');
 define('USER_AGENT',     'alpine-hut-search/1.0');
 
 // ---------------------------------------------------------------------------
@@ -362,6 +362,21 @@ function wmo_description(?int $code): string {
     return $map[$code] ?? "Code $code";
 }
 
+function wmo_icon(?int $code): string {
+    if ($code === null) return '';
+    if ($code === 0)             return '☀️';
+    if ($code === 1)             return '🌤️';
+    if ($code === 2)             return '⛅';
+    if ($code === 3)             return '☁️';
+    if ($code <= 48)             return '🌫️';  // fog / rime fog
+    if ($code <= 57)             return '🌦️';  // drizzle
+    if ($code <= 67)             return '🌧️';  // rain / freezing rain
+    if ($code <= 77)             return '❄️';   // snow
+    if ($code <= 82)             return '🌦️';  // showers
+    if ($code <= 86)             return '🌨️';  // snow showers
+    return '⛈️';                               // thunderstorm
+}
+
 // ---------------------------------------------------------------------------
 // Rendering helpers
 // ---------------------------------------------------------------------------
@@ -500,7 +515,7 @@ function render_results(
                 $wind    = isset($fc['windspeed_10m_max'][$d]) ? (float)$fc['windspeed_10m_max'][$d] : null;
                 $dscore  = $hut['daily_scores'][$d] ?? null;
 
-                $wmo_s   = wmo_description($wcode);
+                $wmo_s   = wmo_icon($wcode) . ' ' . wmo_description($wcode);
                 $tmax_s  = $tmax !== null ? number_format($tmax, 1) . '°' : '—';
                 $prec_s  = $precip !== null ? number_format($precip, 1) . ' mm' : '—';
                 $wind_s  = $wind !== null ? (int)$wind . ' km/h' : '—';
@@ -636,7 +651,7 @@ if ($location !== null && $location !== '') {
 
             if (empty($huts)) {
                 $elev_hint = $min_elevation !== null ? " above {$min_elevation} m elevation" : '';
-                render_error("No huts found within {$distance_km} km of "" . h($location) . ""$elev_hint.");
+                render_error("No huts found within {$distance_km} km of &ldquo;" . h($location) . "&rdquo;$elev_hint.");
             } else {
                 $stats = fetch_all_weather($huts, CACHE_PATH);
                 score_all_huts($huts);
