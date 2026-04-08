@@ -181,7 +181,7 @@ function render_results(array $huts, string $display_name, float $distance_km, ?
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table">';
     echo '<thead><tr>';
-    echo '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th>Elevation</th><th>Website</th>';
+    echo '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th>Elevation</th>';
     echo '</tr></thead><tbody>';
 
     foreach ($huts as $i => $hut) {
@@ -191,17 +191,16 @@ function render_results(array $huts, string $display_name, float $distance_km, ?
         $url     = $hut['official_website_url'] ?? '';
         $dist_s  = $hut['distance_km'] . ' km';
         $elev_s2 = $hut['elevation_m'] !== null ? number_format((int)$hut['elevation_m']) . ' m' : '?';
-        $link    = $url !== ''
-                   ? '<a href="' . h($url) . '" target="_blank" title="' . h($url) . '">&#x1F517;</a>'
-                   : '';
+        $name_td = $url !== ''
+                   ? '<a href="' . h($url) . '" target="_blank">' . $name . '</a>'
+                   : $name;
 
         echo "<tr>";
         echo "<td class=\"rank\">$rank</td>";
-        echo "<td class=\"hut-name\">$name</td>";
+        echo "<td class=\"hut-name\">$name_td</td>";
         echo "<td>$club</td>";
         echo "<td class=\"num\">$dist_s</td>";
         echo "<td class=\"num elev\">$elev_s2</td>";
-        echo "<td class=\"center\">$link</td>";
         echo "</tr>\n";
     }
 
@@ -257,7 +256,6 @@ function render_results(array $huts, string $display_name, float $distance_km, ?
     .results-table td.hut-name { font-weight: 600; }
     .results-table td.num { text-align: right; white-space: nowrap; }
     .results-table td.elev { font-weight: 600; color: #495057; }
-    .results-table td.center { text-align: center; font-size: 1rem; }
 
     footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
   </style>
