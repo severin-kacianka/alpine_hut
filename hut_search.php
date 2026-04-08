@@ -263,7 +263,7 @@ function render_results(array $huts, string $display_name, float $distance_km, ?
 <body>
 <header>
   <h1>Alpine Hut Finder</h1>
-  <p>List huts near a location, sorted by elevation &mdash; <a href="index.php" style="color:#adb5bd">switch to weather view</a></p>
+  <p>List huts near a location, sorted by elevation </p>
 </header>
 
 <?php
