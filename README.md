@@ -2,16 +2,31 @@
 
 Find alpine huts near a location and rank them by forecast weather quality. Uses free, no-signup APIs throughout.
 
-## Scripts
+Available as both a **CLI** (Python) and a **web UI** (PHP).
 
-| Script | Purpose |
+## Tools
+
+| Tool | Purpose |
 |---|---|
-| `hut_search.py` | Main tool: geocode a location, filter huts by distance/elevation, rank by weather |
-| `hut_weather.py` | Rank huts from any CSV by weather (no location filter) |
-| `filter_huts.py` | Create distance-filtered CSVs (10/25/50/100 km) without weather data |
+| `index.php` | Web UI: search form + ranked results table, runs on any PHP web server |
+| `hut_search.py` | CLI: geocode a location, filter huts by distance/elevation, rank by weather |
+| `hut_weather.py` | CLI: rank huts from any CSV by weather (no location filter) |
+| `filter_huts.py` | CLI: create distance-filtered CSVs (10/25/50/100 km) without weather data |
 | `data/get_huts.py` | Data collection: fetch hut data from SAC API and OpenStreetMap |
 
-## Quick start
+## Web UI (index.php)
+
+Drop `index.php` alongside the `data/` directory on any PHP 8.0+ web server with the `curl` extension enabled. The `data/` directory must be writable by the web server user (for the weather cache).
+
+Features:
+- Search form with location, radius, and optional minimum elevation
+- Results table with colour-coded scores and emoji weather icons per day
+- Per-hut weather cache (`data/weather_cache.json`, 24 h TTL) — repeat searches are instant
+- No external CSS/JS dependencies
+
+**Note:** the server needs outbound HTTP access to `api.open-meteo.com` (port 80) and `nominatim.openstreetmap.org` (port 443).
+
+## CLI quick start
 
 ```bash
 # Activate the virtual environment
@@ -147,7 +162,9 @@ python data/get_huts.py
 | [Nominatim / OSM](https://nominatim.org) | Geocoding place names to lat/lon | No |
 | SAC API / Overpass | Hut data collection (`get_huts.py`) | No |
 
-Forecast data is cached for 6 hours in `results/*_cache.json` to avoid redundant API calls. Delete a cache file to force a fresh fetch.
+**CLI** forecast data is cached for 6 hours in `results/*_cache.json` to avoid redundant API calls. Delete a cache file to force a fresh fetch.
+
+**Web UI** caches per hut in `data/weather_cache.json` (24 h TTL). Delete that file to force a full refresh.
 
 ## Dependencies
 
