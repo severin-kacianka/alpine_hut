@@ -636,7 +636,7 @@ if ($location !== null && $location !== '') {
 
             if (empty($huts)) {
                 $elev_hint = $min_elevation !== null ? " above {$min_elevation} m elevation" : '';
-                render_error("No huts found within {$distance_km} km of "" . h($location) . ""$elev_hint.");
+                render_error("No huts found within {$distance_km} km of &ldquo;" . h($location) . "&rdquo;$elev_hint.");
             } else {
                 $stats = fetch_all_weather($huts, CACHE_PATH);
                 score_all_huts($huts);
