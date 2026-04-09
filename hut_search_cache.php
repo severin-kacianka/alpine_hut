@@ -395,7 +395,7 @@ function render_results(
                 $is_open = ($status === 'OPEN' || $status === 'SERVICED');
                 if ($free !== null && $free >= $min_places && $is_open) {
                     $beds_cls = 'avail-open';
-                } elseif ($free === 0 || $status === 'FULL') {
+                } elseif ($free === 0 || $status === 'FULL' || ($free !== null && $free < $min_places)) {
                     $beds_cls = 'avail-full';
                 } else {
                     $beds_cls = '';
