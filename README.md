@@ -8,23 +8,43 @@ Available as both a **CLI** (Python) and a **web UI** (PHP).
 
 | Tool | Purpose |
 |---|---|
-| `index.php` | Web UI: search form + ranked results table, runs on any PHP web server |
+| `index.php` | Web UI: search form + ranked results table with weather scores |
+| `hut_search_v2.php` | Web UI: search form + elevation-sorted table + optional bed availability by date range |
+| `hut_availability.php` | CLI/web: query bed availability for a single hut from hut-reservation.org |
 | `hut_search.py` | CLI: geocode a location, filter huts by distance/elevation, rank by weather |
 | `hut_weather.py` | CLI: rank huts from any CSV by weather (no location filter) |
 | `filter_huts.py` | CLI: create distance-filtered CSVs (10/25/50/100 km) without weather data |
 | `data/get_huts.py` | Data collection: fetch hut data from SAC API and OpenStreetMap |
 
-## Web UI (index.php)
+## Web UIs
 
-Drop `index.php` alongside the `data/` directory on any PHP 8.0+ web server with the `curl` extension enabled. The `data/` directory must be writable by the web server user (for the weather cache).
+Both PHP files are self-contained and require only PHP 8.0+ with the `curl` extension.
+
+### index.php — Weather planner
+
+Drop `index.php` alongside the `data/` directory on any PHP 8.0+ web server. The `data/` directory must be writable by the web server user (for the weather cache).
 
 Features:
-- Search form with location, radius, and optional minimum elevation
-- Results table with colour-coded scores and emoji weather icons per day
+- Search by location, radius, and optional minimum elevation
+- Results table ranked by weather score with colour-coded scores and emoji weather icons per day
 - Per-hut weather cache (`data/weather_cache.json`, 24 h TTL) — repeat searches are instant
 - No external CSS/JS dependencies
 
-**Note:** the server needs outbound HTTP access to `api.open-meteo.com` (port 80) and `nominatim.openstreetmap.org` (port 443).
+**Note:** the server needs outbound HTTP to `api.open-meteo.com` (port 80) and HTTPS to `nominatim.openstreetmap.org` (port 443).
+
+### hut_search_v2.php — Elevation finder with bed availability
+
+Drop `hut_search_v2.php` alongside the `data/` directory on any PHP 8.0+ web server.
+
+Features:
+- Search by location, radius, and optional minimum elevation
+- Results sorted by elevation (highest first)
+- Optional date range (up to 14 days): for each hut with a reservation ID, fetches live bed availability from [hut-reservation.org](https://www.hut-reservation.org)
+- Direct booking link per hut when a reservation ID is available
+- API calls spaced 0.5 s apart to avoid rate-limiting
+- No external CSS/JS dependencies
+
+**Note:** the server needs outbound HTTPS to `nominatim.openstreetmap.org` (port 443) and `www.hut-reservation.org` (port 443).
 
 ## CLI quick start
 
@@ -143,13 +163,16 @@ SCORE_WEIGHTS = {
 
 ## Data
 
-**`data/alpine_huts_full.csv`** — ~4,100 alpine huts across the Alps, combining:
+**`data/alpine_huts_full.csv`** — ~4,160 alpine huts across the Alps, combining:
 - Swiss Alpine Club (SAC) official data
 - OpenStreetMap (via Overpass API)
+- Reservation data scraped from hut-reservation.org
 
-Columns: `official_name`, `operating_club`, `hut_id`, `latitude`, `longitude`, `elevation_m`, `email`, `phone_number`, `official_website_url`, `capacity_beds`, `source_url`
+Columns: `official_name`, `operating_club`, `hut_id`, `latitude`, `longitude`, `elevation_m`, `email`, `phone_number`, `official_website_url`, `capacity_beds`, `source_url`, `reservation_id`
 
-Re-fetch fresh data:
+The `reservation_id` column is populated for ~300 huts. When merging new scraped data, scraped values take precedence (matched by name, then by coordinates within 0.5 km).
+
+Re-fetch fresh hut data:
 ```bash
 python data/get_huts.py
 ```
@@ -160,6 +183,7 @@ python data/get_huts.py
 |---|---|---|
 | [Open-Meteo](https://open-meteo.com) | 5-day weather forecasts | No |
 | [Nominatim / OSM](https://nominatim.org) | Geocoding place names to lat/lon | No |
+| [hut-reservation.org](https://www.hut-reservation.org) | Live bed availability by date | No |
 | SAC API / Overpass | Hut data collection (`get_huts.py`) | No |
 
 **CLI** forecast data is cached for 6 hours in `results/*_cache.json` to avoid redundant API calls. Delete a cache file to force a fresh fetch.
