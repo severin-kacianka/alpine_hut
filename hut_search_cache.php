@@ -209,13 +209,15 @@ function render_form(
     ?float  $distance,
     ?float  $min_elevation,
     string  $start_date,
-    string  $end_date
+    string  $end_date,
+    int     $min_places
 ): void {
-    $loc   = h($location ?? '');
-    $dist  = $distance !== null ? (int)$distance : 10;
-    $elev  = $min_elevation !== null ? (int)$min_elevation : '';
-    $start = h($start_date);
-    $end   = h($end_date);
+    $loc    = h($location ?? '');
+    $dist   = $distance !== null ? (int)$distance : 10;
+    $elev   = $min_elevation !== null ? (int)$min_elevation : '';
+    $start  = h($start_date);
+    $end    = h($end_date);
+    $places = $min_places;
     echo <<<HTML
     <form class="search-form" method="get" action="">
       <h2>Search</h2>
@@ -242,6 +244,11 @@ function render_form(
         <div class="form-group">
           <label for="end_date">End date</label>
           <input type="date" id="end_date" name="end_date" value="$end" style="width:145px">
+        </div>
+        <div class="form-group">
+          <label for="places">Min free places</label>
+          <input type="number" id="places" name="places" value="$places"
+                 min="1" max="999" step="1" style="width:90px">
         </div>
         <div class="form-group" style="justify-content:flex-end">
           <button type="submit">Search</button>
@@ -272,7 +279,8 @@ function render_results(
     string  $display_name,
     float   $distance_km,
     ?float  $min_elevation,
-    array   $date_range
+    array   $date_range,
+    int     $min_places
 ): void {
     $total      = count($huts);
     $dn         = h($display_name);
@@ -308,7 +316,7 @@ function render_results(
     echo '<th rowspan="2">Book</th>';
     if ($with_avail) {
         foreach ($day_labels as $lbl) {
-            echo '<th colspan="2" class="day-header">' . h($lbl) . '</th>';
+            echo '<th colspan="1" class="day-header">' . h($lbl) . '</th>';
         }
     }
     echo '</tr>';
@@ -318,7 +326,6 @@ function render_results(
     if ($with_avail) {
         for ($d = 0; $d < count($day_labels); $d++) {
             echo '<th class="sub-hdr">Free beds</th>';
-            echo '<th class="sub-hdr">Status</th>';
         }
     }
     echo '</tr>';
@@ -366,12 +373,11 @@ function render_results(
 
             foreach ($date_range as $date) {
                 if (!$has_res) {
-                    echo '<td class="avail-none" colspan="2">—</td>';
+                    echo '<td class="avail-none">—</td>';
                     continue;
                 }
 
                 if (!isset($avail[$date])) {
-                    echo '<td class="avail-unknown">?</td>';
                     echo '<td class="avail-unknown">?</td>';
                     continue;
                 }
@@ -386,7 +392,8 @@ function render_results(
                     $beds_s .= ' / ' . $total_b;
                 }
 
-                if ($free !== null && $free > 0 && $status === 'OPEN') {
+                $is_open = ($status === 'OPEN' || $status === 'SERVICED');
+                if ($free !== null && $free >= $min_places && $is_open) {
                     $beds_cls = 'avail-open';
                 } elseif ($free === 0 || $status === 'FULL') {
                     $beds_cls = 'avail-full';
@@ -394,14 +401,11 @@ function render_results(
                     $beds_cls = '';
                 }
 
-                $status_s = h($status ?: '?');
-                if ($status === 'OPEN')        $status_cls = 'avail-open';
-                elseif ($status === 'CLOSED')  $status_cls = 'avail-closed';
-                elseif ($status === 'FULL')    $status_cls = 'avail-full';
-                else                           $status_cls = '';
-
-                echo "<td class=\"num $beds_cls\">$beds_s</td>";
-                echo "<td class=\"avail-status $status_cls\">$status_s</td>";
+                if ($status === 'CLOSED') {
+                    echo '<td class="num avail-closed">CLOSED</td>';
+                } else {
+                    echo "<td class=\"num $beds_cls\">$beds_s</td>";
+                }
             }
         }
 
@@ -511,6 +515,7 @@ $distance_km   = isset($_GET['distance'])      && $_GET['distance']      !== '' 
 $min_elevation = isset($_GET['min_elevation']) && $_GET['min_elevation'] !== '' ? (float)$_GET['min_elevation'] : null;
 $start_input   = isset($_GET['start_date'])    ? trim($_GET['start_date'])    : '';
 $end_input     = isset($_GET['end_date'])      ? trim($_GET['end_date'])      : '';
+$min_places    = isset($_GET['places'])        && $_GET['places'] !== '' ? max(1, (int)$_GET['places']) : 1;
 
 // Validate and build date range
 $date_range  = array();
@@ -540,7 +545,7 @@ if ($start_input !== '' || $end_input !== '') {
     }
 }
 
-render_form($location, $distance_km, $min_elevation, $start_input, $end_input);
+render_form($location, $distance_km, $min_elevation, $start_input, $end_input, $min_places);
 
 foreach ($date_errors as $de) {
     echo '<div class="warn-box">' . h($de) . '</div>';
@@ -564,7 +569,7 @@ if ($location !== null && $location !== '') {
                 if (!empty($date_range)) {
                     fetch_all_availability($huts, $date_range);
                 }
-                render_results($huts, $geo['display_name'], $distance_km, $min_elevation, $date_range);
+                render_results($huts, $geo['display_name'], $distance_km, $min_elevation, $date_range, $min_places);
             }
         } catch (RuntimeException $e) {
             echo '<div class="error-box">' . h($e->getMessage()) . '</div>';
