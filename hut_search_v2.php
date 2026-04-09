@@ -239,7 +239,7 @@ function render_form(
     string  $end_date
 ): void {
     $loc   = h($location ?? '');
-    $dist  = $distance !== null ? (int)$distance : 50;
+    $dist  = $distance !== null ? (int)$distance : 10;
     $elev  = $min_elevation !== null ? (int)$min_elevation : '';
     $start = h($start_date);
     $end   = h($end_date);
@@ -276,6 +276,18 @@ function render_form(
       </div>
       <p class="hint">Leave dates empty to skip availability lookup. Max date range: 14 days.</p>
     </form>
+    <script>
+    document.getElementById('start_date').addEventListener('change', function() {
+        var end = document.getElementById('end_date');
+        if (!end.value || end.value <= this.value) {
+            var parts = this.value.split('-');
+            var next = new Date(+parts[0], +parts[1] - 1, +parts[2] + 1);
+            var mm = String(next.getMonth() + 1).padStart(2, '0');
+            var dd = String(next.getDate()).padStart(2, '0');
+            end.value = next.getFullYear() + '-' + mm + '-' + dd;
+        }
+    });
+    </script>
     HTML;
 }
 
@@ -513,7 +525,7 @@ function render_results(
 // Entry point
 // ---------------------------------------------------------------------------
 $location      = isset($_GET['location'])      ? trim($_GET['location'])      : null;
-$distance_km   = isset($_GET['distance'])      && $_GET['distance']      !== '' ? (float)$_GET['distance']      : 50.0;
+$distance_km   = isset($_GET['distance'])      && $_GET['distance']      !== '' ? (float)$_GET['distance']      : 10.0;
 $min_elevation = isset($_GET['min_elevation']) && $_GET['min_elevation'] !== '' ? (float)$_GET['min_elevation'] : null;
 $start_input   = isset($_GET['start_date'])    ? trim($_GET['start_date'])    : '';
 $end_input     = isset($_GET['end_date'])      ? trim($_GET['end_date'])      : '';
