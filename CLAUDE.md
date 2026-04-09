@@ -8,14 +8,17 @@ Tools for finding and ranking alpine huts by weather forecast. Useful for trip p
 
 ```
 index.php              Web UI (search form + ranked HTML table with weather scores)
-hut_search_v2.php      Web UI (search form + elevation-sorted table + bed availability)
+hut_search_v2.php      Web UI (elevation-sorted table + live bed availability via API)
+hut_search_cache.php   Web UI (same as v2 but reads availability from local cache)
 hut_availability.php   CLI/web: query hut-reservation.org availability for a single hut
+update_cache.php       CLI/web: bulk-download reservation availability to reservation_cache/
 hut_search.py          CLI main tool (geocode + filter + weather + rank)
 hut_weather.py         CLI rank huts from a CSV by weather (no location filter)
 filter_huts.py         CLI create distance-filtered CSVs without weather
 data/get_huts.py       Scrape hut data from SAC API + OpenStreetMap
 data/alpine_huts_full.csv   ~4,160 huts across the Alps (merged with reservation data)
 data/weather_cache.json     Per-hut forecast cache used by index.php (24h TTL)
+reservation_cache/     Per-hut availability JSON files (one file per reservation_id)
 results/               Output CSVs and CLI weather cache files (gitignored)
 data/<location>/       Distance-filtered CSVs from filter_huts.py
 ```
@@ -26,7 +29,11 @@ All three CLI scripts are **standalone** — no shared modules. Scoring and fetc
 
 `index.php` is also fully standalone (single file). It replicates the same scoring logic as the Python scripts. If scoring behaviour changes, update all three: `hut_search.py`, `hut_weather.py`, and `index.php`.
 
-`hut_search_v2.php` is a separate standalone file — no shared code with `index.php`. It does not do weather scoring; instead it optionally calls the hut-reservation.org availability API for huts that have a `reservation_id` in the CSV.
+`hut_search_v2.php` is a separate standalone file — no shared code with `index.php`. It does not do weather scoring; instead it optionally calls the hut-reservation.org availability API live for huts that have a `reservation_id` in the CSV.
+
+`hut_search_cache.php` is identical to `hut_search_v2.php` except it reads availability from local `reservation_cache/<id>` files instead of calling the API. Use `update_cache.php` to populate the cache first.
+
+`update_cache.php` iterates a range of reservation IDs and downloads the raw JSON response for each into `reservation_cache/`. Files fresher than 24 h are skipped. Rate-limiting: 0.5 s between requests, 5 s pause every 10 successful fetches, 5 s pause after any HTTP 403.
 
 ### Data flow (hut_search.py)
 1. Geocode location → lat/lon (Nominatim)
@@ -54,7 +61,7 @@ Final hut score = weighted average of 5 daily scores using `DAY_WEIGHTS`.
 
 - **Open-Meteo** (`http://api.open-meteo.com/v1/forecast`) — free, no key, supports batch lat/lon requests (comma-separated). Returns JSON array in same order as input. Rate-limited: `BATCH_PAUSE_SEC = 1.5` between batches avoids 429s. Note: `index.php` uses HTTP (not HTTPS) to avoid SSL issues on servers without outbound 443.
 - **Nominatim** (`https://nominatim.openstreetmap.org/search`) — free OSM geocoding. Requires `User-Agent: alpine-hut-search/1.0` header.
-- **hut-reservation.org** (`https://www.hut-reservation.org/api/v1/reservation/getHutAvailability`) — free, no key. Returns a JSON array of daily availability objects (`date`, `freeBeds`, `hutStatus`, `totalSleepingPlaces`). Used by `hut_search_v2.php` and `hut_availability.php`. Rate-limited: 0.5 s pause between calls in `hut_search_v2.php`.
+- **hut-reservation.org** (`https://www.hut-reservation.org/api/v1/reservation/getHutAvailability`) — free, no key. Returns a JSON array of daily availability objects (`date`, `freeBeds`, `hutStatus`, `totalSleepingPlaces`). Used by `hut_search_v2.php`, `hut_availability.php`, and `update_cache.php`. Rate-limiting in `hut_search_v2.php`: 0.5 s between calls. In `update_cache.php`: 0.5 s between calls + 5 s every 10 successful fetches + 5 s after any HTTP 403. `hut_search_cache.php` makes no API calls (reads from `reservation_cache/` only).
 
 ## Configuration constants (top of each script)
 

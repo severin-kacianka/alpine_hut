@@ -9,7 +9,9 @@ Available as both a **CLI** (Python) and a **web UI** (PHP).
 | Tool | Purpose |
 |---|---|
 | `index.php` | Web UI: search form + ranked results table with weather scores |
-| `hut_search_v2.php` | Web UI: search form + elevation-sorted table + optional bed availability by date range |
+| `hut_search_v2.php` | Web UI: elevation-sorted table + live bed availability from hut-reservation.org |
+| `hut_search_cache.php` | Web UI: same as v2 but reads availability from local cache (instant, no API calls) |
+| `update_cache.php` | CLI/web: bulk-download reservation availability into `reservation_cache/` |
 | `hut_availability.php` | CLI/web: query bed availability for a single hut from hut-reservation.org |
 | `hut_search.py` | CLI: geocode a location, filter huts by distance/elevation, rank by weather |
 | `hut_weather.py` | CLI: rank huts from any CSV by weather (no location filter) |
@@ -32,7 +34,7 @@ Features:
 
 **Note:** the server needs outbound HTTP to `api.open-meteo.com` (port 80) and HTTPS to `nominatim.openstreetmap.org` (port 443).
 
-### hut_search_v2.php — Elevation finder with bed availability
+### hut_search_v2.php — Elevation finder with live bed availability
 
 Drop `hut_search_v2.php` alongside the `data/` directory on any PHP 8.0+ web server.
 
@@ -40,11 +42,30 @@ Features:
 - Search by location, radius, and optional minimum elevation
 - Results sorted by elevation (highest first)
 - Optional date range (up to 14 days): for each hut with a reservation ID, fetches live bed availability from [hut-reservation.org](https://www.hut-reservation.org)
-- Direct booking link per hut when a reservation ID is available
+- Direct booking link and map links (Google Maps, OSM) per hut
 - API calls spaced 0.5 s apart to avoid rate-limiting
 - No external CSS/JS dependencies
 
 **Note:** the server needs outbound HTTPS to `nominatim.openstreetmap.org` (port 443) and `www.hut-reservation.org` (port 443).
+
+### hut_search_cache.php — Elevation finder with cached availability
+
+Same as `hut_search_v2.php` but reads bed availability from the local `reservation_cache/` directory instead of calling the API. Results appear instantly. Requires running `update_cache.php` first to populate the cache.
+
+Compatible with PHP 7.4+ (unlike v2 which requires PHP 8.0+).
+
+### update_cache.php — Bulk availability downloader
+
+Pre-downloads availability data for a range of hut IDs from hut-reservation.org into `reservation_cache/<id>` files (raw JSON, 24 h TTL).
+
+```bash
+# CLI: fetch IDs 1 through 500
+php update_cache.php 1 500
+
+# Web: update_cache.php?start_id=1&end_id=500
+```
+
+Output per ID: `OK`, `SKIP` (still fresh), or `FAIL` with reason. Rate-limiting: 0.5 s between requests, 5 s pause every 10 successful fetches, 5 s pause after any HTTP 403.
 
 ## CLI quick start
 

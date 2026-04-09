@@ -3,10 +3,11 @@
 // Usage (CLI):  php update_cache.php <start_id> <end_id>
 // Usage (web):  update_cache.php?start_id=1&end_id=500
 //
-// Creates/updates reservation_cache/<N> for each ID in the range.
+// IDs with name NOT_FOUND in data/hut_reservation_scraped.csv are skipped (shown as NF).
 // Files older than 24 h are refreshed; fresh files are skipped.
 
 define('CACHE_DIR',       __DIR__ . '/reservation_cache');
+define('CSV_PATH',        __DIR__ . '/data/hut_reservation_scraped.csv');
 define('CACHE_TTL',       86400);  // 24 h in seconds
 define('AVAIL_URL',       'https://www.hut-reservation.org/api/v1/reservation/getHutAvailability');
 define('FETCH_PAUSE_SEC', 0.5);
@@ -45,6 +46,26 @@ if ($start_id < 1 || $end_id < $start_id) {
 }
 
 // ---------------------------------------------------------------------------
+// Load valid IDs from CSV (name = NOT_FOUND means the ID doesn't exist)
+// ---------------------------------------------------------------------------
+$valid_ids = array();  // id => true for fetchable IDs
+$fh = fopen(CSV_PATH, 'r');
+if ($fh !== false) {
+    $hdr = fgetcsv($fh);
+    if ($hdr !== false) {
+        $hcol = array_flip($hdr);
+        while (($row = fgetcsv($fh)) !== false) {
+            $rid  = isset($hcol['id'],   $row[$hcol['id']])   ? (int)trim($row[$hcol['id']])   : 0;
+            $name = isset($hcol['name'], $row[$hcol['name']]) ? trim($row[$hcol['name']]) : '';
+            if ($rid > 0 && strtoupper($name) !== 'NOT_FOUND' && $name !== '') {
+                $valid_ids[$rid] = true;
+            }
+        }
+    }
+    fclose($fh);
+}
+
+// ---------------------------------------------------------------------------
 // Ensure cache directory exists
 // ---------------------------------------------------------------------------
 if (!is_dir(CACHE_DIR)) {
@@ -69,6 +90,13 @@ flush();
 
 for ($id = $start_id; $id <= $end_id; $id++) {
     $file = CACHE_DIR . '/' . $id;
+
+    // Skip IDs marked NOT_FOUND or absent in the CSV
+    if (!isset($valid_ids[$id])) {
+        echo "NF    $id\n";
+        flush();
+        continue;
+    }
 
     // Skip if file is fresh
     if (file_exists($file) && ($now - filemtime($file)) < CACHE_TTL) {
