@@ -346,8 +346,10 @@ function render_results(
         $lon       = $hut['longitude'];
         $gmaps_url = 'https://www.google.com/maps?q=' . $lat . ',' . $lon;
         $osm_url   = 'https://www.openstreetmap.org/?mlat=' . $lat . '&mlon=' . $lon . '&zoom=15';
+        $geo_url   = 'geo:' . $lat . ',' . $lon;
         $map_td    = '<a href="' . h($gmaps_url) . '" target="_blank">G-Maps</a>'
-                   . ' <a href="' . h($osm_url) . '" target="_blank">OSM</a>';
+                   . ' <a href="' . h($osm_url) . '" target="_blank">OSM</a>'
+                   . ' <a href="' . h($geo_url) . '">GEO</a>';
 
         echo "<tr>";
         echo "<td class=\"rank\">$rank</td>";
