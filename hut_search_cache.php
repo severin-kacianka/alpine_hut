@@ -300,10 +300,10 @@ function render_results(
     // First header row
     echo '<tr>';
     echo '<th rowspan="2">#</th>';
-    echo '<th rowspan="2">Hut</th>';
+    echo '<th rowspan="2" class="sortable" data-col="1" data-type="text" onclick="sortTable(this)">Hut <span class="sort-arrow sort-idle">&#8645;</span></th>';
     echo '<th rowspan="2">Club</th>';
-    echo '<th rowspan="2">Distance</th>';
-    echo '<th rowspan="2">Elevation</th>';
+    echo '<th rowspan="2" class="sortable" data-col="3" data-type="num" onclick="sortTable(this)">Distance <span class="sort-arrow">&#9660;</span></th>';
+    echo '<th rowspan="2" class="sortable" data-col="4" data-type="num" onclick="sortTable(this)">Elevation <span class="sort-arrow sort-idle">&#8645;</span></th>';
     echo '<th rowspan="2">Map</th>';
     echo '<th rowspan="2">Book</th>';
     if ($with_avail) {
@@ -465,6 +465,10 @@ function render_results(
                         padding: 6px 8px; text-align: center; white-space: nowrap; }
     .results-table th.day-header { background: var(--sub-bg); }
     .results-table th.sub-hdr    { background: #6c757d; font-size: .75rem; font-weight: 500; }
+    .results-table th.sortable   { cursor: pointer; user-select: none; }
+    .results-table th.sortable:hover { background: #23272b; }
+    .sort-arrow      { font-size: .7rem; opacity: .7; }
+    .sort-arrow.sort-idle { opacity: .35; }
     .results-table td { border: 1px solid var(--border); padding: 5px 8px; vertical-align: middle; }
     .results-table tr:nth-child(even) td { background: #f8f9fa; }
     .results-table tr:hover td { background: #e9f0ff; }
@@ -568,6 +572,58 @@ if ($location !== null && $location !== '') {
     }
 }
 ?>
+
+<script>
+var _sortCol = 3, _sortAsc = true;
+
+function sortTable(th) {
+    var col  = parseInt(th.dataset.col);
+    var type = th.dataset.type;
+
+    if (_sortCol === col) {
+        _sortAsc = !_sortAsc;
+    } else {
+        _sortCol = col;
+        _sortAsc = true;
+    }
+
+    // Update arrows
+    document.querySelectorAll('th.sortable').forEach(function(el) {
+        var arrow = el.querySelector('.sort-arrow');
+        arrow.innerHTML = '&#8645;';
+        arrow.classList.add('sort-idle');
+    });
+    var active = th.querySelector('.sort-arrow');
+    active.innerHTML = _sortAsc ? '&#9660;' : '&#9650;';
+    active.classList.remove('sort-idle');
+
+    var tbody = document.querySelector('.results-table tbody');
+    var rows  = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+
+    rows.sort(function(a, b) {
+        var av = a.cells[col] ? a.cells[col].textContent.trim() : '';
+        var bv = b.cells[col] ? b.cells[col].textContent.trim() : '';
+
+        if (type === 'num') {
+            // Extract leading number, treat '?' / missing as -Infinity so they sort last
+            var an = parseFloat(av.replace(/[^\d.\-]/g, ''));
+            var bn = parseFloat(bv.replace(/[^\d.\-]/g, ''));
+            an = isNaN(an) ? -Infinity : an;
+            bn = isNaN(bn) ? -Infinity : bn;
+            return _sortAsc ? an - bn : bn - an;
+        } else {
+            return _sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+        }
+    });
+
+    rows.forEach(function(r) { tbody.appendChild(r); });
+
+    // Re-number rank column
+    rows.forEach(function(r, i) {
+        if (r.cells[0]) r.cells[0].textContent = i + 1;
+    });
+}
+</script>
 
 <footer>
   Data: <a href="https://www.sac-cas.ch" target="_blank">SAC</a> &amp;
