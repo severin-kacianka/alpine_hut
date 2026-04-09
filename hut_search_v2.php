@@ -333,6 +333,7 @@ function render_results(
     echo '<th rowspan="2">Club</th>';
     echo '<th rowspan="2">Distance</th>';
     echo '<th rowspan="2">Elevation</th>';
+    echo '<th rowspan="2">Map</th>';
     echo '<th rowspan="2">Book</th>';
     if ($with_avail) {
         foreach ($day_labels as $lbl) {
@@ -375,7 +376,15 @@ function render_results(
         echo "<td class=\"hut-name\">$name_td</td>";
         echo "<td>$club</td>";
         echo "<td class=\"num\">$dist_s</td>";
+        $lat = $hut['latitude'];
+        $lon = $hut['longitude'];
+        $gmaps_url = 'https://www.google.com/maps?q=' . $lat . ',' . $lon;
+        $osm_url   = 'https://www.openstreetmap.org/?mlat=' . $lat . '&mlon=' . $lon . '&zoom=15';
+        $map_td = '<a href="' . h($gmaps_url) . '" target="_blank">G-Maps</a>'
+                . ' <a href="' . h($osm_url) . '" target="_blank">OSM</a>';
+
         echo "<td class=\"num elev\">$elev_s2</td>";
+        echo "<td class=\"map-links\">$map_td</td>";
         echo "<td class=\"reservation\">$res_td</td>";
 
         if ($with_avail) {
@@ -501,6 +510,9 @@ function render_results(
     .results-table td.elev     { font-weight: 600; color: #495057; }
     .results-table td.avail-status { text-align: center; font-size: .78rem; white-space: nowrap; }
     .results-table td.avail-none   { text-align: center; color: #adb5bd; }
+    .results-table td.map-links    { text-align: center; white-space: nowrap; }
+    .results-table td.map-links a  { color: #0d6efd; text-decoration: none; font-size: .8rem; }
+    .results-table td.map-links a:hover { text-decoration: underline; }
     .results-table td.reservation  { text-align: center; white-space: nowrap; }
     .results-table td.reservation a { color: #0d6efd; text-decoration: none; font-size: .8rem; }
     .results-table td.reservation a:hover { text-decoration: underline; }
