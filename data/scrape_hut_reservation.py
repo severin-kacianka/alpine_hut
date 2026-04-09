@@ -32,32 +32,28 @@ except ModuleNotFoundError:
         "  .venv/bin/python -m playwright install chromium"
     )
 
-BASE_URL     = "https://www.hut-reservation.org/reservation/book-hut/{}/wizard"
-OUTPUT_CSV   = "data/hut_reservation_scraped.csv"
-ID_START     = 1
-ID_END       = 439
-PAGE_TIMEOUT = 30_000   # ms — wait for Angular to render hut data
-NAV_TIMEOUT  = 45_000   # ms — page navigation timeout
-DELAY_SEC    = 2.0      # polite pause between pages (avoids rate limiting)
-RETRY_DELAY  = 10.0     # extra wait before retrying a timed-out page
+BASE_URL         = "https://www.hut-reservation.org/reservation/book-hut/{}/wizard"
+OUTPUT_CSV       = "data/hut_reservation_scraped.csv"
+ID_START         = 1      # used only for CSV range / existing-data loading
+ID_FETCH_FROM    = 440    # first ID to actually fetch this run
+ID_END           = 770
+PAGE_TIMEOUT_OK  = 15_000  # ms — wait for h1.hutTitle
+NAV_TIMEOUT      = 30_000  # ms — page navigation timeout
+DELAY_SEC        = 2.0     # pause between pages
 
 FIELDNAMES = ["id", "name", "warden", "phone", "beds",
               "elevation_m", "latitude", "longitude", "website_url"]
 
 
 def load_existing(path: str) -> dict:
-    """Return {id: row} for rows that already have valid data."""
+    """Return {id: row} for ALL rows already in the CSV (good and NOT_FOUND)."""
     if not os.path.exists(path):
         return {}
-    good = {}
+    rows = {}
     with open(path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            name = row.get("name", "")
-            lat  = row.get("latitude", "")
-            # Require both a name and coordinates to count as complete
-            if name and lat and not name.startswith("NOT_FOUND") and not name.startswith("ERROR"):
-                good[int(row["id"])] = row
-    return good
+            rows[int(row["id"])] = row
+    return rows
 
 
 def backup(path: str):
@@ -66,7 +62,7 @@ def backup(path: str):
     ts  = datetime.now().strftime("%Y%m%d_%H%M%S")
     dst = path.replace(".csv", f"_{ts}.bak.csv")
     shutil.copy2(path, dst)
-    print(f"Backed up existing data to {dst}")
+    print(f"Backed up existing data to {dst}", flush=True)
 
 
 def _after_label(text: str, *labels: str) -> str:
@@ -86,20 +82,12 @@ def scrape_hut(page, hut_id: int) -> dict:
     row = {k: "" for k in FIELDNAMES}
     row["id"] = hut_id
 
-    for attempt in (1, 2):          # one retry on timeout
-        try:
-            page.goto(BASE_URL.format(hut_id), timeout=NAV_TIMEOUT)
-            page.wait_for_selector("h1.hutTitle", timeout=PAGE_TIMEOUT)
-            break                   # success
-        except PlaywrightTimeout:
-            if attempt == 1:
-                time.sleep(RETRY_DELAY)
-                continue
-            row["name"] = "NOT_FOUND"
-            return row
-        except Exception as exc:
-            row["name"] = f"ERROR: {exc}"
-            return row
+    try:
+        page.goto(BASE_URL.format(hut_id), timeout=NAV_TIMEOUT)
+        page.wait_for_selector("h1.hutTitle", timeout=PAGE_TIMEOUT_OK)
+    except (PlaywrightTimeout, Exception):
+        row["name"] = "NOT_FOUND"
+        return row
 
     text = page.locator("body").inner_text()
 
@@ -168,11 +156,16 @@ def main():
     existing = load_existing(OUTPUT_CSV)
     backup(OUTPUT_CSV)
 
-    todo = [i for i in range(ID_START, ID_END + 1) if i not in existing]
-    print(f"{len(existing)} IDs already have valid data, {len(todo)} to fetch.", flush=True)
+    # Only fetch IDs from ID_FETCH_FROM onward that aren't already complete
+    def is_complete(row):
+        name = row.get("name", "")
+        lat  = row.get("latitude", "")
+        return bool(name and lat and not name.startswith("NOT_FOUND") and not name.startswith("ERROR"))
 
-    # Merge: start with existing good rows, append newly scraped
-    all_rows = dict(existing)  # id -> row
+    todo = [i for i in range(ID_FETCH_FROM, ID_END + 1) if not is_complete(existing.get(i, {}))]
+    print(f"{len(existing)} rows in existing CSV, fetching {len(todo)} IDs ({ID_FETCH_FROM}–{ID_END}).", flush=True)
+
+    all_rows = dict(existing)  # preserve 1–439 data unchanged
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch(headless=True)

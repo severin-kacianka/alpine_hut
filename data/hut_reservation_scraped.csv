@@ -41,7 +41,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 40,NOT_FOUND,,,,,,,
 41,Rugghubelhütte SAC,Claudia Künzli & Niklaus Stalder,+41793664369,85,2296,46.846222,8.462765,http://www.rugghubel.ch
 42,Capanna Adula CAS,Raffaele Demaldi e Mirella Rizzi,+41918721532,24,2012,46.499200,8.995615,http://www.capannaadula.ch
-43,NOT_FOUND,,,,,,,
 44,Gspaltenhornhütte SAC,"Thomas Jentsch und Monika Schmidlin, Eggeltistrasse 21, BKA 125, 3993 Grengiols",+41336761629,60,2455,46.5,7.81,https://www.gspaltenhornhuette.ch
 45,Windgällenhütte AACZ,Annina und Wisi Arnold-Vetter,+41418851088,55,2032,46.79,08.76,https://www.windgaellenhuette.ch/
 46,Carschinahütte SAC,Sonja Lütolf & Nicola Jeggli,+41 79 418 22 80,62,2236,47.007076,9.827356,http://www.carschina.ch
@@ -52,14 +51,9 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 51,Täschhütte SAC,"Rita Gasser, Hanspeter Schmid",+41279673913,73,2701,46.05159,7.82994,http://www.taeschhuette.ch
 52,Berghaus Männdlenen,Robert Reichen,+41338534464,34,2344,46.66,07.96,https://www.berghaus-maenndlenen.ch
 53,Igloo des Pantalons Blancs,Philippe Graf,+41 77 812 18 87,15,3285,46.04055,7.36853,https://www.clubalpinsion.ch/index.php/club-alpin-sion/igloo
-54,NOT_FOUND,,,,,,,
 55,Chelenalphütte SAC,Anja Zgraggen,+41 885 19 30,40,2350,46.67171,8.43984,https://www.chelenalp.ch
-56,NOT_FOUND,,,,,,,
 57,Spitzsteinhaus,,+43 53 73 83 30,53,1.252,47.70463,12.24388,http://www.spitzsteinhaus.de
 58,Neue Prager Hütte,,+43 664 5235220,78,2796,47.123056,12.392222,http://www.neue-prager-huette.at
-59,NOT_FOUND,,,,,,,
-60,NOT_FOUND,,,,,,,
-61,NOT_FOUND,,,,,,,
 62,Glungezer-Hütte,,+43 6645311070,48,2610,47.20,11.52,https://www.glungezer-huette.at
 63,Ascher Hütte,,+43 660 3424067,26,2256,47.066483,10.504789,https://dav-pfaffenhofen.de/huetten/ascher-huette
 64,La Borbuintze,Julien Grand,+41 79 701 81 00,33,1333,46.509920,8.366572,http://www.cas-diablerets.ch/borbuintze
@@ -68,11 +62,8 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 67,Cabane Barraud,"Préposé : Jean Raymond - Adjoints : Alain Détraz, Sonia Matthey",+41 79 812 33 20,28,1956,46.284576,7.163000,https://www.cas-diablerets.ch/barraud
 68,Chalet Lacombe,Karine Vernez Thomas,+41795443152,22,1653,46.388473,7.042996,https://cas-diablerets.ch/cabanes/chalet-lacombe/
 69,Rotstockhütte,Simon & Michèle Furrer,+41338552464,43,2039,46.545135,7.838241,https://www.rotstockhuette.ch
-70,NOT_FOUND,,,,,,,
-71,NOT_FOUND,,,,,,,
 72,Bettelwurf-Hütte,,+43 664 2036485,60,2077,47.339,11.507,https://www.bettelwurfhuette.at
 73,Höllentalangerhütte,,+49 8821 9438548,120,1387,47.4380,11.02523,https://www.davplus.de/hoellentalangerhuette
-74,NOT_FOUND,,,,,,,
 75,Schesaplana Hütte,Dal Ponte Hanspeter u. Petra,+41 81 325 11 63,63,1908,47.0442,9.684209,https://www.schesaplana-huette.ch
 76,Refuge des Petoudes,"Préposées : Clara Chevalley : +41 77 446 35 85, Olivia Chavaillaz : +41 79 672 14 50",+41 77 446 35 85,9,2169,46.020069,7.011175,https://cas-diablerets.ch/cabanes/refuge-des-petoudes/
 77,Mönchsjochhütte,AlpineExperience GmbH - Christina & Yann Roulet - 3995 Ausserbinn VS,+41 33 971 34 72,100,3657,46.554678,8.005589,http://www.moenchsjoch.ch
@@ -91,16 +82,12 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 90,Freschen-Haus,,+4915117642817,53,1846,47.298512,9.775530,https://www.freschenhaus.at
 91,Tilisuna-Hütte,,+43 664 1472896,110,2.211,47.024591,9.872610,http://www.tilisuna-huette.at
 92,Totalp-Hütte,,+436642400260,87,2.385,47.052701,9.727139,http://www.totalp.at
-93,NOT_FOUND,,,,,,,
-94,NOT_FOUND,,,,,,,
 95,Kaltenberghütte,,+436649280636,63,2.089,47.0709,10.0836,http://www.kaltenberghuette.at/
 96,Neue Reutlinger Hütte,,+497121144860,12,2395,47.07541,10.11565,http://www.dav-reutlingen.de/huetten/neue-reutlinger-huette/
 97,Freiburgerhütte,,+436641745042,103,1918,47.162723,9.99041,http://www.freiburger-huette.at/
-98,NOT_FOUND,,,,,,,
 99,Bergheim Au,,+49171635564 0,65,824,47.318,9.963,https://www.dav-ueberlingen.de/huette-au/
 100,Gaudeamushütte,,+43 5358 2262,43,1.263,47.549167,12.324722,https://www.dav-main-spessart.de
 101,Saupsdorfer Hütte,,035974 55848,25,285,50.927783,14.335000,http://www.saupsdorfer-huette.de/
-102,NOT_FOUND,,,,,,,
 103,Neue Heilbronner Hütte,,+43 664 180 4277,104,2320,47.007216,10.138827,https://www.heilbronner-huette.de
 104,Rotwandhaus,,+49 8026 3959970,69,1737,47.646250,11.935278,https://www.rotwandhaus.de
 105,Berliner Hütte,,+43 664 88 78 70 25,140,2042,47.024515,11.812803,https://www.berlinerhuette.at
@@ -110,37 +97,28 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 109,Zollnersee-Hütte,,00436508209913,32,1.750,46.605,13.070,http://zollnerseehuette.oeav-obergailtal.at/
 110,Geraerhütte,,+436645106830,70,2324,47.0236,11.3741,http://www.geraerhuette.at
 111,Hofpürgl-Hütte,,+4364538304,70,1.703,47.482214,13.519027,http://www.alpenverein.at/hofpuerglhuette/
-112,NOT_FOUND,,,,,,,
-113,NOT_FOUND,,,,,,,
 114,Alpenrosenhütte im Brixental,,+436607375009,54,1555,47.419968,12.237699,https://www.alpenrosenhuette.at
 115,Rüsselsheimer Hütte,,+ 43 5413 203 00,47,2.323,46.994137,10.888199,https://www.ruesselsheimer-huette.de
 116,Neue Bamberger Hütte,,+43 6644 559469,74,1.756,47.30904,12.15055,http://alpenverein-bamberg.de/huetten/bamberger-huette/
 117,Mödlinger Hütte,,+ 43 3611 21120,50,1.523,47.52,14.55,http://www.alpenverein.at/moedlingerhuette/
-118,NOT_FOUND,,,,,,,
 119,Olpererhütte,,+436644176566,72,2389,47.04,11.68,https://www.olpererhuette.de
-120,NOT_FOUND,,,,,,,
 121,Hannoverhaus,,+43 478 421 345,50,2.565,47.040684,13.215527,https://www.alpenverein.de/hannoverhaus
 122,Greizer Hütte,,+4366499721169,81,2.227,47.04330,11.8853,https://www.greizerhuette.at
 123,Lizumer Hütte,,+43 664 9272117,78,2.019,47.166720,11.640514,http://www.lizumer-huette.at
 124,Nürnberger Hütte,,00436641657461,120,2.278 m NHN,46.994374,11.218299,https://www.nuernberger-huette.at   o d e r   www.nuernbergerhuette.at (DAV Sektion Nürnberg)
 125,Edelweiss-Hütte am Schneeberg,,0043 2636 3616,25,1.235,47.791762,15,http://www.edelweisshuette.at/
 126,Meraner Hütte,,+39 328 434 6659,65,1960,46.683048,11.281955,https://www.meranerhuette.it/
-127,NOT_FOUND,,,,,,,
 128,Reintalangerhütte,,+4916097503090,91,1370,47.405306,11.035667,https://www.alpenverein-muenchen-oberland.de/reintalangerhuette
 129,Neue Magdeburger Hütte,,+43 523888790,50,1633,47.288944,11.296524,http://www.magdeburger-huette.at
 130,Hochrieshütte,,+49 8032 8210,39,1569,47.747500,12.248889,https://www.hochrieshuette.de
 131,Dessauer Hütte,,+493405710700,30,281,50.897333,14.135762,https://www.dav-dessau.de/huette
 132,Clarahütte,,+43 664 9758893,47,2038,47.01,12.14,https://www.virgental.at/unterkuenfte/unterkunft-suche/detail/unterkunft/clarahuette-2038-m/
 133,Essener und Rostocker Hütte,,+43 4877 5101,106,2208,47.055000,12.297778,https://www.essener-rostocker-huette.de
-134,NOT_FOUND,,,,,,,
 135,Capanna Scaletta,Pagani Ilaria +4179 943 68 62,+4191 872 26 28,54,2205,2.715043,1.162932,https://www.satlucomagno.ch/wordpress/capanna-scaletta
 136,Richterhütte,,+43524221328,44,2.374,47.123845,12.133851,https://www.richterhuette.com
-137,NOT_FOUND,,,,,,,
 138,Oberlandhütte,,+4353578113,65,1014,47.37979,12.30752,https://www.alpenverein-muenchen-oberland.de/huetten/alpenvereinshuetten/oberlandhuette
 139,Lenggrieser Hütte,,08042 5633096,47,1338,47.65,11.63,https://www.lenggrieserhuette.de
-140,NOT_FOUND,,,,,,,
 141,Peter-Wiechenthaler-Hütte,,+43 664 9544822,68,1.752,47.463,12.875,http://www.wiechenthaler-huette.at
-142,NOT_FOUND,,,,,,,
 143,Bremer Hütte,,+43 664 3047360,69,2.413,46.994893,11.263324,https://www.bremerhuette.at
 144,Ingolstädter Haus,,+43 720 510 504,109,2119,47.50170,12.88744,https://www.dav-ingolstadt.de
 145,Riemannhaus,,0043 6702034373,82,2.177,47.458020,12.914580,https://www.riemannhaus-maria-alm.at
@@ -151,12 +129,9 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 150,Münchner Haus,,+4988212901,10,2959,47.42119,10.98492,https://www.muenchnerhaus.de
 151,Watzmannhaus,,+498652964222,160,1930,47.57133,12.93399,https://www.watzmannhaus.de
 152,Heinrich-Schwaiger-Haus,,+436646565555,71,2802,47.162783,12.738883,https://www.heinrich-schwaiger-haus.at
-153,NOT_FOUND,,,,,,,
 154,Gruttenhütte,,+43 5358 43389,90,1.620,47.55363,12.31104,http://www.gruttenhuette.at/
-155,NOT_FOUND,,,,,,,
 156,Bordierhütte SAC,Nathalie Werlen,+41279561909,44,2886,46.14465,7.84980,http://www.bordierhuette.com
 157,Chamanna Jenatsch CAS,Jill Lucas und Daniel Sidler,081 833 29 29,70,2652,46.530168,9.720377,http://www.chamannajenatsch.ch/
-158,NOT_FOUND,,,,,,,
 159,Salm-Hütte,,+43 4824 2089,50,2.644,47.046972,12.720417,http://www.alpenverein.at/salmhuette/
 160,Muttekopf-Hütte,,+43 6641236928,53,1.934,47.26259,10.66983,http://www.muttekopf.at/huette/
 161,Berglihütte SAC,Hüttenwart: Christian Nebiker<br> +41 79 753 77 56<br> Hüttenchef: Christoph Sager,+41 79 355 12 60,20,3299,46.566799,8.020535,https://konkordiahuette.ch/index.php/huetten/sac-grindelwald/berglihuette
@@ -165,7 +140,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 164,Wildhornhütte SAC,Regula Bischof und Marco Canova,+41337332382,79,2303,46.37929,7.38801,http://www.wildhornhuette.ch
 165,Cufercalhütte SAC,Margrith Monigatti,+41799546571,23,2385,46.593356,9.359021,http://www.cufercal.ch
 166,Topalihütte SAC,Anja Bühlmann,+41279562172,38,2674,46.15717,7.76206,https://www.topalihuette.ch
-167,NOT_FOUND,,,,,,,
 168,Capanna Monte Bar,Serge e James,+41 91 966 33 22,40,1602,46.099995,9.013999,https://capannamontebar.casticino.ch/#
 169,Gamshütte,,+436644282969,38,1921,47.130481,11.807152,https://www.gamshuette.at
 170,Friesenberghaus,,00436641641933,56,2.498,47.067386,11.702097,https://www.friesenberghaus.at
@@ -173,7 +147,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 172,Anton-Karg-Haus,,+43 5372 62 578,91,829,47.580049,12.277278,https://www.antonkarghaus.at
 173,Gepatschhaus,,+43 6604610244,87,1.928,46.901389,10.7375,https://www.gepatschhaus.at
 174,Bad Kissinger Hütte,,+43 676 3731166,50,1.788,47.534444,10.562778,http://badkissingerhuette.at
-175,NOT_FOUND,,,,,,,
 176,Calandahütte SAC,Monika & Beat Gansner,+41 79 363 53 80,29,2073,46.883185,9.482227,http://www.calandahuette.ch
 177,Kampthaler-Hütte,,015138500,1,313,48.131607,16.199331,https://www.alpenverein.at/kampthalerhuette/
 178,Kasseler Hütte (im Zillertal),,+436644016033,85,2.177,47.06,11.95,https://www.kasselerhuette.de
@@ -184,20 +157,15 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 183,Göppinger Hütte,,0043 5583 3540,69,2245,47.214813,10.045557,http://www.goeppinger-huette.at
 184,Stripsenjoch-Haus,,+43 664 3559094,126,1.580,47.34,12.18,http://www.stripsenjoch.at
 185,Porze-Hütte,,00436643256452,64,1.942,46.659,12.581,https://www.alpenverein.at/porzehuette/
-186,NOT_FOUND,,,,,,,
-187,NOT_FOUND,,,,,,,
 188,Barmer Hütte,,0043 6649489413,38,2.610,46.917220,12.16904,https://www.dav-wuppertal.de/huetten-kletteranlagen/barmer-huette
 189,Schwarzwasserhütte,,00000,75,1621,47.331169,10.087352,https://www.schwarzwasserhuette.com
 190,Sudetendeutsche Hütte,,+43720347802,47,2.656,47.049352,12.576295,https://www.sudetendeutschehuette.com/
 191,Jamtalhütte,,+4354438408,180,2165,46.88676,10.17645,https://www.jamtalhuette.at
 192,Stuttgarter Hütte,,+43 6767580250,54,2310,47.18041,10.20460,https://www.alpenverein-schwaben.de/huetten/stuttgarter-huette/
-193,NOT_FOUND,,,,,,,
-194,NOT_FOUND,,,,,,,
 195,Kärlingerhaus,,+4986526019901,160,1631,47.495556,12.937222,https://www.kaerlingerhaus.de
 196,Grubenberghütte,Ruedi Hählen,+41 79 642 79 96,23,1840,46.54939,7,https://www.grubenberghuette.ch
 197,Capanna Corno-Gries CAS,Thomas Bärlocher & Andrea Baumgartner,+41918691129,46,2338,46.467017,8.409994,http://www.corno-gries.ch
 198,Capanna Alzasca CAS,CAS Locarno,091 753 25 15,20,1734,46.271332,8.589253,http://www.capannaalzasca.ch
-199,NOT_FOUND,,,,,,,
 200,Straubinger Haus,,+43 5375 6429,50,1558,47.620128,12.499493,https://www.straubingerhaus.at
 201,Bayreuther Hütte,,00436643425103,54,1576,47.444722,11.820833,https://www.bayreuther-huette.de
 202,Nördlinger Hütte,,00436649142262,58,2238,47.320786,11.236693,https://www.noerdlingerhuette.at
@@ -223,7 +191,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 222,Biberacher Hütte,,+435519257,70,1846,47.257716,10.028680,https://dav-biberach.de/biberacher-huette
 223,Gleiwitzer Hütte,,+4915119029849,45,2176,47.21827,12.76900,https://www.gleiwitzerhuette.at
 224,Wanderheim Kreuzmoos,,00497645386,50,725,48.18936,7.97712,https://www.wanderheim-kreuzmoos.de
-225,NOT_FOUND,,,,,,,
 226,Cabane des Vignettes CAS,Katrien & Alexandre,+41272831322,100,3160,45.989976,7.474725,http://www.cabane-des-vignettes.ch/fr
 227,Salbithütte SAC,Walker Richard,+41418851431,56,2105,46.676423,8.551785,http://www.salbit.ch
 228,Dammahütte SAC,Andrin Kamber,041 885 17 81,18,2439,46.644864,8.457761,http://www.dammahütte.ch
@@ -231,7 +198,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 230,Oberetteshütte,,+39 0473 830280,80,2670,46.764801,10.711189,http://www.oberettes.it/
 231,Taschachhaus,,+436642009588,154,2434,46.90985,10.81760,https://www.taschachhaus.de
 232,Passauer Hütte,,+43 680 50 72 624,50,2051,47.474200,12.750405,https://www.passauer-huette.de
-233,NOT_FOUND,,,,,,,
 234,Wiesbadener Hütte,,0043 5558 4233,160,2.443,46.8684,10.1161,http://www.wiesbadener-huette.com/
 235,Augsburger Hütte,,+43 664 641 16 43,54,2298,47.16,10.49,https://www.augsburgerhuette.at
 236,Tübinger Hütte,,+43 690 2007 1605,80,2193,46.911669,10.003486,https://www.tuebinger-huette.de
@@ -243,17 +209,9 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 242,Seetalhütte SAC,Simona & Andreas Bernet,+41765458282,10,2065,46.8739,10.0093,https://www.sac-praettigau.ch/index.php/huetten/seetalhuette
 243,Lobhornhütte,Christine Stalder,+41 79 656 53 20,24,1955,46.618478,7.868928,https://lobhornhuette.ch
 244,Spannorthütte SAC,Ott Andy,+41416373480,40,1956,46.799824,8.509767,https://www.spannorthuette.ch
-245,NOT_FOUND,,,,,,,
 246,Ramozhütte SAC,Karin Bächinger,081 356 55 02,23,2293,46.73109,9.64372,https://www.sacarosa.ch
-247,NOT_FOUND,,,,,,,
 248,Rieder Hütte,,+4369911741087,32,1.765,47.804032,13.676637,https://www.rieder-huette.at
-249,NOT_FOUND,,,,,,,
-250,NOT_FOUND,,,,,,,
-251,NOT_FOUND,,,,,,,
-252,NOT_FOUND,,,,,,,
-253,NOT_FOUND,,,,,,,
 254,Bifertenhütte AACB,Regina Köhle +41 79 568 20 16,+41 81 941 23 36,23,2482,46.814491,9.026486,http://www.biferten.ch
-255,NOT_FOUND,,,,,,,
 256,DAV-Haus-Spitzingsee,,080269209349,88,1124,47.669957,11.882484,https://www.alpenverein-muenchen-oberland.de/selbstversorgerhuetten/haus-spitzingsee
 257,Hochfeilerhütte,,+39 329 1318270,88,2715,46.962,11.7085,http://www.hochfeilerhütte.com
 258,Jonsdorfer Hütte,,035844 204878,21,452,50.8513,14.6952,http://dav-zittau.de/index.php?rubrik=H%FCtte%20Jonsdorf&topic=123
@@ -263,7 +221,6 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 262,Austria-Hütte,,+436767200021,44,1638,47.4243,13.6001,https://www.alpenverein.at/austriahuette
 263,Winteregghütte,Urs Vogt +41 79 915 19 16,+41 79 915 19 16,30,1897,46.460438,7.649975,https://www.sac-biel.ch/huetten/winteregg.php
 264,Binntalhütte SAC,Lachat Marie-Claire (RdR),+41 27 971 47 97,50,2265,46.374922,8.291807,https://cabane-binntal.ch/
-265,NOT_FOUND,,,,,,,
 266,Zittauer Hütte,,+436648732205,59,2.328,47.163473,12.124178,https://www.zittauerhuette.at
 267,Wolayersee-Hütte,,+43720346141,64,1.960,46.6124,12.8670,https://www.wolayerseehuette-lesachtal.at
 268,Obstansersee-Hütte,,+43 664 932 978 99,60,2304,46.684367,12.493746,https://obstans.jimdo.com/
@@ -287,49 +244,35 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 286,Brunnenkopfhäuser,,+491756540155,26,1602,47.581269,10.927067,https://brunnenkopfhuette.com
 287,Soiernhaus,,+49 171 5465858,45,1616,47.49,11.35,https://www.soiernhaus.de
 288,Bivouac de l'Envers des Dorées,Gilbert Maillard - intendant,+41 27 321 11 16,18,2983,45.979796,7.048766,http://www.cas-dent-de-lys.ch/?page_id=20
-289,NOT_FOUND,,,,,,,
 290,Chamanna Georgy,Valerio Glisenti,0793399765,20,3175,46.487882,9.955766,https://www.chamanna-georgy.ch
-291,NOT_FOUND,,,,,,,
 292,Kürsinger-Hütte,,+43 720 920 444,140,2558,47.122847,12.300099,http://www.kuersinger.at
 293,Carl-von-Stahl-Haus,,+49 8652 6559922,113,1736h,47.574750,13.042617,http://www.stahlhaus.at
 294,Sölden-Hütte,,+43 6643429114,24,1.550,47.484067,13.290367,http://www.soeldenhuette.at/
 295,Zeppezauer-Haus,,+43662 629862,34,1.663,47.724573,13.007448,https://www.zeppezauerhaus.at
-296,NOT_FOUND,,,,,,,
 297,Lindauer Hütte,,0043 664 50 33 456,164,1744,47.034547,9.835456,https://lindauerhuette.com/
 298,Württembergerhaus,,+436507538927,59,2220,47.210277,10.535555,https://www.wuerttemberger-haus.at
-299,NOT_FOUND,,,,,,,
 300,Oberwalder-Hütte,,+43 660 1308530,110,2.973,47.105367,12.715533,https://www.alpenverein.at/oberwalderhuette
 301,Tiefrastenhütte,,+39 334 9896370,50,2312,46.87628,11.78159,https://www.tiefrasten.com/
-302,NOT_FOUND,,,,,,,
 303,Alpenrose-Hütte Zillertal,,06641376848,80,1878,47.025345,11.801511,https://www.alpenrose-huette.at
 304,Staldenmaadhütte,Peter Baumberger,079 607 10 77,38,1120,46.5960,7.4996,https://www.sac-kirchberg.ch/clubhuette.php
 305,Tierberglihütte SAC,Toni Flühmann Nina Reinschmidt,033 971 27 82,78,2795,46.702072,8.414224,http://www.tierbergli.ch
 306,Hess-Hütte,,+436644308060,99,1.699,47.56,14.65,https://www.diehesshuette.at
-307,NOT_FOUND,,,,,,,
 308,Schönbielhütte SAC,Yolanda + Fredy Biner-Perren,027 967 13 54,45,2694,46.001980,7.628976,https://haus-bielti.ch/schoenbielhuette/
 309,Saarbrücker Hütte,,+43 6648925587,74,2538,46.89845,10.03605,https://www.saarbrueckerhuette.com
 310,Dreischusterhütte,,+39 0474646066,47,1639,46.67453,12.29722,http://www.drei-schuster-huette.com
 311,Cabane du Mont d’Or,Commission cabane:Président : Christian Schranz Secrétaire : Amélie Hautier Membres: Steven Von Niederhausern et Anthony Hautier,+41 79 740 12 75,20,1377,46.722757,6.336052,https://www.cas-vallorbe.ch/cabane/
 312,Gruebenhütte AACBs,Michel Silbernagel Am Steinweg 28 4106 Therwil,+41763920949,16,2512,46.60589,8.259318,http://www.gruebenhuette.ch/
-313,NOT_FOUND,,,,,,,
-314,NOT_FOUND,,,,,,,
-315,NOT_FOUND,,,,,,,
 316,Fraganter Schutzhaus,,+43 4785 396,72,1.810,46.950921,13.027661,https://www.fraganterschutzhaus.at
 317,Franz-Fischer-Hütte,,+43 664 7957960,45,2020,47.200214,13.364550,https://www.franzfischer-huette.at
 318,Vermigelhütte,Hüttenteam,041 887 17 73,34,2042,46.59709,8.65678,http://www.vermigelhuette.ch
 319,Niedersachsenhaus,,+4966488192505,54,2.471,47.060278,13.010278,https://www.niedersachsenhaus.at
 320,Innsbrucker Hütte,,00435276295,98,2.369,47.043137,11.310835,https://www.innsbrucker-huette.at
-321,NOT_FOUND,,,,,,,
-322,NOT_FOUND,,,,,,,
 323,Erfurter Hütte,,+436645146833,83,1834,47.441667,11.763056,https://www.erfurterhuette.at
 324,Traunsteiner Skihütte/ Winklmoosalm,,08640 8140,25,1160,47.65,12.58,https://www.traunsteinerhuette-winklmoos.de
-325,NOT_FOUND,,,,,,,
 326,Sunnehüsi,Erika Gerber,+41 78 836 96 49,15,1125,46.643720,7.446150,http://www.sac-sunnehuesi.ch/
 327,Schneibsteinhaus,,+49 8652 2596,66,1.670,47.572147,13.039249,https://www.schneibsteinhaus.de
 328,Hochweißstein-Haus,,+43 676 746 2886,52,1.868,46.64307,12.7401,https://www.alpenverein.at/hochweisssteinhaus/
-329,NOT_FOUND,,,,,,,
 330,Clubhaus Metsch,Vincenz Simon Oppliger Tschingelstrasse 20 / 3655 Sigriswil,+41 79 947 70 69,16,1775,46.44,07.46,https://www.sac-huttwil.ch/sektion/clubhaus.php
-331,NOT_FOUND,,,,,,,
 332,Medelserhütte SAC,Patricia Venzin,+41 81 949 14 03,51,2524,46.640545,8.913761,https://www.medelserhuette.ch
 333,Cabane du Fenestral,Gardiens bénévoles du Ski-club Chavalard de Fully,+41277462800,31,2453,46.189072,7.100621,https://www.fenestral.ch
 334,Rothornhütte SAC,Brielmaier Daniela,+41 27 967 05 75,54,3180,46.048580,7.697374,https://www.rothornhuette-sac.ch/
@@ -337,65 +280,43 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 336,Priel-Schutzhaus,,+43756420602,150,1420,47.704935,14.081894,https://www.prielschutzhaus.com
 337,Zsigmondyhütte (Rif. Comici),,+390474 710358,62,2224,46.628530,12.357851,http://www.zsigmondyhuette.com
 338,Mittellegihütte,Bergführerverein Grindelwald,+41 33 853 03 66,36,3'355,46.583412,8.022527,https://www.mittellegi.ch
-339,NOT_FOUND,,,,,,,
 340,Monte-Leone-Hütte SAC,Claude-André Montandon,+41799349732,20,2848,46.26,8.079,https://www.cas-sommartel.ch/monte-leone/
 341,Rifugio Saoseo CAS,Chatrina & Gigi Murtas,+41 81 844 07 66,50,1985,46.39849,10.11739,http://www.saoseo.ch
 342,Glorer Hütte,,+43 67761182853,39,2.642,47.030833,12.715556,https://www.glorer-huette.at
 343,Hochlecken-Haus,,+436601173017,45,1.572,47.828875,13.605526,https://www.hochleckenhaus.at
 344,Jugendbildungsstätte Winterraum,,0832493010,8,857,47.506154,10.385326,https://www.jubi-hindelang.de/
-345,NOT_FOUND,,,,,,,
 346,ZZZ TEST Monbijouhütte,Daniel Fernandez TEST,000 000 00 00,80,1256,46.944618,7.435092,https://www.sac-cas.ch
 347,Berghaus Alpenrösli,Markus Zimmerling BEI FRAGEN 081 332 12 18,+41813321218,60,1775,46.87,89.37,https://www.berghaus-alpenroesli.ch
 348,Schalijochbiwak SAC,unbewartet,+41775282362,8,3786,46.093315,7.709522,https://www.sac-basel.ch/deutsch/huetten/schalijoch-biwak/
 349,Baltschiederklause SAC,Jolanda Stettler,+41 79 541 65 75,50,2783,46.395051,7.889815,https://www.baltschiederklause.ch
 350,Fromatthütte,Heidi Gempeler,+41794526675,20,1800,46.54601,7.43279,https://www.sac-wildhorn.ch/huetten/fromatthuette/
-351,NOT_FOUND,,,,,,,
-352,NOT_FOUND,,,,,,,
 353,Schneealpen-Haus,,+4338572190,34,1788,47.696318,15.609628,http://www.schneealpe.com
-354,NOT_FOUND,,,,,,,
 355,Ennstaler-Hütte,,+43 664 4901737,38,1543,47.619119,14.676403,
-356,NOT_FOUND,,,,,,,
-357,NOT_FOUND,,,,,,,
-358,NOT_FOUND,,,,,,,
-359,NOT_FOUND,,,,,,,
-360,NOT_FOUND,,,,,,,
-361,NOT_FOUND,,,,,,,
-362,NOT_FOUND,,,,,,,
 363,Clubheim Fälensee,Unbewartete Privathütte SAC St.Gallen,+41,35,1527,47.25,09.42,https://sac-stgallen.ch/sac-clubheim-faelensee/
-364,NOT_FOUND,,,,,,,
 365,Langtalereckhütte,,+43 664 5268655,65,2480,46.8288,10.9919,https://alpenverein-karlsruhe.de/huetten/langtalereckhuette
 366,Braunschweiger Hütte,,0043664 2012013,158,2.759,46.93540,10.91048,https://www.braunschweiger-huette.at
-367,NOT_FOUND,,,,,,,
-368,NOT_FOUND,,,,,,,
 369,Hildesheimer Hütte,,+43 5254 2300,70,2.899,46.966545,11.117297,https://www.hildesheimerhuette.at/index.html
 370,Hochjoch Hospiz,,+43 720 51 31 30,65,2.413,46.82516,10.83393,https://www.hochjoch-hospiz.at
 371,Zapporthütte SAC,Daniela Zwyer,+41816641496,24,2276,46.500000,9.093930,https://www.zapporthuette.ch
 372,Wolfratshauser Hütte,,+43 650 9568840,42,1752,47.39111,10.84861,https://www.wolfratshauserhuette.at/
 373,Kreuzeckhaus,,+49 8821 2202,46,1652,47.45216,11.06610,https://www.kreuzeckhaus.net
 374,Hollandiahütte SAC,AlpineExperience GmbH - Christina & Yann Roulet - 3995 Ausserbinn,+41 27 939 11 35,72,3238,46.4753,7.9603,https://www.hollandiahuette.ch
-375,NOT_FOUND,,,,,,,
-376,NOT_FOUND,,,,,,,
 377,Hexenseehütte,,+4354766214,18,2588,47.018826,10.481156,https://www.koelner-haus.at/de/die-hexenseehuette/hexenseehuette/
 378,Mischabeljochbiwak SAC,Gerold Bumann,+41797579916,24,3855,46.074210,7.865815,https://mischabeljochbiwak.ch
 379,Cabane de Chanrion CAS,Sophie Martin & Nuno Neves,+41277781209,59,2462,45.939266,7.380848,https://www.chanrion.ch/
-380,NOT_FOUND,,,,,,,
 381,Arbenbiwak SAC,Rinaldo Amacker,+41794090644,15,3224,46.031364,7.665059,https://sac.zermatt.org/verein/arbenbiwak/
 382,Cabane de Saleinaz CAS,-,+41277831700,48,2691,45.976355,7.070281,https://www.cas-neuchatel.ch/cabanes/cabane-de-saleinaz-2691m/
 383,Feichtau-Hütte,,0664 7346 5776,0,1360,47.801406,14.317450,https://www.alpenverein.at/feichtauhuette/
-384,NOT_FOUND,,,,,,,
 385,Neue Fürther Hütte,,0043 664 3224762,75,2201,47.1654,12.4245,http://www.fuerther-huette.at
 386,Chamanna Coaz CAS,Andrea & Martin Walliser,+41818426278,55,2610,46.38169,9.82834,https://www.coaz.ch
 387,Sylvan-Hütte,,015146626864,1,374,49.902413,9.479421,https://www.dav-main-spessart.de
 388,Hüfihütte SAC,Désirée Stalder und Daniel Scheuber,+41 41 885 14 75,32,2334,46.802200,8.819044,https://huefihuette.ch
 389,Brixner Hütte,,+39 327 532 99 44,28,2282,46.912911,11.620518,http://www.brixnerhuette.it
-390,NOT_FOUND,,,,,,,
 391,Chamanna da Boval CAS,Roberto Costa,+41818426403,80,2495,46.415199,9.925074,https://www.boval.ch/
-392,NOT_FOUND,,,,,,,
 393,Douglasshütte,,00436644412378,86,1.979,47.059684,9.754765,https://www.douglasshuette.at
 394,Cabane d’Essertze,Marisa Sierro,+41 79 862 67 33,24,2191,46.148057,7.371963,http://essertze.ch/
 395,Anhalter Hütte,,+436606647428,74,2040,47.301383,10.667783,https://www.dav-obererneckar.de/Huetten_Wege/Anhalter%20Huette
 396,Valentinalm,,+43 660 6799784,35,1215,46.6816,13.0097,https://www.valentinalm.at
-397,NOT_FOUND,,,,,,,
 398,Etzlihütte SAC,Rita & Res Streiff-Arnold,+41418202288,75,2052 H.ü.M,46.71,08.72,https://www.etzlihuette.ch
 399,Capanna Piansecco CAS,Team Piansecco - CAS Bellinzona e Valli,+41 91 869 12 14,42,1982,46.294,8.281,https://www.capannapiansecco.ch
 400,Cabane de Valsorey CAS,Isabelle Balleys,+41 27 787 11 22,50,3037,45.930778,7.271748,https://www.valsorey.ch
@@ -406,35 +327,353 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 405,Skihütte Elm,Thomas Jäggin,+41 79 864 79 88,15,1745,2.729805,1.198227,https://sac-olten.ch/huetten/skihuette-elm
 406,Cabane du Carroz,Gardien.e.s bénévoles*la cabane est ouverte uniquement les week-ends*,+41797566827,18,1508,46.2840,6.0721,https://www.cas-geneve.ch/mCabCarroz.php?choix=2
 407,Priener Hütte,,+498057428,72,1410,47.702107,12.327922,http://www.priener-huette.de
-408,NOT_FOUND,,,,,,,
-409,NOT_FOUND,,,,,,,
 410,Gollinghütte,,+43 676 5336288,70,1641,47.2866,13.7693,https://www.gollinghuette.com
 411,Alois-Günther-Haus,,+43 3853 300,24,1782,47.5743,15.7906,https://www.aloisguentherhaus.at
 412,Rieserfernerhütte,,+390474492125,59,2798,46.89,12.07,https://alpenverein.it/huette/rieserfernerhuette/
 413,Cabane Balavaux,Pauline FERRY,+41 78 255 88 07,24,2042,46.157,7.278,https://www.cabanebalavaux.com
-414,NOT_FOUND,,,,,,,
 415,Kellerjoch-Hütte,,+436641722468,30,2237,47.316541,11.764917,https://www.kellerjoch.at
 416,Almtaler Haus,,+436642374442,59,714,47.754855,14.017935,https://www.almtalerhaus.com
 417,Ski- und Ferienhaus Obergestelen,Bruno&Katrin Reiss,+41794803674,30,1800,46.58672,7.43225,http://www.sac-obergestelen.ch
-418,NOT_FOUND,,,,,,,
 419,Capanna Poncione di Braga,"Astrid Lorenzetti Richina (Presidente) Esther Perucchi (Vice-Presidente, responsabile riservazioni + 41 79 221 46 10)",+ 41 79 374 36 71,18,2003,46.42919,8.57221,https://www.utoelocarno.ch
 420,Mischabelhütte AACZ,Zurbriggen Jonas und Corina,+41279571317,95,3340,46.10,78.88,https://www.mischabelhuette.ch
-421,NOT_FOUND,,,,,,,
-422,NOT_FOUND,,,,,,,
-423,NOT_FOUND,,,,,,,
 424,Habsburg-Haus,,02665 219,69,1785,47.42795,15.41917,https://das-habsburghaus.at
 425,Hubertus-Haus,,06606511135,26,946,47.81199,16.02510,
-426,NOT_FOUND,,,,,,,
-427,NOT_FOUND,,,,,,,
-428,NOT_FOUND,,,,,,,
 429,Neunkirchner Hütte,,+4366473595991,19,1525,47.27396,14.14879,http://gebirgsverein-neunkirchen.at
 430,Peilstein-Haus,,0267487333,56,718,48.014866,16.051710,https://www.gebirgsverein-services.at/peilsteinhaus_web/index.html
-431,NOT_FOUND,,,,,,,
-432,NOT_FOUND,,,,,,,
-433,NOT_FOUND,,,,,,,
 434,Wetterkogler-Haus,,+43 33364224,34,1743,47.53041,15.914399,https://www.alpenverein.at/wetterkoglerhaus/
 435,Capanna Tomeo,Patriziato di Broglio,0794852388,28,1739,46.366081,8.688937,https://www.capannatomeo.ch/
 436,Cabane de la Dent Blanche CAS,TBC,+41 27 283 10 85,34,3507,46.02027,7.6008,https://www.cabane-dent-blanche.ch
 437,Lamsenjochhütte,,+43524462063,82,1953,47.380067,11.603557,https://www.alpenverein-muenchen-oberland.de/huetten/alpenvereinshuetten/lamsenjochhuette
 438,Berghaus Kleinwalsertal,,+49 160 3314192,45,1.250,47.34875,10.14565,https://www.dav-memmingen.de/index.php?id=559
 439,Haus Wäldele,,+49 160 3314192,16,1.250,47.34859,10.14563,https://www.dav-memmingen.de/index.php?id=560
+440,NOT_FOUND,,,,,,,
+441,NOT_FOUND,,,,,,,
+442,Marteller Hütte,,+39 3355687235,56,2610,46.4696,10.6731,http://www.martellerhuette.com
+443,NOT_FOUND,,,,,,,
+444,Grialetsch-Hütte SAC,Tanja und Werner Schweizer,+41 81 416 34 36,58,2542,46.71052,9.96057,https://www.grialetsch.ch/
+445,Cresta-Biwak SAC,Alessandro Marino unbewartet / non surveillé / non sorvegliata / unattended,+41764479883,6,3025,46.04474,8.03018,https://sac-saas.ch/cresta_biwak/
+446,Schilthornhütte,Patrick und Claudia Hofer,033 855 50 53,19,2433,46.5701,7.86251,https://www.schilthornhuette.com
+447,Capanna Alpe Sponda,Onorina Rossetti,+41918642352,34,1997,46.41847,8.78584,https://www.satchiasso.ch
+448,NOT_FOUND,,,,,,,
+449,NOT_FOUND,,,,,,,
+450,NOT_FOUND,,,,,,,
+451,NOT_FOUND,,,,,,,
+452,Neue Traunsteiner Hütte,,+4986121398831,89,1560,47.62830,12.80096,https://www.traunsteinerhuette.com
+453,Lämmerenhütte SAC,Annina Glauser,+41 27 470 25 15,84,2502,46.400329,7.574448,http://www.laemmeren.ch
+454,Fusshornbiwak,Belalp Alpin Center,+41774230808,8,2788,46.253,8.033,https://www.belalpalpincenter.ch/biwak/
+455,NOT_FOUND,,,,,,,
+456,Heidelberger Hütte,,+43 5444 21021,120,2364,46.90976,10.25948,https://www.heidelberger-huette.at
+457,NOT_FOUND,,,,,,,
+458,NOT_FOUND,,,,,,,
+459,NOT_FOUND,,,,,,,
+460,NOT_FOUND,,,,,,,
+461,Karl-Stein-Hütte,,03414773138,30,144,50.960052,14.059685,https://www.dav-leipzig.de/huetten/Karl-Stein-Hutte/2693
+462,NOT_FOUND,,,,,,,
+463,NOT_FOUND,,,,,,,
+464,NOT_FOUND,,,,,,,
+465,NOT_FOUND,,,,,,,
+466,Sillianer Hütte,,+4915154265541,63,2447,46.705993,12.406326,
+467,Alpwirtschaft Tanzboden,Michaela und Christoph Tresch,+41 55 283 12 18,15,1443,47.22,09.10,https://www.tanzboden-rieden.ch/
+468,Kelchalm (Bochumer Hütte),,+43 5356 20299,58,1432,47.23,12.27,https://www.kelchalm.at
+469,Sonnschienhütte,,06765118454,38,1523,47.5866,15.03900,
+470,NOT_FOUND,,,,,,,
+471,NOT_FOUND,,,,,,,
+472,Galmihornhütte,Skiclub Münster,+41 27 973 10 30,35,2113,46.489456,8.242922,https://galmihornhuette.ch/
+473,Cabane de Prafleuri,Estelle GABRIEL,+41 27 281 17 80,59,2662,46.074947,7.378778,https://www.prafleuri.ch
+474,Burghütte,"Johannes Andenmatten, Amadeo Rüedi, Raphael Imsand",+41 27 971 40 27,32,1750,46.450992,8.135312,http://burghuette.ch/
+475,Berg- und Skiheim Brixen im Thale,,+43 5334 8542,53,800,47.454383,12.260491,https://www.alpenverein-regensburg.de/huetten/huetten-der-sektion/berg-und-skiheim-brixen-im-thale
+476,Martin-Busch-Hütte,,00436643043151,90,2501,46.801111,10.886944,https://www.vent.eu
+477,Capanna Alp da Canaa,Associazione Paesaggio Valle di Lodano,0790000000,20,1843,46.25045,8.63499,https://www.valledilodano.ch/it/rifugi
+478,Capanna Grossalp,UTOE Locarno,+41 79 541 82 26,4,1906,46.316398,8.471349,https://www.utoelocarno.ch
+479,Capanna Alpe Nimi,Pietro Zanoli,0041 79 230 48 79,18,1718,46.25221,8.76752,
+480,Rifugio Alpe Masnée,Patriziato di Maggia,+41 79 240 08 31,16,2063,46.316398,8.471349,http://patriziatomaggia.ch/masnee
+481,Rifugio Alpe Spluga,Patriziato di Giumaglio ID: NL-00001164,+41791234567,24,1838,46.315570,8.679129,http://www.alpespluga.ch
+482,Ostello Fusio,Felicitas Tuena,0041 79 458 00 55,28,1289,46.316398,8.471349,https://lavizzara.ch/it_CH/cultura-e-svago/turismo/ostello
+483,Rifugio Ribia,Società Escursionistica Isorno Melezza,000000000,12,1996,46.25150,8.54173,https://www.capanna-ribia.ch
+484,Rifugio la Reggia,Suriano Fausto +41 79 617 00 57 Cavalli Mailena +41 79 379 62 23,+41 79 379 62 23,14,1410,46.28811,8.48671,https://www.dinodb.ch/
+485,Bonn-Matreier Hütte,,+436643481006,44,2750,47.038877,12.427530,http://www.bonnmatreier-huette.at
+486,NOT_FOUND,,,,,,,
+487,Tschiervahütte SAC,Caroline Zimmermann,+41 81 842 63 91,90,2583,46.40388,9.880131,http://www.tschierva.ch/
+488,E.-T.-Compton-Hütte,,+436767506886,18,1585,46.696,13.157,https://www.alpenverein.at/etcomptonhuette
+489,Filmoor-Standschützen-Hütte,,00436641127153,14,2350,46.6712,12.5362,http://www.filmoorhuette.at
+490,NOT_FOUND,,,,,,,
+491,Adamek-Hütte,,+43 664 5473481,89,2196,47.492209,13.583920,https://www.adamek.at
+492,Haindlkar-Hütte,,+43 6641140046,45,1121,47.567150,14.611917,https://www.alpenverein.at/haindlkarhuette
+493,Edelraute-Hütte,,+43 3618 21014,51,1725,47.439229,14.432754,https://www.edelrautehütte.com
+494,Cabane de Tracuit CAS,Adrien Theytaz,+41 27 475 15 00,96,3256,46.130270,7.679355,https://www.tracuit.ch/
+495,Talherberge Zwieselstein,,+43 5254 2763,32,1472,46.939372,11.027146,https://www.alpenverein-regensburg.de/huetten/huetten-der-sektion/talherberge-zwieselstein
+496,Hinterbalmhütte,Claudia Schnellmann,076 330 12 48,32,1817 müM,46.779620,8.798549,https://www.hinterbalm-huette.ch/
+497,Steinsee-Hütte,,+43660 49 17 124,84,2061,47.226122,10.587251,https://www.steinseehuette.at
+498,Rottalhütte SAC,Dölf und Irene Grossniklaus +41795468956,+41338552445,28,2755,46.31,07.56,https://www.sac-interlaken.ch/index.php/huetten/rottalhuette
+499,NOT_FOUND,,,,,,,
+500,NOT_FOUND,,,,,,,
+501,NOT_FOUND,,,,,,,
+502,Konstanzer Hütte,,+4366488381401,80,1688,47.069629,10.189105,https://www.konstanzerhuette.com/
+503,Hofalm-Hütte,,+436803135327,23,1305,47.65004,14.37131,https://www.hofalm.at
+504,Hans Wödlhütte,,+436641278335,40,1533,47.36,13.81,http://www.preintaler.at/
+505,Kistenpasshütte,Ramona Forrer,+41 79 201 35 13,14,2714,46.84037,9.02935,https://www.sac-winterthur.ch/huetten/kistenpass.php
+506,NOT_FOUND,,,,,,,
+507,Taubensteinhaus,,+4980269269039,46,1567,47.66083,11.92530,https://www.taubensteinhaus.de
+508,Welser Hütte,,+436641765608,83,1740,47.723,14.049,https://www.welserhuette-gruenau.com/
+509,Pühringer-Hütte,,0043 664 93272446,62,1638,47.687077,13.966548,https://www.pühringerhütte.at
+510,Capanna Arena,Società Escursionistica Isorno Melezza,00000000000,30,1689,46.23269,8.51456,https://www.capanna-arena.ch
+511,Cabane Arpitettaz CAS,Bernard Jeangros (intendant),+41274754028,32,2786,46.101306,7.679483,https://arpitettaz.ch/
+512,NOT_FOUND,,,,,,,
+513,NOT_FOUND,,,,,,,
+514,Ringelspitzhütte SAC,Simona Rikenmann und Patrick Untersee,+41796322434,36,1998,46.865791,9.380734,https://www.ringelspitzhuette.ch/
+515,Silberhornhütte SAC,Huggler Thomas,+41 79 376 86 36,10,2663,46.54901,7.93364,https://sac-lauterbrunnen.ch/huetten/silberhornhuette/
+516,Rifugio Pian di Crest,Società Alpinistica Valmaggese,+41 91 755 14 14,35,2108,46.391138,8.487152,https://www.sav-vallemaggia.ch/tours/pian-di-crest/
+517,Rifugio Maria Luisa,Giada Lora,+39 032463086,40,2'157,46.43477,8.42819,https://www.rifugiomarialuisa.it
+518,NOT_FOUND,,,,,,,
+519,NOT_FOUND,,,,,,,
+520,Würgauer Haus,,0951 63040,1,440,49.98222,11.08992,https://alpenverein-bamberg.de/huetten/wuergauer-haus/
+521,NOT_FOUND,,,,,,,
+522,NOT_FOUND,,,,,,,
+523,NOT_FOUND,,,,,,,
+524,NOT_FOUND,,,,,,,
+525,Sustlihütte SAC,Petra & Remo Gisler,+41418851757,67,2257,46.751682,8.470734,https://www.sustlihuette.ch
+526,Hüttenrunde Gipfelwege,,+49 8652 976 46 10,15,- Gipfelwege bis max. 2368,00.000000,0.000000,https://www.dav-berchtesgaden.de/huetten-wege/huettenrunde-gipfelwege.html
+527,Stockhornbiwak SAC,Simon Schmid,+4179 300 66 99,18,2598,46.377958,7.881010,http://stockhornbiwak.ch/
+528,Fritz-Pflaum-Hütte,,+491234567890,17,1868,47.564187,12.337136,http://www.fritzpflaumhuette.de
+529,NOT_FOUND,,,,,,,
+530,Turtmannhütte SAC,Magdalena & Fredy Tscherrig,+41 027 932 14 55,72,2519,46.160075,7.699618,https://www.cas-prevotoise.ch/cabanes/turtmannhtte.php
+531,Berggasthaus Brüsti,Dominik Wyrsch,+41 41 871 00 11,30,1525,46.8432,8.60702,https://www.berggasthaus-brusti.com/
+532,NOT_FOUND,,,,,,,
+533,NOT_FOUND,,,,,,,
+534,NOT_FOUND,,,,,,,
+535,NOT_FOUND,,,,,,,
+536,Ostwandlager,,086529764610,24,623,47.545813,12.970935,https://www.dav-berchtesgaden.de/Huetten/Selbstversorgerhuetten/Ostwandlager
+537,Hanslberghütte,,+4994146399031,1,344,48.953357,12.005885,https://www.alpenverein-regensburg.de/huetten/huetten-der-sektion/hanslberghuette
+538,Berg- und Skiheim Brixen im Thale - Ferienwohnung,,+43 5334 8542,10,800,47.454383,12.260491,https://www.alpenverein-regensburg.de/huetten/huetten-der-sektion/berg-und-skiheim-ferienwohnung
+539,Rifugio Alpe Fontana,Patriziato di Prato,079 430 99 91,20,1651,46.407211,8.704557,
+540,NOT_FOUND,,,,,,,
+541,Westfalenhaus,,+43 6503622528,50,2273,47.107917,11.100111,https://www.westfalenhaus.at
+542,NOT_FOUND,,,,,,,
+543,Munt la Reita,Famiglia Senn,077 508 54 18,48,1430,46.281955,8.483003,https://www.muntlareita.ch
+544,NOT_FOUND,,,,,,,
+545,Neue Reichenberger Hütte,,+434873 5580,46,2.586 M,46.971448,12.280359,https://www.alpenverein.at/reichenberg
+546,Ludwigsburger Hütte,,+43541420204,52,1935,47.114722,10.823611,https://www.ludwigsburger-huette.at
+547,Steinwaldhütte,,+49 1590 6717621,22,701,49.877729,12.035445,https://www.alpenverein-regensburg.de/huetten/huetten-der-sektion/steinwaldhuette
+548,Lonza Biwak,ZERMATTERS BAHNHOFSTRASSE 58 CH-3920 ZERMATT +41 27 966 24 66,0279662466,8,2975,45.986042,7.635144,https://www.zermatters.ch/
+549,Berghütte Hohsaas,Familie Urban Burgener CH-3910 Saas-Grund,+41 27 957 17 08,72,3142,46.13926,7.991636,https://www.hohsaashuette.ch/
+550,Agroturissem Alp d'Err,Julia Schwienbacher,+41 81 637 12 60,16,2178,46.571345,9.692372,
+551,Cesa da Sett,Claudio Filli,+41 81 684 19 23,16,2303 m ü. M.,46.415417,9.636980,http://www.cesa-da-sett.ch
+552,Sägässähenki Jenisberg,Magdalena Walcher und Adrian Risch,+41 79 552 28 91,12,1504 m ü M,46.695129,9.726563,https://www.jenisberg.ch
+553,Tigias Plang Faller,Familie Cotti,076 477 06 96,12,1922 m.ü.M.,46.503695,9,https://plang-faller.ch/
+554,"Chesa sut Baselgia, Stugl","Chesa sut Baselgia, Stugl, Christine Stucki",076 200 72 59,6,1550 m.ü.M.,46.650,9.731,https://www.chesa-sut-baselgia.ch
+555,Gamskarkogel-Hütte,,+436764519850,25,2.467,47.161786,13.158782,http://www.gamskarkogelhuette.at
+556,Ischler Hütte,,+43 3622 71148,40,1368,47.7000,13.76060,https://www.alpenverein.at/salzkammergut/huetten/index.php
+557,NOT_FOUND,,,,,,,
+558,Lauteraarhütte SAC,Stefan Hablützel & Claudia Schiesser,+41339731110,28,2393,46.570068,8.222178,https://www.lauteraarhuette.ch/
+559,Salbitschijenbiwak SAC,Hediger Thomas,0792829960,10,2400,46.67615,8.52369,https://sac-mythen.ch/unsere-huetten/
+560,NOT_FOUND,,,,,,,
+561,NOT_FOUND,,,,,,,
+562,Schwarzenberghütte (DAV),,+491603864848,58,1.380,47.42930,10.40679,https://www.dav-illertissen.de/Schwarzenberghuette
+563,Giessener Hütte,,+436644221389,37,2215,46.59733,13.19733,https://giessener-huette.at
+564,NOT_FOUND,,,,,,,
+565,Capanna Brogoldone,Eva Glavanova,+41 766099550,25,1910,46.154572,9.034788,https://www.brogoldone.ch
+566,Cabane de Sorniot,Gardiens bénévoles,+41277462426,46,2064,46.169803,7.094961,http://www.sorniot.ch
+567,Grassenbiwak SAC,Tobias Sigrist,+41763040877,18,2647,46.77020,8.44665,https://www.sac-engelberg.ch/grassen-biwak/
+568,Clubhütte Grubenalp,Sommer: Saskia & Romeo Bumann / Winter: Sebastian Zurbriggen / unbewartet / non surveillé / non sorvegliata / unattended,+41 79 717 19 80,14,2300,46.16038,7.94713,https://sac-saas.ch/grubenalp/
+569,Cabane de la Tourche,Laurianne Vaudan,+41244852218,50,2198,46.21461,7.06186,https://cas-st-maurice.ch/tourche.php
+570,Müllerhütte - Rif. Cima Libera,,+43 699 18678965,74,3145,46.96,11.18,http://www.muellerhuette.eu
+571,Gauenhütte,,+49 7531 21794,26,1235,47.059304,9.864445,https://www.dav-konstanz.de/huetten/gauenhuette
+572,NOT_FOUND,,,,,,,
+573,Cabane de Bounavaux,Denis Bossel et Mireille Bella,+41 79 603 68 78,36,1636,46.533463,7.132362,https://www.cas-gruyere.ch/fr/cabanes/cabane-de-bounavaux/
+574,Cabane des Marindes,Pascal et Jean,+41 79 790 45 33,37,1868,58.7775,15.3880,https://www.cas-gruyere.ch/fr/cabanes/cabane-des-marindes/
+575,Cabane des Clés,"Nicolas Bourguet, Marie-Claude Chambovey, Pascal Risse, Eric Kolly",+41 79 625 17 07,20,1352,46.340481,7.01209,https://www.cas-gruyere.ch/fr/cabanes/cabane-des-cles/
+576,Enzianhütte/Rhön,,+496658319,50,760,50.52,9.91,https://www.enzianhuette-rhoen.de
+577,Ignaz-Mattis-Hütte,,+436644233823,45,1986,47.28485,13.648433,https://www.alpenverein.at/ignazmattishuette/
+578,Lucknerhütte,,+4348768455,55,2.241,47.03,12.69,https://www.lucknerhuette.at
+579,Balmhornhütte SAC,Die Balmhornhütte wird fast jede Woche durch ein anderes Mitglied unserer Sektion gewartet.,+41 33 675 13 40,20,1956,46.451224,7.689617,http://www.balmhornhuette.ch
+580,NOT_FOUND,,,,,,,
+581,Rifugio Giümela,Patriziato di Biasca,+41918621174,8,1863.2,46.371613,9.081973,https://www.patriziatobiasca.ch
+582,Capanna Quarnei,Marzio e Jordan Brambilla,+41918702640,50,2107,46.473110,9.023686,https://www.quarnei.ch
+583,Capanna Adula UTOE,Ciril Noto e Lisa Foletti,+41774599611,52,2393,46.29431,9.0275,https://www.adula-utoe.ch
+584,Rifugio Scaradra,"Patriziato Generale di Aquila, Torre e Lottigna Mattia Cima/Tito Maestrani",0795501161,16,2173,46.555734,9.005902,https://www.rifugioscaradra.ch
+585,Ostello GiovaniBosco,Hotel Walser,+41 91 759 02 02,150,1'500,46.316398,8.471349,https://hotel-boscogurin.ch/it/ostello
+586,NOT_FOUND,,,,,,,
+587,Testhütte Carolin,,06648115245,48,123,12.34,23.56,
+588,NOT_FOUND,,,,,,,
+589,Äugstenhütte,Lukas Däster,+41 79 859 72 01,26,1500,47.027371,9.106704,https://www.aeugstenhuette.ch/
+590,NOT_FOUND,,,,,,,
+591,Obere Maxlraineralm,,+4980267382,56,1528,47.661461,11.888306,https://www.obere-maxlraineralm.com
+592,Refuge du lac de Derborence,Jean-Michel Cajeux,+ 41794494687,38,1480,46.28,07.21,https://www.refugederborence.ch
+593,Rifugio Lago,Patriziato di Biasca,091 862 11 74,6,2'130,46.353786,9.019984,https://www.patriziatobiasca.ch/rifugio_lago.html
+594,Rifugio Biasagn,Patriziato di Biasca,091 862 11 74,4,2023,46.393349,9.036978,https://www.patriziatobiasca.ch/rifugio_biasagn.html
+595,Rifugio Alpe Compiett,Patriziato di Biasca,+41918621174,5,1517,46.355335,9.002010,https://www.patriziatobiasca.ch/page40.html
+596,Bosruck-Hütte,,07563666,30,1036,47.639379,14.366294,https://www.bosruckhuette.eu
+597,Klagenfurter Hütte,,0043 463 513056,39,1664,46.446747,14.182995,https://www.klagenfurter-huette.at
+598,Bivacco Piano della Parete,SAT Lucomagno Casella Postale 175 6718 Olivone,+41792200605,10,2720,46.438706,9.080077,https://www.satlucomagno.ch
+599,NOT_FOUND,,,,,,,
+600,NOT_FOUND,,,,,,,
+601,NOT_FOUND,,,,,,,
+602,Biwak - Enzianhütte Rhön,,+496658319,8,760,50.52,9.91,https://www.enzianhuette-rhoen.de
+603,Aarbiwak SAC,Markus Brefin,+41 33 744 36 11,17,2731,46.5555,8.1522,https://www.sac-pilatus.ch/aarbiwak.html
+604,NOT_FOUND,,,,,,,
+605,NOT_FOUND,,,,,,,
+606,NOT_FOUND,,,,,,,
+607,Prova,,+39 0461 981871,25,5060,46.07000,11.12331,https://www.sat.tn.it
+608,Boé,,+39 0471 1930340,76,2.871,46.514614,11.823281,https://www.rifugioboe.it/
+609,"Monzoni ""Torquato Taramelli""",,+39 360 879719,12,2.046,46.394620,11.740311,https://www.rifugiotaramelli.it
+610,Haus Unken,,+491706359720,15,564,47.661749,12.744579,https://www.alpenverein-gangkofen.de/huetten/Haus%20Unken/
+611,Haus Don Bosco,,+49755291383,46,851,47.323,9.997,http://dav-pfullendorf.de
+612,Hohenzollernhaus,,+436645311915,53,2123,46.90201,10.63496,https://www.hohenzollernhaus.at
+613,August-Schuster-Haus,,004988223567,40,1564,47.583752,10.992427,https://august-schuster-haus.de
+614,Sidelenhütte,Silvia und Orlando Gisler,+41418870233,35,2708,46.59,84.26,https://www.sidelen-huette.ch/
+615,Martinsmadhütte SAC,Judith Schreyer / Ueli Zimmermann,+41 55 642 12 12,40,2002,27.33,1.19,https://www.martinsmadhuette.ch
+616,Haldenseehaus,,+43 5675 20733,64,1150,47.487397,10.598373,https://www.dav-gp.de/huetten/haldenseehaus
+617,Ostpreussenhütte,,+491622579050,38,1630,47.46028,13.11603,https://www.ostpreussenhuette.at
+618,NOT_FOUND,,,,,,,
+619,"Rosetta ""Giovanni Pedrotti""",,+39 0439 68308,60,2.578,46.267422,11.839020,https://www.rifugiorosetta.it/
+620,NOT_FOUND,,,,,,,
+621,NOT_FOUND,,,,,,,
+622,NOT_FOUND,,,,,,,
+623,Ciampedié,Jacopo Bernard,+39 3773676493,8,2000,46.433865,11.664272,https://www.instagram.com/rifugio_ciampedie/
+624,Roda di Vael,Roberta Silva,+39 0462 764450,49,2.282,46.420195,11.630136,https://www.rodadivael.it/
+625,"Altissimo ""Damiano Chiesa""",Eleonora Orlandi,+39 0464 867130,35,2.060,45.810375,10.890379,https://rifugioaltissimoda.wixsite.com/homepage
+626,"Cima d'Asta ""Ottone Brentari""",Emanuele Tessaro,+39 04611637778,57,2.480,46.170309,11.604395,https://www.rifugio-cimadasta.it/
+627,Sette Selle,Ruggero Samaden,+39 331 7065002,15,2.014,46.132330,11.392361,https://www.sat.tn.it/gruppo-lagorai-rifugio-sette-selle/
+628,"Casarota ""Livio Ciola""",Lorenza Delama,+39 3480985560,24,1.569,45.954421,11.195494,https://www.sat.tn.it/rifugio-casarota-l-ciola/
+629,NOT_FOUND,,,,,,,
+630,"Alpe Pozza ""Vincenzo Lancia""",Paolo Bortoloso,+39 0464 868068,48,1.802,45.827309,11.144719,https://www.rifugiolancia.it/
+631,"Bocca di Trat ""Nino Pernici""",Valentina Santoni,+39 3292599365,20,1.601,45.926631,10.768671,https://www.sat.tn.it/rifugio-bocca-di-trat-nino-pernici/
+632,NOT_FOUND,,,,,,,
+633,Peller,Manuela Ferri,+39 333 3092573,15,2022 Mt,46.322250,10.952679,https://www.rifugiopeller.com
+634,Giorgio Graffer al Grosté,Roberto Manni,+39 0465 441358,25,2.261,46.219654,10.889412,http://www.graffer.com/
+635,NOT_FOUND,,,,,,,
+636,"Tosa ""Tommaso Pedrotti""",Franco Nicolini,+393493646251,10,2.500,46.154130,10.898766,https://rifugiotosapedrotti.it/
+637,"Val d'Ambiez ""Silvio Agostini""",Roberto Cornella,+39 0465 734138,50,2.410,46.142434,10.869477,https://www.rifugioagostini.com/
+638,"XII Apostoli ""Fratelli Garbari""",Alessandro Beltrami,+39 392 1934444,20,2.489,46.150640,10.847428,https://rifugiododiciapostoli.net/
+639,"Stavèl ""Francesco Denza""",Mirco Dezulian,+39 0463 758187,82,2.298,46.243415,10.655236,https://www.rifugiodenza.com/
+640,"Val d'Amola ""Giovanni Segantini""",Carmela Caola,+39 3381571319,41,2.371,46.209112,10.710788,https://www.rifugiosegantini.com/
+641,"Mandron ""Città di Trento""",Denis Redolfi - Guida Alpina,+39 3483900694,83,2.449,46.202565,10.571175,https://www.rifugiomandrone.com
+642,"Caré Alto ""Dante Ongari""",Gianni Mittempergher,+39 3492962189,74,2.450,46.107651,10.626103,https://www.rifugiocarealto.it/
+643,NOT_FOUND,,,,,,,
+644,NOT_FOUND,,,,,,,
+645,"Cevedale ""Guido Larcher""",Manuel Casanova,+39 0463751770,80,2.607,46.436915,10.665993,https://www.rifugiocevedale.it/
+646,"Saènt ""Silvio Dorigoni""",Lorenzo Iachelini,+39 0463 896375,65,2.436,46.460635,10.751911,https://rifugiodorigoni.it/
+647,"Monte Casale ""Don Zio Pisoni""",Luciana Zarantonello,+39 3478647762,16,1.590,46.030058,10.924548,https://www.sat.tn.it/rifugio-don-zio-pisoni-al-monte-casale/
+648,Sulzenauhütte,Tamara Gleirscher und Florian Blankenhagen,+43522624320,102,2191,46.995920,11.181911,https://www.sulzenauhuette.at
+649,Berta-Hütte,Helery & Marcus Winkler,0043 6603773269,32,1527,46.518164,13.960374,https://www.bertahuette-mittagskogel.at
+650,Elberfelder Hütte,Lucas Zipper +436642444338,+43 4824 2545,55,2346,46.97814,12.76045,https://www.dav-wuppertal.de/huetten-kletteranlagen/elberfelder-huette
+651,"Monte Calino ""San Pietro""",Alessandro Alimena,+39 0464 791003,24,973,10.50224,45.56011,https://www.rifugiosanpietro.it/
+652,NOT_FOUND,,,,,,,
+653,NOT_FOUND,,,,,,,
+654,Mannheimer Hütte,,00436641900691,87,2.679,47.066762,9.689749,https://www.mannheimerhuette.co.at
+655,Oberzalimhütte,,+436606362823,44,1889,47.079861,9.693361,https://www.oberzalim.at
+656,Fluhseehütte,Fluhseeverein Lenk,+41,12,2049,46.41125,7.49946,https://www.fluhsee.ch/
+657,Antica Osteria Dazio,Andrea Nardecchia,+41 91 755 11 62,27,1'291,46.44363,8.66209,https://www.osteriadazio.com
+658,NOT_FOUND,,,,,,,
+659,NOT_FOUND,,,,,,,
+660,NOT_FOUND,,,,,,,
+661,NOT_FOUND,,,,,,,
+662,Rotgüldensee-Hütte,,+43 664 32 62 113,50,1739 m ü.A.,47.1012,13.4119,https://www.rogsi.at
+663,Berghaus Bäregg,Conny Brawand,+41 79 121 09 09,28,1775,46.600492,8.060145,https://www.baeregg.com/
+664,NOT_FOUND,,,,,,,
+665,Guggihütte SAC,"Arnold Zwahlen, +41 77 422 82 46, abends ab 18:30 Uhr und am Wochenende",+41 00 000 000 00,24,2791,46.562740,7.974400,https://sac-interlaken.ch/index.php/huetten/guggihuette?view=guggihuette
+666,Reichenhaller Haus,,004986515566,20,1750,47.755228,12.850100,https://www.dav-badreichenhall.de/huetten-kletteranlagen/reichenhaller-haus
+667,Wormser Hütte,,+43 664 1320325,64,2307,47.063889,9.974722,http://www.wormser-huette.at/
+668,Cabane de la Barmaz,Guillaume Cretton,+41 79 847 11 18,36,2458,46.061406,7.386067,https://www.cabanedelabarmaz.ch/
+669,Keinprecht-Hütte,,+43 664 43 303 46,40,1872,47.274638,13.693052,https://www.keinprechthütte.at/
+670,NOT_FOUND,,,,,,,
+671,NOT_FOUND,,,,,,,
+672,Weisshornhütte SAC,Jacqueline Rossé Berchtold,+41 27 967 12 62,30,2933,46.086247,7.743592,https://www.sac-basel.ch/
+673,Bergrestaurant Längfluh,Florence Hischier Michel Bader,+41 77 420 74 54,26,2870,46.0849,7.8956,https://www.langfluh-saasfee.ch/
+674,Capanna Gambarogno,Pepe Regazzi,+41 79 251 32 49,16,1724,46.112331,8.830570,https://www.capannagambarogno.ch
+675,Franz-Senn-Hütte,,+43 5226 2218,130,2147,47.085192,11.168758,https://www.franzsennhuette.at
+676,Tannheimer Hütte,,00491714766877,22,1713,47.49,10.61,https://www.tannheimer-huette.at
+677,Kaufbeurer Haus,,+49826991996,29,2007,47.341847,10.456899,https://dav-allgaeu-immenstadt.de/huetten/kaufbeurer-haus/
+678,NOT_FOUND,,,,,,,
+679,Berghaus Alpiglen,Selina Emmenegger,+41 33 853 11 30,49,1616,46.600038,8.001995,https://alpiglen.ch/index.php?page=home
+680,Chalet La Source,Elodie Gachet,+41 76 334 60 79,19,1168,46.27510,7.08550,https://www.cas-argentine.ch/nos-cabanes/chalet-la-source.php
+681,Cabane Bertol CAS,Florence et Stéphane Schenk,+41 79 626 65 79,80,3311,46.00604,7.52772,http://www.bertol.ch
+682,Spitzmeilenhütte SAC,Roland und Esther Beeler,0796103639,50,2087,47.0342,9.25065,https://www.spitzmeilenhuette.ch
+683,Wangenitzsee-Hütte,,00434826229,46,2508,46.9306,12.79967,https://www.wangenitzseehuette.at
+684,Lienzer Hütte,,+43 681 104 80988,67,1977,46.934975,12.746468,https://www.lienzer-huette.at
+685,Schwarzensteinhütte (Rif. al Sasso Nero),,+39 342 8038 586,50,3026,47.01300,11.885647,https://www.schwarzensteinhuette.com
+686,Frederic-Simms-Hütte,,+436644840093,45,2004,47.210307,10.355494,https://www.dav-simmshuette.at/willkommen.html
+687,NOT_FOUND,,,,,,,
+688,Treschhütte SAC,Franziska Kunz-Waser,+41794164355,34,1475,46.71863,8.64950,https://www.treschhuette.ch
+689,Läntahütte SAC,Barbara und Sebastian Heyerick,0041819351713,30,2089,46.54160,9.04190,https://www.laentahuette.ch
+690,Cabane des Audannes,Juliette Tuduri,+41 27 398 45 50,49,2'503,46.34347,7.38415,https://www.audannes.ch
+691,Stickler-Hütte,,+436479349,42,1750,47.148372,13.378154,https://www.sticklerhuette.at
+692,Dresdner Hütte,,+435226 8112,135,2308,46.999726,11.139388,https://www.dresdnerhuette.at
+693,Starkenburger Hütte,,+436645035420,59,2237,47.126944,11.279444,https://www.alpenverein-darmstadt.de/huetten/starkenburgerhuette
+694,NOT_FOUND,,,,,,,
+695,Zittel-Haus,,+43 664 75199527,63,3106,47.054,12.957,https://www.zittelhaus.at
+696,NOT_FOUND,,,,,,,
+697,Domhütte SAC,Selina Jöhl,+41 27 967 26 34,75,2937,46.103031,7.817705,https://domhuette.ch
+698,Rifugio Garzonera,Katrin Vavassori,+41762145138,20,1973,46.499504,8.661362,https://www.satritom.ch
+699,NOT_FOUND,,,,,,,
+700,NOT_FOUND,,,,,,,
+701,NOT_FOUND,,,,,,,
+702,NOT_FOUND,,,,,,,
+703,NOT_FOUND,,,,,,,
+704,NOT_FOUND,,,,,,,
+705,Siegerlandhütte,,+49 173 9894028,51,2710,46.94083,11.14778,https://www.siegerlandhuette.at
+706,Cabane de Prarochet,,,,,,,https://ski-club-saviese.odoo.com/cabane-prarochet
+707,Rappenseehütte,,+49 000000000,200,2091,47.288858,10.255029,https://www.dav-kempten.de/huetten/rappenseehuette
+708,NOT_FOUND,,,,,,,
+709,NOT_FOUND,,,,,,,
+710,Albert-Heim-Hütte SAC,Roman Felber,+41 41 887 17 45,60,2543,46.60890,8.46355,https://www.albertheimhuette.ch/
+711,Arthur-von-Schmid-Haus,,0043 4784 20071,59,2.281,46.989098,13.267216,https://www.arthurvonschmidhaus.at
+712,NOT_FOUND,,,,,,,
+713,NOT_FOUND,,,,,,,
+714,Solstein-Haus,,+436643336531,85,1805,47.308092,11.288141,https://www.solsteinhaus.at
+715,Base Camp SAC Uto,SAC Uto,+41 78 806 48 42,46,Koordinaten:,47.380688,8.542386,https://sac-uto.ch
+716,Hagener Hütte,,+436644036697,33,2446,47.02,13.09,https://dav-hagen.de/unsere-huetten/hagener-huette/
+717,Leutschachhütte SAC,Andrea Furrer,+41418831517,60,2208,47.783610,8.601277,https://leutschachhuette.ch
+718,Gmundner Hütte,,004369912643190,39,1666,47.872943,13.833801,https://www.gmundnerhuette.at
+719,NOT_FOUND,,,,,,,
+720,Lizumer Hütte (Sommer),,+436641546661,76,2019,47.16,11.64,https://www.lizumer-huette.at
+721,Erlanger Hütte,,+43 664 392 02 68,40,2550,47.14472,10.84722,https://www.alpenverein-erlangen.de/huetten/erlanger-huette/
+722,Alpe Rossiglion,Dani Curchod,+41796682801,20,1959,43.308,9.0880,https://www.sentiero-calanca.ch
+723,Pfälzerhütte LAV,Sophia Sandkühler & Stefanie Ritter,00423 263 36 79,72,2108,47.071327,9.613255,https://www.pfaelzerhuette.com
+724,von-Schmidt-Zabierow-Hütte,,065887284,42,1966,47.55,12.65,http://www.schmidt-zabierow.at
+725,Hochlandhütte,,+491749897863,41,1630,47.450916,11.318772,https://www.alpenverein-hochland.de/huetten/Hochlandhuette
+726,Cabane des Ecoulaies,Johan Andrey & Céline Gaspoz,+41 79 414 90 86,22,2575,46.063535,7.379731,https://www.lespyramides.ch
+727,Hermann-von-Barth-Hütte,Sonja & Ronny Quärengässer,+43 676 6834840,57,2131,10.40,47.31,https://www.hermann-von-barth.at
+728,Aclas Dafora,Claudio Egli,+41 78 910 70 11,14,1680 m.ü.M.,46.695155,9.638081,https://www.aclas-dafora.ch
+729,Enderlinhütte SAC,Tatjana Stauffacher & Marcel Schlatter,+4179 476 19 59,25,1501,47.038784,9.551532,https://www.sac-piz-sol.ch
+730,NOT_FOUND,,,,,,,
+731,NOT_FOUND,,,,,,,
+732,NOT_FOUND,,,,,,,
+733,Magdeburger Hütte (Rif. Cremona alla Stua),,+ 39 320 181 3900,40,2423,46.973525,11.284193,https://rifugiocremona.com/
+734,NOT_FOUND,,,,,,,
+735,NOT_FOUND,,,,,,,
+736,NOT_FOUND,,,,,,,
+737,NOT_FOUND,,,,,,,
+738,NOT_FOUND,,,,,,,
+739,NOT_FOUND,,,,,,,
+740,NOT_FOUND,,,,,,,
+741,NOT_FOUND,,,,,,,
+742,NOT_FOUND,,,,,,,
+743,NOT_FOUND,,,,,,,
+744,NOT_FOUND,,,,,,,
+745,NOT_FOUND,,,,,,,
+746,NOT_FOUND,,,,,,,
+747,NOT_FOUND,,,,,,,
+748,NOT_FOUND,,,,,,,
+749,NOT_FOUND,,,,,,,
+750,NOT_FOUND,,,,,,,
+751,NOT_FOUND,,,,,,,
+752,NOT_FOUND,,,,,,,
+753,NOT_FOUND,,,,,,,
+754,NOT_FOUND,,,,,,,
+755,NOT_FOUND,,,,,,,
+756,NOT_FOUND,,,,,,,
+757,NOT_FOUND,,,,,,,
+758,NOT_FOUND,,,,,,,
+759,NOT_FOUND,,,,,,,
+760,NOT_FOUND,,,,,,,
+761,NOT_FOUND,,,,,,,
+762,NOT_FOUND,,,,,,,
+763,NOT_FOUND,,,,,,,
+764,NOT_FOUND,,,,,,,
+765,NOT_FOUND,,,,,,,
+766,NOT_FOUND,,,,,,,
+767,NOT_FOUND,,,,,,,
+768,NOT_FOUND,,,,,,,
+769,NOT_FOUND,,,,,,,
+770,NOT_FOUND,,,,,,,
