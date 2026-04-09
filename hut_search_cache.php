@@ -119,6 +119,7 @@ function load_and_filter_huts(
             'distance_km'          => round($dist, 1),
             'reservation_id'       => $reservation_id,
             'availability'         => array(),
+            'cache_age_s'          => null,
         );
     }
     fclose($fh);
@@ -154,8 +155,9 @@ function fetch_availability(string $reservation_id, array $date_range): array {
         return array();
     }
 
+    $age_s    = time() - filemtime($file);
     $date_set = array_flip($date_range);
-    $result   = array();
+    $result   = array('__cache_age_s' => $age_s);
     foreach ($data as $entry) {
         $entry_date = substr($entry['date'] ?? '', 0, 10);
         if (isset($date_set[$entry_date])) {
@@ -175,7 +177,10 @@ function fetch_availability(string $reservation_id, array $date_range): array {
 function fetch_all_availability(array &$huts, array $date_range): void {
     foreach ($huts as &$hut) {
         if ($hut['reservation_id'] === '') continue;
-        $hut['availability'] = fetch_availability($hut['reservation_id'], $date_range);
+        $avail = fetch_availability($hut['reservation_id'], $date_range);
+        $hut['cache_age_s']  = $avail['__cache_age_s'] ?? null;
+        unset($avail['__cache_age_s']);
+        $hut['availability'] = $avail;
     }
     unset($hut);
 }
@@ -199,6 +204,13 @@ function build_date_range(string $start, string $end): array {
 // ---------------------------------------------------------------------------
 function h(string $s): string {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
+}
+
+function format_age(?int $seconds): string {
+    if ($seconds === null) return '—';
+    if ($seconds < 60)   return $seconds . 's ago';
+    if ($seconds < 3600) return (int)($seconds / 60) . 'm ago';
+    return (int)($seconds / 3600) . 'h ' . (int)(($seconds % 3600) / 60) . 'm ago';
 }
 
 // ---------------------------------------------------------------------------
@@ -318,6 +330,7 @@ function render_results(
         foreach ($day_labels as $lbl) {
             echo '<th colspan="1" class="day-header">' . h($lbl) . '</th>';
         }
+        echo '<th rowspan="2" class="sub-hdr">Cached</th>';
     }
     echo '</tr>';
 
@@ -409,6 +422,11 @@ function render_results(
             }
         }
 
+        if ($with_avail) {
+            $age_s = $hut['cache_age_s'];
+            echo '<td class="cache-age">' . format_age($age_s) . '</td>';
+        }
+
         echo "</tr>\n";
     }
 
@@ -485,6 +503,7 @@ function render_results(
     .results-table td.avail-status  { text-align: center; font-size: .78rem; white-space: nowrap; }
     .results-table td.avail-none    { text-align: center; color: #adb5bd; }
     .results-table td.avail-unknown { text-align: center; color: #adb5bd; font-style: italic; }
+    .results-table td.cache-age    { text-align: right; color: #adb5bd; font-size: .75rem; white-space: nowrap; }
     .results-table td.map-links    { text-align: center; white-space: nowrap; }
     .results-table td.map-links a  { color: #0d6efd; text-decoration: none; font-size: .8rem; }
     .results-table td.map-links a:hover { text-decoration: underline; }
