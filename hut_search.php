@@ -269,11 +269,17 @@ function render_form(
         </div>
         <div class="form-group">
           <label for="start_date">Start date</label>
-          <input type="date" id="start_date" name="start_date" value="$start" style="width:145px">
+          <div class="input-clear">
+            <input type="date" id="start_date" name="start_date" value="$start" style="width:145px">
+            <button type="button" class="clear-btn" onclick="document.getElementById('start_date').value=''" title="Clear">&times;</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="end_date">End date</label>
-          <input type="date" id="end_date" name="end_date" value="$end" style="width:145px">
+          <div class="input-clear">
+            <input type="date" id="end_date" name="end_date" value="$end" style="width:145px">
+            <button type="button" class="clear-btn" onclick="document.getElementById('end_date').value=''" title="Clear">&times;</button>
+          </div>
         </div>
         <div class="form-group">
           <label for="places">Min free places</label>
@@ -609,6 +615,10 @@ function render_results(
     button[type=submit] { padding: 8px 22px; background: #0d6efd; color: #fff; border: none;
                           border-radius: 4px; cursor: pointer; font-size: .95rem; font-weight: 600; }
     button[type=submit]:hover { background: #0b5ed7; }
+    .input-clear { display: flex; align-items: center; gap: 4px; }
+    .clear-btn { padding: 0 5px; background: none; border: none; color: #adb5bd;
+                 cursor: pointer; font-size: 1.1rem; line-height: 1; }
+    .clear-btn:hover { color: #495057; }
     .hint { margin: .6rem 0 0; font-size: .78rem; color: #6c757d; }
 
     .error-box { background: var(--red-bg); color: var(--red); border: 1px solid #f5c6cb;
