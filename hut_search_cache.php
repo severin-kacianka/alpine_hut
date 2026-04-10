@@ -8,6 +8,7 @@ setlocale(LC_ALL, 'C');
 
 define('CSV_PATH',       __DIR__ . '/data/alpine_huts_full.csv');
 define('CACHE_DIR',      __DIR__ . '/reservation_cache');
+define('GEO_CACHE',      __DIR__ . '/reservation_cache/geocode_cache.json');
 define('NOMINATIM_URL',  'https://nominatim.openstreetmap.org/search');
 define('USER_AGENT',     'alpine-hut-search/1.0');
 define('MAX_DATE_RANGE', 14);    // maximum days in date range
@@ -16,6 +17,15 @@ define('MAX_DATE_RANGE', 14);    // maximum days in date range
 // Geocoding
 // ---------------------------------------------------------------------------
 function geocode(string $location): array {
+    $key   = strtolower(trim($location));
+    $cache = array();
+    if (file_exists(GEO_CACHE)) {
+        $cache = json_decode(file_get_contents(GEO_CACHE), true) ?: array();
+    }
+    if (isset($cache[$key])) {
+        return $cache[$key];
+    }
+
     $url = NOMINATIM_URL . '?' . http_build_query(array(
         'q'      => $location,
         'format' => 'json',
@@ -39,11 +49,19 @@ function geocode(string $location): array {
     if (empty($data)) {
         throw new RuntimeException("No results found for location: " . htmlspecialchars($location, ENT_QUOTES, 'UTF-8'));
     }
-    return array(
+    $result = array(
         'lat'          => (float)$data[0]['lat'],
         'lon'          => (float)$data[0]['lon'],
         'display_name' => $data[0]['display_name'],
     );
+
+    // Persist to cache (atomic write to avoid corruption)
+    $cache[$key] = $result;
+    $tmp = GEO_CACHE . '.tmp.' . getmypid();
+    file_put_contents($tmp, json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    rename($tmp, GEO_CACHE);
+
+    return $result;
 }
 
 // ---------------------------------------------------------------------------
