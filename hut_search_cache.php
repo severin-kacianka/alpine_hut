@@ -310,7 +310,10 @@ function render_results(
     float   $distance_km,
     ?float  $min_elevation,
     array   $date_range,
-    int     $min_places
+    int     $min_places,
+    float   $center_lat,
+    float   $center_lon,
+    string  $location
 ): void {
     $total      = count($huts);
     $dn         = h($display_name);
@@ -389,7 +392,7 @@ function render_results(
                    . ' <a href="' . h($osm_url) . '" target="_blank">OSM</a>'
                    . ' <a href="' . h($geo_url) . '">GEO</a>';
 
-        echo "<tr>";
+        echo "<tr data-lat=\"$lat\" data-lon=\"$lon\" style=\"cursor:pointer\" title=\"Click to show on map\">";
         echo "<td class=\"rank\">$rank</td>";
         echo "<td class=\"hut-name\">$name_td</td>";
         echo "<td>$club</td>";
@@ -449,6 +452,76 @@ function render_results(
     }
 
     echo '</tbody></table></div>';
+
+    // Build JS data for the map
+    $map_huts = array();
+    foreach ($huts as $i => $hut) {
+        $map_huts[] = array(
+            'rank' => $i + 1,
+            'name' => $hut['official_name'],
+            'club' => $hut['operating_club'] ?? '',
+            'lat'  => $hut['latitude'],
+            'lon'  => $hut['longitude'],
+            'elev' => $hut['elevation_m'],
+            'dist' => $hut['distance_km'],
+            'url'  => $hut['official_website_url'] ?? '',
+        );
+    }
+    $huts_json   = json_encode($map_huts, JSON_HEX_TAG | JSON_HEX_AMP);
+    $center_json = json_encode(array('lat' => $center_lat, 'lon' => $center_lon, 'name' => $location), JSON_HEX_TAG | JSON_HEX_AMP);
+
+    echo '<div id="hut-map"></div>';
+    echo <<<JS
+    <script>
+    (function() {
+        var CENTER = $center_json;
+        var HUTS   = $huts_json;
+
+        var map = L.map('hut-map');
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Search center marker (red)
+        var centerIcon = new L.Icon.Default();
+        L.marker([CENTER.lat, CENTER.lon])
+            .addTo(map)
+            .bindPopup('<div class="map-popup"><b>' + CENTER.name + '</b><br><em>Search center</em></div>');
+
+        // Hut markers — store by index to open from table click
+        var markers = [];
+        HUTS.forEach(function(h) {
+            var elevStr = h.elev != null ? h.elev + ' m &bull; ' : '';
+            var urlStr  = h.url  ? '<br><a href="' + h.url + '" target="_blank">Website</a>' : '';
+            var popup   = '<div class="map-popup">'
+                        + '<b>#' + h.rank + ' ' + h.name + '</b><br>'
+                        + h.club + '<br>'
+                        + elevStr + h.dist + ' km away'
+                        + urlStr
+                        + '</div>';
+            var m = L.marker([h.lat, h.lon]).addTo(map).bindPopup(popup);
+            markers.push(m);
+        });
+
+        // Fit bounds to all markers
+        var points = [[CENTER.lat, CENTER.lon]].concat(HUTS.map(function(h) { return [h.lat, h.lon]; }));
+        map.fitBounds(points, { padding: [30, 30] });
+
+        // Table row click → open marker popup
+        document.querySelectorAll('.results-table tbody tr').forEach(function(row, i) {
+            row.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') return; // don't intercept link clicks
+                var m = markers[i];
+                if (!m) return;
+                map.setView(m.getLatLng(), 13);
+                m.openPopup();
+                document.getElementById('hut-map').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    })();
+    </script>
+    JS;
 }
 
 // ---------------------------------------------------------------------------
@@ -461,6 +534,8 @@ function render_results(
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Alpine Hut Finder (Cached)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <style>
     :root {
       --border:  #dee2e6;
@@ -534,6 +609,11 @@ function render_results(
     .avail-full   { background: var(--yellow-bg) !important; color: var(--yellow); font-weight: 700; }
 
     footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
+
+    #hut-map { height: 500px; margin-top: 1rem; border-radius: 8px;
+               border: 1px solid var(--border); }
+    .map-popup b { font-size: .9rem; }
+    .map-popup a { color: #0d6efd; }
   </style>
 </head>
 <body>
@@ -606,7 +686,7 @@ if ($location !== null && $location !== '') {
                 if (!empty($date_range)) {
                     fetch_all_availability($huts, $date_range);
                 }
-                render_results($huts, $geo['display_name'], $distance_km, $min_elevation, $date_range, $min_places);
+                render_results($huts, $geo['display_name'], $distance_km, $min_elevation, $date_range, $min_places, $geo['lat'], $geo['lon'], $location);
             }
         } catch (RuntimeException $e) {
             echo '<div class="error-box">' . h($e->getMessage()) . '</div>';
