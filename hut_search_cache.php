@@ -456,15 +456,41 @@ function render_results(
     // Build JS data for the map
     $map_huts = array();
     foreach ($huts as $i => $hut) {
+        $color = 'default';
+        if ($hut['reservation_id'] !== '' && !empty($date_range)) {
+            $avail      = $hut['availability'];
+            $has_green  = false;
+            $has_yellow = false;
+            $has_red    = false;
+            foreach ($date_range as $date) {
+                if (!isset($avail[$date])) continue;
+                $day     = $avail[$date];
+                $free    = $day['freeBeds'];
+                $status  = $day['hutStatus'] ?? '';
+                $is_open = ($status === 'OPEN' || $status === 'SERVICED');
+                if ($status === 'CLOSED') {
+                    $has_red = true;
+                } elseif ($free === 0 || $status === 'FULL' || ($free !== null && $free < $min_places)) {
+                    $has_yellow = true;
+                } elseif ($free !== null && $free >= $min_places && $is_open) {
+                    $has_green = true;
+                }
+            }
+            if ($has_red)        $color = 'red';
+            elseif ($has_yellow) $color = 'yellow';
+            elseif ($has_green)  $color = 'green';
+        }
+
         $map_huts[] = array(
-            'rank' => $i + 1,
-            'name' => $hut['official_name'],
-            'club' => $hut['operating_club'] ?? '',
-            'lat'  => $hut['latitude'],
-            'lon'  => $hut['longitude'],
-            'elev' => $hut['elevation_m'],
-            'dist' => $hut['distance_km'],
-            'url'  => $hut['official_website_url'] ?? '',
+            'rank'  => $i + 1,
+            'name'  => $hut['official_name'],
+            'club'  => $hut['operating_club'] ?? '',
+            'lat'   => $hut['latitude'],
+            'lon'   => $hut['longitude'],
+            'elev'  => $hut['elevation_m'],
+            'dist'  => $hut['distance_km'],
+            'url'   => $hut['official_website_url'] ?? '',
+            'color' => $color,
         );
     }
     $huts_json   = json_encode($map_huts, JSON_HEX_TAG | JSON_HEX_AMP);
@@ -483,8 +509,18 @@ function render_results(
             maxZoom: 18,
         }).addTo(map);
 
-        // Search center marker (red)
-        var centerIcon = new L.Icon.Default();
+        // Colored SVG pin icon
+        function makeIcon(color) {
+            var fills = { green: '#28a745', yellow: '#ffc107', red: '#dc3545', 'default': '#2a81cb' };
+            var fill  = fills[color] || fills['default'];
+            var svg   = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">'
+                      + '<path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 9.4 12.5 28.5 12.5 28.5S25 21.9 25 12.5C25 5.6 19.4 0 12.5 0z" fill="' + fill + '" stroke="#fff" stroke-width="1.5"/>'
+                      + '<circle cx="12.5" cy="12.5" r="5" fill="rgba(255,255,255,0.7)"/>'
+                      + '</svg>';
+            return L.divIcon({ html: svg, className: '', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -38] });
+        }
+
+        // Search center marker
         L.marker([CENTER.lat, CENTER.lon])
             .addTo(map)
             .bindPopup('<div class="map-popup"><b>' + CENTER.name + '</b><br><em>Search center</em></div>');
@@ -500,7 +536,7 @@ function render_results(
                         + elevStr + h.dist + ' km away'
                         + urlStr
                         + '</div>';
-            var m = L.marker([h.lat, h.lon]).addTo(map).bindPopup(popup);
+            var m = L.marker([h.lat, h.lon], { icon: makeIcon(h.color) }).addTo(map).bindPopup(popup);
             markers.push(m);
         });
 
