@@ -16,6 +16,22 @@ define('MAX_DATE_RANGE', 14);    // maximum days in date range
 // ---------------------------------------------------------------------------
 // Geocoding
 // ---------------------------------------------------------------------------
+
+/**
+ * Try to parse the input as a "lat,lon" or "lat lon" coordinate pair.
+ * Returns ['lat', 'lon', 'display_name'] on success, null if not a coordinate string.
+ */
+function parse_latlon(string $input): ?array {
+    if (preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*[,\s]\s*(-?\d+(?:\.\d+)?)\s*$/', $input, $m)) {
+        $lat = (float)$m[1];
+        $lon = (float)$m[2];
+        if ($lat >= -90 && $lat <= 90 && $lon >= -180 && $lon <= 180) {
+            return ['lat' => $lat, 'lon' => $lon, 'display_name' => $input];
+        }
+    }
+    return null;
+}
+
 function geocode(string $location): array {
     $key   = strtolower(trim($location));
     $cache = array();
@@ -253,7 +269,7 @@ function render_form(
       <h2>Search</h2>
       <div class="form-row">
         <div class="form-group">
-          <label for="location">Location</label>
+          <label for="location">Location or Lat/Lon</label>
           <input type="text" id="location" name="location" value="$loc"
                  placeholder="e.g. Innsbruck, Chamonix" required style="width:220px">
         </div>
@@ -730,7 +746,7 @@ if ($location !== null && $location !== '') {
     } elseif (empty($date_errors)) {
 
         try {
-            $geo  = geocode($location);
+            $geo  = parse_latlon($location) ?? geocode($location);
             $huts = load_and_filter_huts(CSV_PATH, $geo['lat'], $geo['lon'], $distance_km, $min_elevation);
 
             if (empty($huts)) {
