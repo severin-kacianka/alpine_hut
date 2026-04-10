@@ -11,7 +11,7 @@ define('CSV_PATH',        __DIR__ . '/data/hut_reservation_scraped.csv');
 define('CACHE_TTL',       86400 / 2);  // 12 h in seconds
 define('AVAIL_URL',       'https://www.hut-reservation.org/api/v1/reservation/getHutAvailability');
 define('FETCH_PAUSE_SEC', 0.5);
-define('LOG_FILE',        __DIR__ . '/reservation_cache/update_log.txt');
+define('LOG_BASE',        __DIR__ . '/reservation_cache/update_log');
 
 // ---------------------------------------------------------------------------
 // Logging
@@ -24,7 +24,14 @@ function log_open(): void {
     if (!is_dir(CACHE_DIR)) {
         mkdir(CACHE_DIR, 0755, true);
     }
-    $_log_fh = fopen(LOG_FILE, 'a');
+    // Rotate: -2.txt → -3.txt, -1.txt → -2.txt, then open fresh -1.txt
+    if (file_exists(LOG_BASE . '-2.txt')) {
+        rename(LOG_BASE . '-2.txt', LOG_BASE . '-3.txt');
+    }
+    if (file_exists(LOG_BASE . '-1.txt')) {
+        rename(LOG_BASE . '-1.txt', LOG_BASE . '-2.txt');
+    }
+    $_log_fh = fopen(LOG_BASE . '-1.txt', 'w');
 }
 
 function log_line(string $msg): void {
