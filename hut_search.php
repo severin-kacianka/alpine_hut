@@ -520,8 +520,17 @@ function render_results(
             return L.divIcon({ html: svg, className: '', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -38] });
         }
 
-        // Search center marker
-        L.marker([CENTER.lat, CENTER.lon])
+        // Search center marker — star shape to distinguish from hut pins
+        var starSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 30 30">'
+                    + '<circle cx="15" cy="15" r="10" fill="none" stroke="#dc3545" stroke-width="2.5"/>'
+                    + '<circle cx="15" cy="15" r="2.5" fill="#dc3545"/>'
+                    + '<line x1="15" y1="0" x2="15" y2="8" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                    + '<line x1="15" y1="22" x2="15" y2="30" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                    + '<line x1="0" y1="15" x2="8" y2="15" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                    + '<line x1="22" y1="15" x2="30" y2="15" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                    + '</svg>';
+        var centerIcon = L.divIcon({ html: starSvg, className: '', iconSize: [45, 45], iconAnchor: [22, 22], popupAnchor: [0, -22] });
+        L.marker([CENTER.lat, CENTER.lon], { icon: centerIcon })
             .addTo(map)
             .bindPopup('<div class="map-popup"><b>' + CENTER.name + '</b><br><em>Search center</em></div>');
 
