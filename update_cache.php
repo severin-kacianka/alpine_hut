@@ -8,9 +8,42 @@
 
 define('CACHE_DIR',       __DIR__ . '/reservation_cache');
 define('CSV_PATH',        __DIR__ . '/data/hut_reservation_scraped.csv');
-define('CACHE_TTL',       86400);  // 24 h in seconds
+define('CACHE_TTL',       86400 / 2);  // 12 h in seconds
 define('AVAIL_URL',       'https://www.hut-reservation.org/api/v1/reservation/getHutAvailability');
 define('FETCH_PAUSE_SEC', 0.5);
+define('LOG_FILE',        __DIR__ . '/reservation_cache/update_log.txt');
+
+// ---------------------------------------------------------------------------
+// Logging
+// ---------------------------------------------------------------------------
+$_log_fh = null;
+
+function log_open(): void {
+    global $_log_fh;
+    // Ensure directory exists before opening log
+    if (!is_dir(CACHE_DIR)) {
+        mkdir(CACHE_DIR, 0755, true);
+    }
+    $_log_fh = fopen(LOG_FILE, 'a');
+}
+
+function log_line(string $msg): void {
+    global $_log_fh;
+    $line = '[' . date('Y-m-d H:i:s') . '] ' . $msg . "\n";
+    echo $line;
+    if ($_log_fh) {
+        fwrite($_log_fh, $line);
+        fflush($_log_fh);
+    }
+}
+
+function log_close(): void {
+    global $_log_fh;
+    if ($_log_fh) {
+        fclose($_log_fh);
+        $_log_fh = null;
+    }
+}
 
 // ---------------------------------------------------------------------------
 // Parse + validate inputs
@@ -73,7 +106,13 @@ if (!is_dir(CACHE_DIR)) {
         echo "Error: could not create cache directory: " . CACHE_DIR . "\n";
         exit(1);
     }
-    echo "Created cache directory: " . CACHE_DIR . "\n";
+}
+
+log_open();
+log_line("=== Run started: IDs $start_id–$end_id ===");
+
+if (!is_dir(CACHE_DIR)) {
+    log_line("Created cache directory: " . CACHE_DIR);
 }
 
 // ---------------------------------------------------------------------------
@@ -85,24 +124,21 @@ $skipped  = 0;
 $failed   = 0;
 $total    = $end_id - $start_id + 1;
 
-echo "Updating reservation cache for IDs $start_id–$end_id ($total total)...\n";
-flush();
+log_line("Updating reservation cache for IDs $start_id–$end_id ($total total)...");
 
 for ($id = $start_id; $id <= $end_id; $id++) {
     $file = CACHE_DIR . '/' . $id;
 
     // Skip IDs marked NOT_FOUND or absent in the CSV
     if (!isset($valid_ids[$id])) {
-        echo "NF    $id\n";
-        flush();
+        log_line("NF    $id");
         continue;
     }
 
     // Skip if file is fresh
     if (file_exists($file) && ($now - filemtime($file)) < CACHE_TTL) {
-        echo "SKIP  $id\n";
+        log_line("SKIP  $id");
         $skipped++;
-        flush();
         continue;
     }
 
@@ -126,20 +162,17 @@ for ($id = $start_id; $id <= $end_id; $id++) {
     curl_close($ch);
 
     if ($err || $body === false) {
-        echo "FAIL  $id  (curl error: $err)\n";
+        log_line("FAIL  $id  (curl error: $err)");
         $failed++;
-        flush();
         usleep((int)(FETCH_PAUSE_SEC * 1000000));
         continue;
     }
 
     if ($code !== 200) {
-        echo "FAIL  $id  (HTTP $code)\n";
+        log_line("FAIL  $id  (HTTP $code)");
         $failed++;
-        flush();
         if ($code === 403) {
-            echo "--- HTTP 403, pausing 5s ---\n";
-            flush();
+            log_line("--- HTTP 403, pausing 5s ---");
             sleep(5);
         } else {
             usleep((int)(FETCH_PAUSE_SEC * 1000000));
@@ -149,33 +182,31 @@ for ($id = $start_id; $id <= $end_id; $id++) {
 
     $data = json_decode($body, true);
     if (!is_array($data)) {
-        echo "FAIL  $id  (invalid JSON)\n";
+        log_line("FAIL  $id  (invalid JSON)");
         $failed++;
-        flush();
         usleep((int)(FETCH_PAUSE_SEC * 1000000));
         continue;
     }
 
     // Write raw JSON body to cache file
     if (file_put_contents($file, $body) === false) {
-        echo "FAIL  $id  (could not write file)\n";
+        log_line("FAIL  $id  (could not write file)");
         $failed++;
-        flush();
         usleep((int)(FETCH_PAUSE_SEC * 1000000));
         continue;
     }
 
-    echo "OK    $id\n";
+    log_line("OK    $id");
     $fetched++;
-    flush();
 
     if ($fetched % 10 === 0) {
-        echo "--- pausing 5s after $fetched successful fetches ---\n";
-        flush();
+        log_line("--- pausing 5s after $fetched successful fetches ---");
         sleep(5);
     } else {
         usleep((int)(FETCH_PAUSE_SEC * 1000000));
     }
 }
 
-echo "\nDone. Fetched: $fetched  Skipped: $skipped  Failed: $failed\n";
+log_line("Done. Fetched: $fetched  Skipped: $skipped  Failed: $failed");
+log_line("=== Run finished ===");
+log_close();
