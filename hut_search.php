@@ -281,7 +281,7 @@ function render_form(
         <div class="form-group">
           <label for="min_elevation">Min elevation (m)</label>
           <input type="number" id="min_elevation" name="min_elevation" value="$elev"
-                 min="0" max="5000" step="100" placeholder="optional" style="width:130px">
+                 min="0" max="5000" step="1" placeholder="optional" style="width:130px">
         </div>
         <div class="form-group">
           <label for="start_date">Start date</label>
