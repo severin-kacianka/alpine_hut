@@ -1,6 +1,6 @@
 official_name,operating_club,hut_id,latitude,longitude,elevation_m,email,phone_number,official_website_url,capacity_beds,source_url,reservation_id
-Aarbiwak SAC,SAC,2147000001,46.55555404703093,8.15222678796981,2731,k.brefin@livenet.ch,,http://www.sac-pilatus.ch,17,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000001,
-Albert-Heim-Hütte SAC,SAC,2147000006,46.60890792501105,8.463518795919578,2542,info@albertheimhuette.ch,,https://www.albertheimhuette.ch/,60,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000006,
+Aarbiwak SAC,SAC,2147000001,46.55555404703093,8.15222678796981,2731,k.brefin@livenet.ch,,http://www.sac-pilatus.ch,17,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000001,603
+Albert-Heim-Hütte SAC,SAC,2147000006,46.60890792501105,8.463518795919578,2542,info@albertheimhuette.ch,,https://www.albertheimhuette.ch/,60,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000006,710
 Arbenbiwak SAC,SAC,2147000016,46.031364,7.665059,3224,rinaldo.amacker@bluewin.ch,+41794090644,https://sac.zermatt.org/verein/arbenbiwak/,15,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000016,381
 Bächlitalhütte SAC,SAC,2147000021,46.587037979835685,8.282681550901897,2328,info@baechlitalhuette.ch,,http://www.baechlitalhuette.ch,71,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000021,
 Balmhornhütte SAC,SAC,2147000024,46.45128542486783,7.689567354207958,1956,balmhornhuette@sac-altels.ch,,http://www.balmhornhuette.ch,20,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000024,
@@ -18,14 +18,14 @@ Claridenhütte SAC,SAC,2147000063,46.85951911737697,8.935791708394552,2453,clari
 Clubhaus Backi,SAC,2141008193,47.262709624800515,7.444411157204625,1165,backi@sac-weissenstein.ch,,https://www.sac-weissenstein.ch/clubhaus-backi.html,30,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2141008193,
 Clubhaus Metsch,SAC,2147463667,46.44,07.46,1775,clubhaus@sac-huttwil.ch,+41 79 947 70 69,https://www.sac-huttwil.ch/sektion/clubhaus.php,16,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147463667,330
 Clubhütte Bärenfang,SAC,2141008212,47.0661044570562,8.664897934872702,1390,info@baerenfang.ch,,https://www.sac-zug.ch/huetten/baerenfang/,26,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2141008212,
-Clubhütte Grubenalp,SAC,2140495223,46.1603467087469,7.947001445496775,2300,info@wanderspuren.ch,,https://sac-saas.ch/grubenalp/,14,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2140495223,
-Cresta-Biwak SAC,SAC,2147425514,46.04476909558431,8.030220023170205,3032,crestabiwak@sac-saas.ch,,https://sac-saas.ch/cresta_biwak/,0,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147425514,
+Clubhütte Grubenalp,SAC,2140495223,46.1603467087469,7.947001445496775,2300,info@wanderspuren.ch,,https://sac-saas.ch/grubenalp/,14,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2140495223,568
+Cresta-Biwak SAC,SAC,2147425514,46.04476909558431,8.030220023170205,3032,crestabiwak@sac-saas.ch,,https://sac-saas.ch/cresta_biwak/,0,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147425514,445
 Domhütte SAC,SAC,2147000081,46.102662297858686,7.817608761999371,2940,info@domhuette.ch,,https://domhuette.ch,75,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000081,
 Enderlinhütte SAC,SAC,2147000087,47.03876766644046,9.551605939927788,1501,enderlin@sac-piz-sol.ch,,http://www.sac-piz-sol.ch,30,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000087,
 Fridolinshütten SAC,SAC,2147000101,46.821274000572494,8.950063359838234,2111,fridolinshuette-sac@bluewin.ch,,http://www.fridolinshuette.ch,50,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000101,
 Fründenhütte SAC,SAC,2147000102,46.483632393033496,7.74180856093144,2562,info@fruendenhuette.ch,,http://www.fruendenhuette.ch,58,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000102,
 Glärnischhütte SAC,SAC,2147000116,47.001575603403786,8.96342626797513,1990,info@glhuette.ch,,http://www.glhuette.ch,90,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000116,
-Grassenbiwak SAC,SAC,2147000120,46.770144464475244,8.446747926946987,2647,grassen.biwak@gmail.com,,https://www.sac-engelberg.ch/grassen-biwak/,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000120,
+Grassenbiwak SAC,SAC,2147000120,46.770144464475244,8.446747926946987,2647,grassen.biwak@gmail.com,,https://www.sac-engelberg.ch/grassen-biwak/,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000120,567
 Grathaus Moron,SAC,2140505062,47.26307981892374,7.269090980046482,1313,,,https://www.sac-angenstein.ch/huetten/grathaus-moron/,33,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2140505062,
 Grubenberghütte,SAC,2147000124,46.54928167614313,7.251924563072391,1840,info@grubenberghuette.ch,,http://www.grubenberghuette.ch,23,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000124,
 Grünhornhütte SAC,SAC,2147000126,46.81050214162548,8.941374353894444,2448,,,http://www.sac-toedi.ch,0,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000126,
@@ -39,24 +39,24 @@ Länta-Hütte SAC,SAC,2147000147,46.54155588176615,9.041741803171636,2090,info@l
 Lauteraarhütte SAC,SAC,2147000148,46.57003531015104,8.222308365945011,2393,lauteraar@sac-zofingen.ch,,http://www.lauteraarhuette.ch,28,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000148,
 Leutschachhütte SAC,SAC,2147000153,46.783602365466464,8.601145646329524,2208,furrer_andreaaa@gmx.ch,,http://www.leutschachhuette.ch,60,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000153,
 Lohnerhütte SAC,SAC,2147000157,46.47456722786203,7.599702341022783,2171,grabemattli@gmail.com,,http://www.sac-wildstrubel.ch,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000157,
-Martinsmadhütte SAC,SAC,2147000167,46.8926450857446,9.188313801761202,2002,info@martinsmadhuette.ch,,http://www.martinsmadhuette.ch,40,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000167,
+Martinsmadhütte SAC,SAC,2147000167,46.8926450857446,9.188313801761202,2002,info@martinsmadhuette.ch,,http://www.martinsmadhuette.ch,40,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000167,615
 Mutthornhütte SAC,SAC,2147000187,46.486554,7.829508,2788,info@mutthornhuette.ch,+41338531344,http://www.mutthornhuette.ch,60,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000187,14
 Planurahütte SAC,SAC,2147000207,46.82001420113037,8.880432739456106,2947,info@planurahuette.ch,,http://www.planurahuette.ch,41,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000207,
 Ringelspitzhütte SAC,SAC,2147000218,46.865785157467315,9.380813365669814,1998,info@ringelspitzhuette.ch,,http://www.ringelspitzhuette.ch,36,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000218,
 Rosenlauibiwak SAC,SAC,2147000220,46.65909844867396,8.167679082351222,2330,biwak@dossenhuette.ch,,https://dossenhuette.ch/#rosenlauibiwak,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000220,
 Rottalhütte SAC,SAC,2147000226,46.52604468597215,7.944711590242324,2755,rottalhuette@sac-interlaken.ch,,http://www.sac-interlaken.ch/index.php/huetten/rottalhuette,28,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000226,
-Salbitschijenbiwak SAC,SAC,2147000230,46.67614749717253,8.523676878908017,2400,salbit@sac-mythen.ch,,https://sac-mythen.ch/unsere-huetten,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000230,
+Salbitschijenbiwak SAC,SAC,2147000230,46.67614749717253,8.523676878908017,2400,salbit@sac-mythen.ch,,https://sac-mythen.ch/unsere-huetten,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000230,559
 Sardonahütte SAC,SAC,2147000234,46.91548356434636,9.275458481694724,2158,jaeger.beat@bluewin.ch,,http://www.sardonahuette.ch,44,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000234,
 Schräawislihütte,SAC,2147000242,46.919904677853246,9.329977071902329,1732,,,https://www.sac-piz-sol.ch/sac-webapp/huetten,8,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000242,
 Seetalhütte SAC,SAC,2147000246,46.8739,10.0093,2065,info@seetalhuette.ch,+41765458282,https://www.sac-praettigau.ch/index.php/huetten/seetalhuette,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000246,242
-Silberhornhütte SAC,SAC,2147000249,46.548987925175055,7.933582306211974,2663,,,http://www.sac-lauterbrunnen.ch,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000249,
+Silberhornhütte SAC,SAC,2147000249,46.548987925175055,7.933582306211974,2663,,,http://www.sac-lauterbrunnen.ch,10,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000249,515
 Solvaybiwak SAC,SAC,2147000252,45.97862339198917,7.663014151150061,4003,,,https://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/2147000252/,0,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000252,
 Spitzmeilenhütte SAC,SAC,2147000256,47.034288127392834,9.250575750295917,2087,info@spitzmeilenhuette.ch,,http://www.spitzmeilenhuette.ch,50,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000256,
-Stockhornbiwak SAC,SAC,2147000258,46.377385314208986,7.88106828139595,2598,,,http://www.stockhornbiwak.ch,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000258,
+Stockhornbiwak SAC,SAC,2147000258,46.377385314208986,7.88106828139595,2598,,,http://www.stockhornbiwak.ch,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000258,527
 Sunnehüsi,SAC,2147448785,46.643720,7.446150,1125,sunnehuesi@sac-bluemlisalp.ch,+41 78 836 96 49,http://www.sac-sunnehuesi.ch/,15,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147448785,326
 Sustlihütte SAC,SAC,2147000262,46.75163133069784,8.470799017612562,2257,info@sustlihuette.ch,,http://www.sustlihuette.ch,67,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000262,
 Tanzbodenhütte,SAC,2140485008,47.22010788989732,9.105935964440379,1441,tanzboden@sac-pfannenstiel.ch,,https://www.sac-pfannenstiel.ch/huetten/tanzbodenhuette,17,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2140485008,
-Treschhütte SAC,SAC,2147000274,46.71860447283968,8.64945304486683,1475,info@treschhuette.ch,,http://www.treschhuette.ch,32,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000274,
+Treschhütte SAC,SAC,2147000274,46.71860447283968,8.64945304486683,1475,info@treschhuette.ch,,http://www.treschhuette.ch,32,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000274,688
 Trifthütte SAC,SAC,2147000277,46.674023,8.371172,2420,info@trifthuette.ch,+41 33 975 12 28,https://www.trifthuette.ch,62,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000277,28
 Weisshornhütte SAC,SAC,2147000290,46.08602025719224,7.7434799165374,2932,annetteflorence@icloud.com,,http://www.sac-basel.ch/huetten/weisshornhuette,31,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000290,
 Chalet du CAF Contamines,CAF,30941606,45.8168426,6.7249451,1164,,,,,OSM,
@@ -99,7 +99,7 @@ Lyfialm - Malga Lifi,,298467485,46.5037984,10.7029948,2196.0,,,,,OSM,
 Rifugio Ghedina,,299927723,46.1158602,10.8085216,1137.0,,+39 0465 321808,https://www.trentinorifugi.com/index.php?bsclef=schede_rifugi&ex=html&viewnews=ok&ln=it&id=76&catid=6,,OSM,
 Alpe e Rifugio Legnone,ProLoco Delebio,300524772,46.1078796,9.4360824,1689.0,,+393395005056,,,OSM,
 Lienzer Hütte,,301000243,46.9348077,12.7465478,1980,,,,87,OSM,
-Elberfelder Hütte,,301262877,46.977887,12.7604244,2346,,+43 4824 2545,https://elberfelderhuette.com,59,OSM,
+Elberfelder Hütte,,301262877,46.977887,12.7604244,2346,,+43 4824 2545,https://elberfelderhuette.com,59,OSM,650
 Cabane de Mille,,302898492,46.0136689,7.2065712,2473,,+41 27 783 11 82,https://www.cabanedemille.ch,40,OSM,
 Koča na Pesku,,303847394,46.4672016,15.3439495,1382,,,,,OSM,
 Scheibenwaldhütte,,305860388,47.640437,12.4240651,1140,,+43 5375 6053,https://www.scheibenwald.com/,,OSM,
@@ -161,7 +161,7 @@ Fraganter Schutzhaus,Alpenverein Klagenfurt,389785876,46.950921,13.027661,1810,,
 Gerlitzenhütte,Sektion Villach,389785880,46.6961092,13.8869343,1580,,,,,OSM,
 Kapunerhütte,ÖAV Sektion Graz,389786039,46.641703,15.2414477,1003,,,https://www.alpenverein.at/kapunerhuette/,,OSM,
 Karl-Lechner-Haus,Sektion Stuhlecker,389786044,47.582021,15.7982186,1450,,,https://www.alpenverein.at/karllechnerhaus/,,OSM,
-Klagenfurter Hütte,Österreichischer Alpenverein - Sektion Klagenfurt,389786089,46.4468626,14.1830532,1664,,,https://klagenfurter-huette.at/,,OSM,
+Klagenfurter Hütte,Österreichischer Alpenverein - Sektion Klagenfurt,389786089,46.4468626,14.1830532,1664,,,https://klagenfurter-huette.at/,,OSM,597
 Peter-Wiechenthaler-Hütte,ÖAV Sektion Saalfelden,389786192,47.463,12.875,1752,,+43 664 9544822,http://www.wiechenthaler-huette.at,68,OSM,141
 Polinikhütte,Sektion Mölltal,389786196,46.909217,13.182667,1873,,,,,OSM,
 St. Pöltner Hütte,ÖAV Sektion Sankt Pölten,389786350,47.157556,12.495647,2481,st.poeltnerhuette.reinhold@gmail.com,+43 6562 6265,https://www.alpenverein.at/bonnmatreierhuette/,,OSM,
@@ -182,7 +182,7 @@ Schafalm,,413596354,47.1986475,11.2985671,1580,,,,,OSM,
 Fahrlechhütte,,416556393,47.2996175,13.6914908,1648,,,https://www.fahrlechhuette.at/,,OSM,
 Rifugio Serot,,417322481,46.0734662,11.3881872,1566,info@rifugioserot.eu,,https://www.rifugioserot.eu/,,OSM,
 Giglachsee Hütte,,417326835,47.2795539,13.6381195,1955,,,https://www.giglachsee-huette.at/,,OSM,
-Ignaz-Mattis-Hütte,OeAV Wien,417326836,47.2848356,13.6485881,1986,,,https://www.alpenverein.at/ignazmattishuette/,,OSM,
+Ignaz-Mattis-Hütte,OeAV Wien,417326836,47.2848356,13.6485881,1986,,,https://www.alpenverein.at/ignazmattishuette/,,OSM,577
 Roßkogelhütte,,417668849,47.240689,11.1904543,1778,,+43 5232 81419,https://www.rosskogelhuette.tirol/,,OSM,
 Metzg-Hütte,,426925727,46.9658846,8.6760193,1527.0,,,,,OSM,
 Neue Thüringer Hütte,Neue Thüringer Hütte Verein (Alpenvereinshütte),430122613,47.172778,12.383333,2240,kontakt@nth-huette.de,+436644273214,https://www.neuethueringerhuette.at/,71,OSM,237
@@ -201,7 +201,7 @@ Refuge des Barmettes,,451703419,45.3895634,6.7527105,2010,refugedesbarmettes@gma
 Capanna Cadagno,SAT Ritom,452629133,46.5465894,8.7196139,1987,info@capannacadagno.ch,+41 91 868 13 23,https://www.capannacadagno.ch/,60,OSM,
 Rotstockhütte,Skiklub Stechelberg,454394985,46.545135,7.838241,2039,info@rotstockhuette.ch,+41338552464,https://www.rotstockhuette.ch,43,OSM,69
 Spielbodenalp,,454394987,46.548842,7.8739087,1789.0,,,http://www.spielbodenalp.com/,,OSM,
-Hinterbalmhütte,,454641956,46.7795427,8.7984837,1817,info@hinterbalm-huette.ch,+41 41 883 19 39,https://www.hinterbalm-huette.ch/,34,OSM,
+Hinterbalmhütte,,454641956,46.7795427,8.7984837,1817,info@hinterbalm-huette.ch,+41 41 883 19 39,https://www.hinterbalm-huette.ch/,34,OSM,496
 Cavardirashütte,,454642322,46.742437,8.8142692,2649,info@cavardiras.ch,+41 81 947 57 47,https://www.cavardiras.ch/,70,OSM,
 Bergkristallhütte,Andrea Schaller,455564096,47.2954934,9.9870805,1250,bergkristallhuette@gmx.at,+43 664 1808482,https://www.bergkristallhuette.com/,,OSM,
 Rifugio Croz dell'Altissimo,,455703644,46.1706042,10.931698,1480,info@rifugiocrozaltissimo.it,+39 339 798 2922; +39 347 118 4459,https://www.rifugiocrozaltissimo.it/,,OSM,
@@ -244,7 +244,7 @@ Capanna Campo Tencia,CAS Ticino,502559755,46.4442266,8.7326694,2140,campotencia@
 Capanna Corno Gries CAS,CAS Bellinzona e valli,502559768,46.4670761,8.4100474,2338,info@corno-gries.ch,+41 91 869 11 29,https://www.corno-gries.ch/,46,OSM,197
 Dammahütte SAC,SAC - CAS,502559776,46.644864,8.457761,2439,info@dammahuette.ch,041 885 17 81,http://www.dammahütte.ch,18,OSM,228
 Col de la Dent Blanche CAS Bivouac,SAC - CAS,502559811,46.041928,7.6070861,3540,vuadens_nicolas@bluewin.ch,,https://www.cas-jaman.ch/cabanes/bivouac-de-la-dent-blanche,15,OSM,
-Guggihütte,SAC - CAS,502559863,46.5627465,7.9743995,2791,guggihuette@sac-interlaken.ch,,https://www.sac-interlaken.ch/,24,OSM,
+Guggihütte,SAC - CAS,502559863,46.5627465,7.9743995,2791,guggihuette@sac-interlaken.ch,,https://www.sac-interlaken.ch/,24,OSM,665
 Glattalphütte SAC,SAC Sektion Mythen,502559868,46.9168403,8.8750058,1896,sacglattalp@bluewin.ch,+41 41 830 19 39,https://www.glattalphuette.ch/,51,OSM,39
 Hüfihütte SAC,SAC Sektion Pilatus,502559876,46.8018251,8.8189945,2334,info@huefihuette.ch,+41 41 885 14 75,https://www.huefihuette.ch/,32,OSM,388
 Gspaltenhornhütte SAC,SAC - CAS,502559893,46.5,7.81,2455,info@gspaltenhornhuette.ch,+41336761629,https://www.gspaltenhornhuette.ch,60,OSM,44
@@ -259,7 +259,7 @@ Refuge de la Charpoua,Compagnie des guides de Chamonix,503688752,45.9241372,6.95
 Eiger-Ostegghütte,,505804029,46.6003942,8.0411805,2320,,,http://www.mittellegi.ch,12,OSM,
 Anton-Renk-Hütte,DAV Sektion Aachen,512618893,47.0112221,10.6988204,2261,,,,,OSM,
 Hohenzollernhaus,DAV Sektion Hohenzollern,512622097,46.9020017,10.6347837,2123,,,,,OSM,
-Sidelenhütte,,514017580,46.5974645,8.4267493,2708,info@sidelen-huette.ch,+41 41 887 02 33,http://www.sidelen-huette.ch,34,OSM,
+Sidelenhütte,,514017580,46.5974645,8.4267493,2708,info@sidelen-huette.ch,+41 41 887 02 33,http://www.sidelen-huette.ch,34,OSM,614
 Oberaar,KWO Kraftwerke Oberaar,521161221,46.5488746,8.2775108,2335,,+41339824811,https://www.grimselwelt.ch/grimselhotels/oberaar,,OSM,
 Jausenstation Blaubergalm,,528882177,47.5873314,11.7369609,1540,,+43 6642 306719,,15,OSM,
 Berggasthaus Herzogstand,Siegfried Zauner GmbH,528928716,47.6079348,11.3109351,1575,,,,,OSM,
@@ -375,7 +375,7 @@ Tanzbodenhütte,SAC Sektion Pfannenstiel,1189809806,47.2201601,9.1058501,1409.0,
 Langesbergalm,,1208640448,47.1830909,10.6692518,1540,,,,,OSM,
 Saulochalm,,1209817466,47.2582595,12.7148808,1556.0,,,https://www.saulochalm.at/,,OSM,
 Chalet Cima Uomo,,1212500269,46.3849889,11.7980503,2012,,,,,OSM,
-Sustlihütte SAC,SAC - CAS,1212971626,46.7517064,8.4707938,2257,info@sustlihuette.ch,+41 41 885 17 57,https://www.sustlihuette.ch/,67,OSM,
+Sustlihütte SAC,SAC - CAS,1212971626,46.7517064,8.4707938,2257,info@sustlihuette.ch,+41 41 885 17 57,https://www.sustlihuette.ch/,67,OSM,525
 Baita Rifugio Biancoia,famiglia Pertile,1265828635,45.8271505,11.6292622,1121.0,,,,,OSM,
 Schürhütte,,1286795477,47.7435457,14.3460581,1117.0,,,,,OSM,
 Rifugio Belvedere,private,1288185322,45.8449446,7.7515553,2291.0,,,,15,OSM,
@@ -392,7 +392,7 @@ Lahnalm,,1339441796,47.6358013,14.5394042,905.0,,,,,OSM,
 Capanna dei Monti di Lego,Parrocchia di Mergoscia,1341552316,46.1988368,8.8317723,1110,,,https://www.fondazioneverzasca.ch/it/46/monti_di_lego.aspx,10,OSM,
 Koschutahaus / Koča pod Košuto,Naturfreunde,1342611573,46.4517585,14.3874496,1280,,,,,OSM,
 Kögelehütte,,1348444866,47.3999785,10.725254,1510,,,,,OSM,
-Capanna Quarnei,Società Alpinistica Bassa Blenio,1349631178,46.473108,9.0236542,2107,capanna@quarnei.ch,+41 91 870 26 40,https://quarnei.ch/,58,OSM,
+Capanna Quarnei,Società Alpinistica Bassa Blenio,1349631178,46.473108,9.0236542,2107,capanna@quarnei.ch,+41 91 870 26 40,https://quarnei.ch/,58,OSM,582
 Weißalm,,1351497872,47.692696,15.379432,1431.0,,,,,OSM,
 Herrenboden,,1351497873,47.7000304,15.40339,1402,,,,,OSM,
 "Rifugio Forestale ""Val delle Moneghe""",,1361631209,46.1832514,11.9462178,1265,,,,,OSM,
@@ -442,7 +442,7 @@ Pra Cornet,,1576617817,46.4044007,7.1323733,1646,,,,,OSM,
 Rifugio Dondena,Soc. Dondena s.r.l.,1603857953,45.6120757,7.5515031,2186,,,,,OSM,
 Klammalm,,1607527933,47.1510754,11.5961086,1947,,,,,OSM,
 Lattenalm,,1620496977,47.1644733,11.7241766,1680,,,https://m.christler-tux.at/de/lattenalm/,,OSM,
-Hochlandhütte,DAV Sektion Hochland,1621410739,47.4497413,11.3187322,1630,,+49 174 9897863,https://www.hochlandhuette.de/,,OSM,
+Hochlandhütte,DAV Sektion Hochland,1621410739,47.4497413,11.3187322,1630,,+49 174 9897863,https://www.hochlandhuette.de/,,OSM,725
 Breitlehnalm,,1632744583,47.0408861,10.9444301,1874,,,,,OSM,
 Jausenstation Trojer Alm,,1634923290,46.9436576,12.3253445,1810,,,,,OSM,
 Volkzeiner Hütte,,1635114705,46.8691446,12.4389208,1884,,+43 4843 20031,https://www.volkzeinerhütte.at,,OSM,
@@ -641,7 +641,7 @@ Planinski dom pod Ježo,,4347161233,46.1634,13.6692,740,,,,,OSM,
 Miravalle,,4352696989,46.6099111,12.6110573,1337.0,,,,,OSM,
 Rifugio Doss dei Cembri / Doss dei Gembri,,4393058908,46.3806888,10.6596574,2316,info@dossdeigembri.it,+39 0463 753227,,,OSM,
 Zunigalm,,4397709992,46.9730428,12.5189571,1848,zunigalm@tele2.at,+43 664 9059063,https://www.hinterbichl.at/lodges/zunigalm.php,,OSM,
-Cabane d'Arpitettaz,SAC CAS,4399549524,46.1008928,7.6793553,2786,cabane@arpitettaz.ch,+41 27 475 40 28,https://www.arpitettaz.ch/,32,OSM,
+Cabane d'Arpitettaz,SAC CAS,4399549524,46.1008928,7.6793553,2786,cabane@arpitettaz.ch,+41 27 475 40 28,https://www.arpitettaz.ch/,32,OSM,511
 Cabane de Moiry,SAC - CAS,4399562394,46.0906851,7.5954924,2825,moiry@cas-montreux.ch,+41 27 475 45 34,https://cabane-moiry.ch/,96,OSM,
 Cabane de la Tsa,,4399832720,46.0303483,7.5038158,2607,cabtza@gmail.com,+41 76 261 11 48,https://www.cabtza.com/,32,OSM,
 Refuge de Chalin,SAC - CAS,4411036267,46.1792227,6.9472064,2595,,+41 24 466 31 24,https://www.cas-chaussy.ch/,8,OSM,
@@ -676,7 +676,7 @@ Etzlihütte SAC,SAC Thurgau,4949529835,46.7181822,8.720629,2052,info@etzlihuette
 Allmi / Läger,,4959996621,46.7344684,7.8545566,1299.0,,,,,OSM,
 Alp Spilau,Familie Furrer-Gisler,4962763167,46.9244724,8.6913107,1900,,+41 79 567 45 64,https://www.alp-spilau.ch/,,OSM,
 Gfellalphütte,Kandersteg International Scout Centre,4972779619,46.4399169,7.7193265,1849,,,,,OSM,
-Galmihornhütte,,4987947849,46.4892737,8.2428863,2113,info@galmihornhuette.ch,+41 79 410 12 58,https://galmihornhuette.ch/,35,OSM,
+Galmihornhütte,,4987947849,46.4892737,8.2428863,2113,info@galmihornhuette.ch,+41 79 410 12 58,https://galmihornhuette.ch/,35,OSM,472
 Bergerie de Cote Belle,,4988282729,45.0242603,5.9578888,1900.0,,,,,OSM,
 Ristorante Su'n Paradis,,4988488940,46.3708438,12.0912668,1862,,,,,OSM,
 Müllnerhütte,Hans Gruber,4994988821,47.1329559,13.5984768,1683.0,,+43 650 5090763,,,OSM,
@@ -723,7 +723,7 @@ Refuge d’Archiane,,6412734285,44.7459559,5.5042657,784,,+33 4 75 21 24 47,,30,
 Rifugio Alpe Soglia,,6418509638,45.3665832,7.5184592,1723,,,,18,OSM,
 Les Montagnards,,6420766392,45.3012793,7.220472,1410,info@lesmontagnards.it,,https://www.lesmontagnards.it/,,OSM,
 Baite Pianezzo,Mapomo,6552380087,45.8653715,9.325161,1176,,,https://www.mapomodaltaquota.it,,OSM,
-Rifugio Giorgio Graffer al Grostè,Società degli Alpinisti Tridentini,6592652529,46.2196548,10.8894126,2261,rifugio@graffer.com,+39 0465 441358,http://www.graffer.com/,70,OSM,
+Rifugio Giorgio Graffer al Grostè,Società degli Alpinisti Tridentini,6592652529,46.2196548,10.8894126,2261,rifugio@graffer.com,+39 0465 441358,http://www.graffer.com/,70,OSM,634
 Les Roches Blanches,,6593452791,45.2463362,6.9378769,2084.0,,,,,OSM,
 Rifugio Boch,,6594064625,46.2260393,10.8754306,2085,,+39 0465 440465,,,OSM,
 hubelhütte,,6600298909,46.7777636,8.2022384,1605.0,,,,,OSM,
@@ -759,7 +759,7 @@ Refuge La Vouivre,,6893389795,46.345086,6.8325822,1437.0,info@lactaney.com,+41 2
 Rifugio Maraman,,6904021206,44.400663,7.1685091,1783.0,info@maraman.it,+39 391 121 3232,https://www.maraman.it/,,OSM,
 Lui d'Aout,,6913946927,46.1934499,7.1387079,1957,,,,,OSM,
 Cabane du Demècre,Les Trotteurs de Fully,6919661171,46.1740748,7.0822415,2361,cabanedemecre@gmail.com,+41 27 746 35 87,https://www.demecre.ch/,27,OSM,
-Cabane de Sorniot,,6920077295,46.1693151,7.0949146,2064,info@sorniot.ch,+41 27 746 24 26,http://www.sorniot.ch,46,OSM,
+Cabane de Sorniot,,6920077295,46.1693151,7.0949146,2064,info@sorniot.ch,+41 27 746 24 26,http://www.sorniot.ch,46,OSM,566
 Refuge du Lac,,6920281757,46.2798371,7.2144607,1462,info@refugederborence.ch,+41 27 346 14 28,https://www.refugederborence.ch/,36,OSM,
 Gîte d'alpage de Dorbon,,6920374590,46.2591734,7.1904664,1974.0,dorbon@bluewin.ch,+41 78 761 52 47,https://www.dorbon.ch/,20,OSM,
 Morterer Alm,,6991676399,46.5712087,10.8424486,1900.0,,,,,OSM,
@@ -842,7 +842,7 @@ Gasthaus Steinberg,,9839566353,47.3691695,12.2211378,880,,+43 5334 2534,https://
 Brixner Hütte - Rifugio Bressanone,AVS / Martha Oberhofer,9917556569,46.912911,11.620518,2282,info@brixnerhuette.it,+39 327 532 99 44,http://www.brixnerhuette.it,28,OSM,389
 Tiefrastenhütte,,9917556570,46.87628,11.78159,2312,info@tiefrastenhuette.it,+39 334 9896370,https://www.tiefrasten.com/,50,OSM,301
 Edelrauthütte,Familie Weißensteiner,9917556577,46.9470882,11.7391096,2545,info@edelrauthuette.it,+39 0474 653230,https://www.edelrauthuette.it/,70,OSM,
-Schwarzensteinhütte - Rifugio al Sasso Nero,,9917584405,47.0129173,11.8856637,3026,info@schwarzensteinhuette.com,+39 342 8038586,https://www.schwarzensteinhuette.com,50,OSM,
+Schwarzensteinhütte - Rifugio al Sasso Nero,,9917584405,47.0129173,11.8856637,3026,info@schwarzensteinhuette.com,+39 342 8038586,https://www.schwarzensteinhuette.com,50,OSM,685
 Chemnitzer Hütte - Rifugio Porro,,9917589294,46.9571079,11.8087307,2420,,,,,OSM,
 Birnlückenhütte - Rifugio Brigata Tridentina,,9917669519,47.0799281,12.2064082,2441,,+39 0474 654140,http://schutzhuetten.net/birnlueckenhuette/,,OSM,
 Lenkjöchlhütte - Rifugio Giogo Lungo,,9917671909,47.0391152,12.1908818,2603,,+39 0474 838144,,,OSM,
@@ -861,7 +861,7 @@ Schlüichalm,,9957031992,47.0567153,12.1407834,1742.0,,,,,OSM,
 ,,9997909650,46.7611514,13.4693472,1916.0,,,,,OSM,
 ,,10001542921,46.8771048,13.1791772,1837.0,,,,,OSM,
 Scharfetthütte,,10028738648,47.252812,13.4487044,1747.0,,,,,OSM,
-Lauteraarhütte,SAC Zofingen,10048744013,46.5700751,8.2221825,2393,lauteraar@sac-zofingen.ch,+41 33 973 11 10,https://www.lauteraarhuette.ch/,28,OSM,
+Lauteraarhütte,SAC Zofingen,10048744013,46.5700751,8.2221825,2393,lauteraar@sac-zofingen.ch,+41 33 973 11 10,https://www.lauteraarhuette.ch/,28,OSM,558
 ,,10086597625,46.5295287,13.970108,1213.0,,,,,OSM,
 ,,10086609200,46.5172315,14.0981631,592.0,,,,,OSM,
 Stanzalm,,10086745842,47.1334039,13.0076598,1780,,,,,OSM,
@@ -900,7 +900,7 @@ Cabane Becs de Bosson,,11215332056,46.1641939,7.5163251,2985,info@cabanedesbecs.
 Hollandiahütte SAC,SAC - CAS,11242272119,46.4752668,7.9601696,3238,info@hollandiahuette.ch,+41 27 939 11 35,https://www.hollandiahuette.ch/,86,OSM,374
 Oberaletschhütte,SAC - CAS,11262553552,46.425217,7.973875,2640,info@oberaletsch.ch,+4127 927 17 67,http://www.oberaletsch.ch,58,OSM,47
 Rifugio Gattascosa,,11290337396,46.1565227,8.1585272,1993,,+39 328 3151669,https://www.rifugiogattascosa.com/,,OSM,
-Cabane des Audannes,,11331670994,46.3434549,7.3840844,2506,gardien@audannes.ch,+41 79 310 90 60,https://www.audannes.ch/,46,OSM,
+Cabane des Audannes,,11331670994,46.3434549,7.3840844,2506,gardien@audannes.ch,+41 79 310 90 60,https://www.audannes.ch/,46,OSM,690
 Cabane Depetro Gervasoni,,11343254722,45.0993834,5.5105683,1400.0,,,,,OSM,
 Rifugio Escursionistico Vulpot,,11455406128,45.2078685,7.1460405,1805,rifugiovulpot22@gmail.com,+39 0123 83771,http://www.rifugiovulpot.com,24,OSM,
 Rifugio Portia,,11681202214,45.1876015,7.4095112,1328,,,,,OSM,
@@ -958,7 +958,7 @@ Auberge du Truc,,13124891039,45.8362474,6.7495729,1750,aubergedutruc@hotmail.fr,
 Skihütte Brend,,13127380901,46.8619143,8.1508886,959.0,,,https://fsk-grossteil.ch/,,OSM,
 Kührointalm,,13131702124,47.5708459,12.9612323,1390.0,,,,,OSM,
 Almagellerhütte SAC,SAC,13135143793,46.1076059,8.0076731,2894,info@almagellerhuette.ch,+41 27 957 11 79,http://www.almagellerhuette.ch,120,OSM,208
-Berghütte Hohsaas,,13135956569,46.1392281,7.9917696,3140,,,https://www.hohsaashuette.ch,,OSM,
+Berghütte Hohsaas,,13135956569,46.1392281,7.9917696,3140,,,https://www.hohsaashuette.ch,,OSM,549
 Weissmieshütte SAC,SAC - CAS,13135956571,46.143814,7.977938,2726,huette@weissmieshuette.ch,+41279572554,http://www.weissmieshuette.ch,99,OSM,209
 Refuge de Tré la Tête,,13140705117,45.7917496,6.734776,1909.0,contact@trelatete.com,+33 4 50 47 01 68,https://www.trelatete.com,,OSM,
 Capanna Meden m.2405,,13173654673,46.2230474,10.0592205,2405,,,,,OSM,
@@ -1007,7 +1007,7 @@ Passauer Hütte,,27715096,47.474200,12.750405,2051,,+43 680 50 72 624,https://ww
 Schmidt-Zabierow Hütte,DAV Sektion Passau,27870023,47.5506186,12.6463241,1966,,+43 6588 7284,http://www.schmidt-zabierow.at,,OSM,
 Alois-Günther-Haus,ÖAV Sektion Edelweiß,28939679,47.5743,15.7906,1782,,+43 3853 300,https://www.aloisguentherhaus.at,24,OSM,411
 Riemannhaus,Sektion Ingolstadt des Deutschen Alpenvereins e.V.,29176116,47.458020,12.914580,2177,,0043 6702034373,https://www.riemannhaus-maria-alm.at,82,OSM,145
-Neue Traunsteiner Hütte,DAV Sektion Traunstein,29176583,47.6281798,12.8008994,1560,,+49 171 4378919,https://www.traunsteinerhuette.com/,,OSM,
+Neue Traunsteiner Hütte,DAV Sektion Traunstein,29176583,47.6281798,12.8008994,1560,,+49 171 4378919,https://www.traunsteinerhuette.com/,,OSM,452
 Lamsenjochhütte,DAV Sektion Oberland,29269844,47.380067,11.603557,1953,,+43524462063,https://www.alpenverein-muenchen-oberland.de/huetten/alpenvereinshuetten/lamsenjochhuette,82,OSM,437
 Binsalm,,29312645,47.3967387,11.5781507,1500,,+43 5245 214,https://www.binsalm.at/,,OSM,
 Malga Stablasolo,,29334896,46.4300312,10.7688055,1539,,+39 331 6412213,,,OSM,
@@ -1103,7 +1103,7 @@ Rießerkopf Haus (Toni Hütte),,36555424,47.4689176,11.0882487,1096,,+49 8821 73
 ,,36555425,47.4686233,11.0880877,1108.0,,,,,OSM,
 Rifugio Colò,Pavona Loretta,36677079,46.3900918,13.1152257,612,info@rifugiocolo.it,+39 3474281877,https://www.rifugiocolo.it/,,OSM,
 Malga Montasio,,36677850,46.4129233,13.4317052,1515.0,,,,,OSM,
-Rifugio Alpe Pozza - Vincenzo Lancia,Società degli Alpinisti Tridentini,36743997,45.8272905,11.1447193,1825,info@rifugiolancia.it,+39 0464 868068,https://rifugiolancia.it/,64,OSM,
+Rifugio Alpe Pozza - Vincenzo Lancia,Società degli Alpinisti Tridentini,36743997,45.8272905,11.1447193,1825,info@rifugiolancia.it,+39 0464 868068,https://rifugiolancia.it/,64,OSM,630
 Rifugio Baita Tonda,,37014394,45.8878794,11.1755126,1593.0,,,https://www.rifugiobaitatonda.it,,OSM,
 Rifugio Bolettone,,37105518,45.837087,9.180257,1304,,,,30,OSM,
 Rifugio Riva,,37289736,45.9704346,9.4197777,1021,info@rifugioriva.it,+39 328 7115705,http://www.rifugioriva.it,22,OSM,
@@ -1124,7 +1124,7 @@ Koča na Čemšeniški planini,,38435639,46.1902901,14.9617455,1120,,,,,OSM,
 Malga Lessinia,,38496520,45.6963188,11.0079324,1616,,+39 0335 257339,https://www.rifugiomalgalessinia.it/,,OSM,
 Rifugio Stoppani,,38510469,46.2149333,10.900701,2439,info@rifugiostoppanicampiglio.it,,https://www.stoppanidolomiteslodge.it/,,OSM,
 Rifugio Cacciatore,,38564018,46.129947,10.8805046,1820,,,http://www.rifugiocacciatore.com,,OSM,
-Rifugio Val d'Ambiez - Silvio Agostini,Società degli Alpinisti Tridentini,38564403,46.1424346,10.8694778,2410,info@rifugioagostini.com,+39 0465 734138,https://www.rifugioagostini.com/,57,OSM,
+Rifugio Val d'Ambiez - Silvio Agostini,Società degli Alpinisti Tridentini,38564403,46.1424346,10.8694778,2410,info@rifugioagostini.com,+39 0465 734138,https://www.rifugioagostini.com/,57,OSM,637
 Rifugio Maria e Alberto al Brentei,Club Alpino Italiano,38612573,46.1752428,10.876025,2182,,,https://www.rifugiobrentei.it,,OSM,
 Rifugio Francis Fox Tuckett,Società degli Alpinisti Tridentini,38613134,46.1920149,10.8821454,2272,,+39 0465 441226,https://www.rifugio-tuckett.it/,110,OSM,
 Refuge de la Blanche,,38822534,44.6663591,6.9403482,2500,refugedelablanche@outlook.fr,+33 4 83 43 83 80,https://www.refugedelablanche.com,18,OSM,
@@ -1193,7 +1193,7 @@ Refuge de Péclet-Polset,Club Alpin Français,47597059,45.289338,6.6591978,2479,
 Refuge du Roc de la Pêche,,47600502,45.3278498,6.6912452,1911,,+33 4 79 08 79 75,https://www.lerocdelapeche.com/page/home,,OSM,
 Refuge Le Repoju,,47801203,45.3479023,6.7020332,1731.0,,,https://www.refuge-repoju.com/,,OSM,
 Haus Schattwald,DAV Sektion Geislingen/Steige,49219041,47.5140907,10.4652601,1100,,,https://www.alpenverein-geislingen.de/,,OSM,
-Wormser Hütte,DAV Sektion Worms,50302011,47.0637796,9.974689,2307,wormserhuetteschruns@gmail.com,+43 664 1320325,http://www.wormser-huette.at,,OSM,
+Wormser Hütte,DAV Sektion Worms,50302011,47.0637796,9.974689,2307,wormserhuetteschruns@gmail.com,+43 664 1320325,http://www.wormser-huette.at,,OSM,667
 Hörnlehütte,DAV Sektion Starnberg,50842438,47.6441839,11.0548936,1390,,+49 8845 229,https://www.hoernlebahn.de/?H%D6RNLEH%DCTTE,,OSM,
 Nauderer Hütte,DAV Sektion Bremen,51008473,46.8779476,10.5482911,1910,,,https://www.alpenverein-bremen.de/huetten/nauderer-huette,,OSM,
 Malga di Piazza Manzone,,52162214,45.9040392,9.8639783,883.0,,,,,OSM,
@@ -1343,7 +1343,7 @@ Rifugio Bellano,Gruppo Escursionisti Bellanesi,74619173,46.0957871,9.3470135,130
 Rifugio Bugone,Chiara Signori,74630139,45.8749778,9.0871649,1119,info@rifugiobugone.com,+39 031 513808,http://www.rifugiobugone.com,20,OSM,
 Malga Spora,,74864827,46.1901583,10.9519518,1855,massimo.ciccolini@alice.it,+39 0461 653637,https://www.malgaspora.com/,,OSM,
 Sonnalm,,74867645,47.2748802,10.3645214,1800,,+43 5634 6834,http://www.joechelspitze.at/,,OSM,
-Hermann-von-Barth-Hütte,DAV Sektion Düsseldorf,75106212,47.3092601,10.3987159,2129,,+4356346671,https://www.hermann-von-barth.at/,,OSM,
+Hermann-von-Barth-Hütte,DAV Sektion Düsseldorf,75106212,47.3092601,10.3987159,2129,,+4356346671,https://www.hermann-von-barth.at/,,OSM,727
 Capanna Caduti del Monte Baldo,,75117105,45.845166,10.8951416,1016.0,,,,,OSM,
 Kemptner Hütte,DAV Sektion Allgäu-Kempten,75133409,47.3134051,10.3277716,1846,,+49 8322 700152,https://www.kemptner-huette.de/,,OSM,
 Refuge du Grenairon,Patrice et Cécile Lavocat,75225360,46.0322745,6.7983035,1974,contact@grenairon.com,+33 4 50 34 47 31,https://grenairon.com/,,OSM,
@@ -1386,7 +1386,7 @@ Rifugio Capanna Falco,Gruppo Escursionisti Cernobbio,79938781,45.8712714,9.06545
 Rifugio Garzirola,,79939621,46.1073592,9.0797478,1974,,,,,OSM,
 Capanna Mara,famiglia Santambrogio,79943439,45.8441093,9.1947427,1125,,+39 335 6776768,,,OSM,
 Rifugio Martina,Carlo A. Ticozzi,79945135,45.9229899,9.2164415,1231,,+39 031 964695,https://www.rifugiomartina.com/,18,OSM,
-Reichenhaller Haus,DAV Sektion Bad Reichenhall,80751554,47.7551145,12.8495662,1750,,+49 8651 5566,https://www.dav-badreichenhall.de/huetten-kletteranlagen/reichenhaller-haus,,OSM,
+Reichenhaller Haus,DAV Sektion Bad Reichenhall,80751554,47.7551145,12.8495662,1750,,+49 8651 5566,https://www.dav-badreichenhall.de/huetten-kletteranlagen/reichenhaller-haus,,OSM,666
 Breininghütte,,81020564,47.5330804,13.4790719,1526,,,,,OSM,
 Edtalmhütte,,81020592,47.5491282,13.4775999,1334,,,https://www.salzburg-abtenau.at/almen/urlaub-auf-der-almhuette/,,OSM,
 Gablonzer Hütte,Sektion Neugablonz-Enns,81020836,47.53327,13.47980,1550,,+4361368465,https://www.gablonzerhuette.at,69,OSM,108
@@ -1401,7 +1401,7 @@ Grußberghütte,,81366290,47.1724442,13.1467407,1722.0,,,,,OSM,
 Höfener Alm,Familie Dietrich,81626059,47.4750829,10.6495238,1680,,,https://www.hoefener-alm.at/,,OSM,
 Adlerhorst,,81628876,46.9188869,13.3658206,2335,,,,,OSM,
 Schwarzrieshütte,private,81639631,47.7217117,12.2344267,973,,+43 676 7676480,https://www.schwarzrieshuette.at/,,OSM,
-Westfalenhaus,,81920286,47.1079388,11.1000843,2273,,,https://www.westfalenhaus.at/,,OSM,
+Westfalenhaus,,81920286,47.1079388,11.1000843,2273,,,https://www.westfalenhaus.at/,,OSM,541
 Hamburger Schihütte,,82169182,47.1480883,13.0602696,1944.0,,,http://www.hamburger-skihuette.at/,,OSM,
 Haitzingalm,,82169298,47.156954,13.0721257,1773.0,,,,,OSM,
 Bärsteinalm,,82169419,47.161875,13.0856333,1286,,,,,OSM,
@@ -1450,13 +1450,13 @@ Hofpürglhütte,Alpenvereinssektion Linz,84131551,47.482214,13.519027,1703,,+436
 Brunnenkogelhaus,ÖTK Österreichischer Touristenklub,84526830,46.9473802,11.0487582,2738,brunnenkogelhaus@oetk.at,+43 664 1234206,http://brunnenkogel.schutz.haus,,OSM,
 Hochstubaihütte,Sektion Dresden des DAV e.V.,84526831,46.9816603,11.0646578,3173,,+43 720920305,http://www.hochstubaihuette.at,,OSM,
 Hildesheimer Hütte,DAV Sektion Hildesheim,84541388,46.966545,11.117297,2899,info@gustl-soelden.at,+43 5254 2300,https://www.hildesheimerhuette.at/index.html,70,OSM,369
-Franz-Senn-Hütte,Sektion Innsbruck,84547654,47.0851251,11.168697,2147,,+4352262218,https://www.franzsennhuette.at,,OSM,
+Franz-Senn-Hütte,Sektion Innsbruck,84547654,47.0851251,11.168697,2147,,+4352262218,https://www.franzsennhuette.at,,OSM,675
 Rifugio Ciampac,,84653322,46.4454166,11.7709939,2148.0,,,,,OSM,
 Rifugio Tobià del Giagher,,84653328,46.44473,11.7698914,2159.0,,,,,OSM,
-Starkenburger Hütte,,84674198,47.1268166,11.2795752,2237,,+436645035420,https://www.alpenverein.at/huetten/?huette_nr=0637,,OSM,
+Starkenburger Hütte,,84674198,47.1268166,11.2795752,2237,,+436645035420,https://www.alpenverein.at/huetten/?huette_nr=0637,,OSM,693
 Dreizinnenhütte - Rifugio Antonio Locatelli/Sepp Innerkofler,,84679331,46.6369375,12.3104861,2405,,,https://www.dreizinnenhuette.com/,,OSM,
 Rifugio Casera Vecchia di Varrone,Sezione CAI di Premana,84697874,46.0346632,9.4994807,1675,,+39 0341 188 1142,https://www.rifugiovarrone.com/,24,OSM,
-Martin-Busch-Hütte,DAV Sektion Berlin,84977315,46.8010543,10.8869356,2501,info@hotel-vent.at,+43 5254 8130,https://dav-berlin.de/huetten-ueberblick-anfahrt/oetztal/martin-busch-huette/,176,OSM,
+Martin-Busch-Hütte,DAV Sektion Berlin,84977315,46.8010543,10.8869356,2501,info@hotel-vent.at,+43 5254 8130,https://dav-berlin.de/huetten-ueberblick-anfahrt/oetztal/martin-busch-huette/,176,OSM,476
 Similaunhütte - Rifugio Similaun,D. Pirpamer Markus GmbH,84977320,46.7724375,10.8546135,3019,,+39 0473 669711,https://www.similaunhuette.com,,OSM,
 ,Familie Nutz,84994214,47.6180356,13.4514959,1238.0,,,,,OSM,
 Hainfelder Hütte,Österreichischer Touristenklub,85042838,48.0193956,15.7537657,924,,,,,OSM,
@@ -1472,7 +1472,7 @@ Kleinzeller Hinteralm,,85505434,47.9620653,15.6780643,1026,,,,,OSM,
 Ebenwaldhütte,,85523198,47.9857643,15.6867873,1044,Gertrude.thalhammer@gmx.at,+432766 3212,https://www.instagram.com/ebenwaldhuette/,,OSM,
 Niederelbehütte,,85615278,47.0624849,10.3159987,2300,info@niederelbehuette.at,+43 676 41 52 355,http://www.niederelbehuette.at/,,OSM,
 Rossalm,,85638718,47.5665652,13.5792554,1387,,,https://www.rossalm.at/,,OSM,
-Zittelhaus,Alpenverein Rauris,85718959,47.0540434,12.9573612,3106,,+43 664 75199527,https://www.zittelhaus.at,,OSM,
+Zittelhaus,Alpenverein Rauris,85718959,47.0540434,12.9573612,3106,,+43 664 75199527,https://www.zittelhaus.at,,OSM,695
 Saarbrücker Hütte,,85800043,46.89845,10.03605,2538,,+43 6648925587,https://www.saarbrueckerhuette.com,74,OSM,309
 Wiesbadener Hütte,"Heinrich Lorenz, Landle 18a, 6563 Galtür, Austria",85800219,46.8684,10.1161,2443,wiesbadener@gmx.net,0043 5558 4233,http://www.wiesbadener-huette.com/,160,OSM,234
 Madlenerhaus,,85800333,46.9170828,10.0853729,1986,info@madlenerhaus-silvretta.com,+43 650 721 2010,https://www.madlenerhaus-silvretta.com/,,OSM,
@@ -1480,7 +1480,7 @@ Tübinger Hütte,,85800400,46.911669,10.003486,2193,tuebinger.huette@dav-tuebing
 Neue Heilbronner Hütte,Sektion Heilbronn des Deutschen Alpenvereins (DAV) e.V.,85801026,47.007216,10.138827,2320,info@heilbronnerhuette.at,+43 664 180 4277,https://www.heilbronner-huette.de,104,OSM,103
 Rifugio Elisa,Mauro Balatti,86077164,45.9384984,9.3815166,1515,,+393669791655,,23,OSM,
 Wolayerseehütte,Familie Ortner,86101191,46.6124,12.8670,1960,,+43720346141,https://www.wolayerseehuette-lesachtal.at,64,OSM,267
-Sonnschienhütte,Sektion Voisthaler,86141335,47.5865778,15.039122,1526,,,https://www.alpenverein.at/sonnschienhuette/,,OSM,
+Sonnschienhütte,Sektion Voisthaler,86141335,47.5865778,15.039122,1526,,,https://www.alpenverein.at/sonnschienhuette/,,OSM,469
 Breslauer Hütte,DAV Sektion Breslau,86299919,46.8681837,10.8793002,2844,,+43 676 96 345 96,https://www.breslauerhuette.at,,OSM,
 Rifugio Gran Baita,Katia Plati,86351521,45.9605778,9.4934003,1700,rifugio.granbaita@gmail.com,+39 0341 999262,,14,OSM,
 Rifugio Ratti-Cassin,Maurizio Valsecchi,86354127,45.9608136,9.490163,1670,,+39 0341 911103,,40,OSM,
@@ -1575,7 +1575,7 @@ Rifugio Torbi,,95592069,46.3998433,10.6906527,1646.0,,,,,OSM,
 Erfurter Hütte,,95667789,47.441667,11.763056,1834,,+436645146833,https://www.erfurterhuette.at,83,OSM,323
 Refuge de l'Orgère,,95777693,45.2292302,6.6729095,1935,refuge.orgere@vanoise-parcnational.fr,+33 7 61 71 68 47,https://refuge-orgere.vanoise.com,,OSM,
 Dortmunder Hütte,DAV Sektion Dortmund,95812262,47.2117727,11.0082146,1950,info@dortmunderhuette.at,+43 52395202,https://www.dortmunderhuette.at,,OSM,
-Rifugio Stavèl Francesco Denza,Società degli Alpinisti Tridentini,95877357,46.2434159,10.6552368,2298,rifugiodenza@email.it,+39 0463 758187,https://www.rifugiodenza.com/,56,OSM,
+Rifugio Stavèl Francesco Denza,Società degli Alpinisti Tridentini,95877357,46.2434159,10.6552368,2298,rifugiodenza@email.it,+39 0463 758187,https://www.rifugiodenza.com/,56,OSM,639
 Grimminghütte,,95949957,47.5145105,14.0442405,966,,+43 676 331 94 98,https://www.grimminghuette.naturfreunde.at/,,OSM,
 Talschlusshütte Fischleintal - Rifugio Fondovalle Val Fiscalina,,96096595,46.6513776,12.3538667,1526,,,https://www.talschlusshuette.com/,,OSM,
 Rifugio Peller,Società degli Alpinisti Tridentini,96109724,46.3221978,10.9526937,2022,rifpeller@satcles.it,+39 0463 536221,https://www.satcles.it/rifpeller/,40,OSM,
@@ -1621,14 +1621,14 @@ Chalet - Refuge de Nant Borrant,,98063753,45.7784549,6.7142497,1455.0,,,http://w
 Refuge La Roselette,,98063934,45.7810001,6.6917681,1873,laroselette@repaires.com,+33 4 50 47 13 31,https://www.laroselette.com,28,OSM,
 Rockfeldalm,,98181068,47.1390773,13.0436886,1822,,,,,OSM,
 La Cabane des Choucas,,98207278,46.4830401,7.1202013,1553.0,,,,,OSM,
-Cabane de la Tourche,,98248138,46.2144514,7.0617257,2198,info@tourche.ch,+41 24 485 22 18,https://www.tourche.ch,60,OSM,
+Cabane de la Tourche,,98248138,46.2144514,7.0617257,2198,info@tourche.ch,+41 24 485 22 18,https://www.tourche.ch,60,OSM,569
 Refuge de Mayen,,98328686,46.3663466,7.0145382,1838.0,,,,,OSM,
 CAS Chalet Lacombe,Club Alpin Suisse - Diablerets,98328700,46.388473,7.042996,1653,lacombe@cas-diablerets.ch,+41795443152,https://cas-diablerets.ch/cabanes/chalet-lacombe/,22,OSM,68
 Dibaita Puflatschhütte,,98576829,46.5470452,11.6069905,1974,info@dibaita-puflatschhuette.com,+39 0471 729090,https://www.dibaita-puflatschhuette.com,,OSM,
 Panoramahütte,,98603964,46.7581717,13.4564106,2089.0,,,,,OSM,
 Rifugio Cristina,famiglia Bricalli,98613216,46.2837279,9.9479465,2287,rifugio.cristina@tiscali.it,+39 0342 452398,http://rifugiocristina.altervista.org,25,OSM,
 Rifugio Ca' Runcasch,,98615065,46.2965369,9.9472939,2170,info@rifugiocaruncasch.com,+39 347 980 4889,https://www.rifugiocaruncasch.com/,,OSM,
-Schwarzenberghütte,DAV Sektion Illertissen,99182939,47.4291986,10.4068762,1380,,+49 160 3864848,https://www.dav-illertissen.de/Schwarzenberghuette,,OSM,
+Schwarzenberghütte,DAV Sektion Illertissen,99182939,47.4291986,10.4068762,1380,,+49 160 3864848,https://www.dav-illertissen.de/Schwarzenberghuette,,OSM,562
 Rifugio Valstornada,,99249959,45.9637897,11.0729193,1032.0,,,,,OSM,
 Rifugio Cacciatori Aldeno,S.A.T. Aldeno,99249960,45.9635476,11.0726334,1008,,,,,OSM,
 Möslalm,,99318407,47.3373743,11.3430336,1262,info@moeslalm.tirol,+43 512 27 57 83,https://www.moeslalm.tirol/,,OSM,
@@ -1660,7 +1660,7 @@ Widdersteinhütte,Peter Jochum (kein AV-Hütte! - laut DAV-Seite aber schon!),10
 Bad Kissinger Hütte,DAV Sektion Bad Kissingen,101968311,47.534444,10.562778,1788,,+43 676 3731166,http://badkissingerhuette.at,50,OSM,174
 Landsberger Hütte,DAV Sektion Landsberg,101987039,47.4451,10.51438,1810,,+43 56756282,https://www.landsbergerhuette.at,135,OSM,215
 Edenalpe Nesselwängle,Hedwig Pohler,101989178,47.4765942,10.5735489,1680,email@edenalpe.at,+43 676 4920184,https://www.edenalpe.at/,12,OSM,
-Kaufbeurer Haus,DAV Sektion Allgäu-Immenstadt,102017757,47.34179,10.4569944,2005,,+49 171 5636569,https://www.dav-allgaeu-immenstadt.de/html/kaufbeurer_haus.html,,OSM,
+Kaufbeurer Haus,DAV Sektion Allgäu-Immenstadt,102017757,47.34179,10.4569944,2005,,+49 171 5636569,https://www.dav-allgaeu-immenstadt.de/html/kaufbeurer_haus.html,,OSM,677
 Schattbachalm,,102142343,47.1073081,13.0718109,1683,,,,,OSM,
 Almwirtschaft Möselalm,,102213237,46.6793505,13.2088545,1196.0,,,,,OSM,
 Hochzeller-Alm,,102413629,47.3322725,12.7384839,1939.0,,,https://www.hochzelleralm.com/,,OSM,
@@ -1670,7 +1670,7 @@ Voralphütte SAC,SAC - CAS,102481933,46.690552,8.487712,2126,info@voralphuette.c
 Bergseehütte SAC,SAC - CAS,102481950,46.657394,8.4849452,2370,huettenwart@bergsee.ch,+41 41 885 14 35,http://www.bergsee.ch,65,OSM,
 Chelenalphütte SAC,SAC - CAS,102481958,46.6717074,8.4399144,2350,info@chelenalp.ch,+41 41 885 19 30,https://www.chelenalp.ch/,42,OSM,55
 Salbithütte SAC,SAC,102485283,46.676488,8.5518168,2105,info@salbit.ch,+41 41 885 14 31,https://salbit.ch/,58,OSM,227
-Dresdner Hütte,Sektion Dresden des DAV e.V.,103209591,46.9980648,11.1395425,2308,info@dresdnerhuette.at,+43 5226 8112,https://www.dresdnerhuette.at/,,OSM,
+Dresdner Hütte,Sektion Dresden des DAV e.V.,103209591,46.9980648,11.1395425,2308,info@dresdnerhuette.at,+43 5226 8112,https://www.dresdnerhuette.at/,,OSM,692
 Sennes Hütte,,103325526,46.65364,12.0594256,2126,info@sennes.com,,https://www.sennes.com/,,OSM,
 Burgstallhütten,,103381373,47.3758798,13.7321346,1600.0,,,,,OSM,
 Burgstallhütten,,103381384,47.375835,13.7319406,1600.0,,,,,OSM,
@@ -1681,7 +1681,7 @@ Rifugio Malga Consèria,Fabiana Pallaoro,103589635,46.1704086,11.5400074,1848,,,
 Dürrensteinhütte - Rifugio di Vallandro,,103700847,46.6419371,12.1958776,2038.0,,,,,OSM,
 Putzalm - Malga Putz,,104151033,46.7091926,12.180244,1743,,,,,OSM,
 Brendlhütte,Sektion Graz,104335331,46.7669372,15.0739556,1566,,,https://www.steiermark.com/de/Suedsteiermark/Urlaub-planen/Ausflugsziele/Brendlhuette_isd_313068,,OSM,
-Steinseehütte,"Österreichischer Alpenverein, Sektion Landeck",104676616,47.2261982,10.5871738,2069,,+43 660 4917124,https://www.steinseehuette.at/,,OSM,
+Steinseehütte,"Österreichischer Alpenverein, Sektion Landeck",104676616,47.2261982,10.5871738,2069,,+43 660 4917124,https://www.steinseehuette.at/,,OSM,497
 Berggasthof Biberg,,104863232,47.4220507,12.7933191,1443,,+43 67763001713,https://berggasthof-biberg.at/,,OSM,
 Gafadurahütte,L.A.C,105541139,47.1861397,9.568446,1428,,,,42,OSM,
 Malga Nuova Coredo,,105622539,46.323566,11.1741665,1562,,,,,OSM,
@@ -1755,7 +1755,7 @@ Refuge de la Madone de Fenestre,Club Alpin Français,115739771,44.095768,7.35633
 Refuge de la Cougourde,Club Alpin Français,115740095,44.1263411,7.3308441,2100,,+33 9 78 23 31 59,https://refugelacougourde.ffcam.fr/,,OSM,
 Chalet Vidron,,115740659,44.111757,7.3203632,1782.0,,,,,OSM,
 Rifugio Ervedo Zanotti,"Club Alpino Italiano sezione ""Ligure"" - Genova",115758220,44.3000585,6.9995281,2087.0,,,,,OSM,
-August-Schuster-Haus,DAV Sektion Bergland,116240805,47.5837526,10.9924606,1564,mail@august-schuster-haus.de,+49 8822 3567,https://august-schuster-haus.de,,OSM,
+August-Schuster-Haus,DAV Sektion Bergland,116240805,47.5837526,10.9924606,1564,mail@august-schuster-haus.de,+49 8822 3567,https://august-schuster-haus.de,,OSM,613
 Gampen-Kuhalm,,116293681,46.7109873,11.1002452,1852.0,,,,,OSM,
 Rifugio la Rezila,,116380592,46.356253,11.6937262,1756.0,info@rifugiolarezila.it,,http://www.rifugiolarezila.it/,,OSM,
 Enzianhütte,,116484464,47.4846762,10.6721384,1160,,,,,OSM,
@@ -1779,7 +1779,7 @@ Gitschenhörelihütte,,117573688,46.8577273,8.5250223,2325,,+41 41 880 28 62,htt
 Plauener Hütte,,117878139,47.118333,12.096111,2363,,+436504684308,https://www.plauener-huette.at,71,OSM,207
 Pfeishütte,Sektion Innsbruck,117889584,47.330036,11.425489,1922,info@pfeishuette.at,+43 512 552906,https://www.alpenverein.at/pfeishuette/,60,OSM,179
 Grawa Alm,,117963862,47.0142878,11.1869091,1530,,+43 676 412 1009,https://www.feldhof-tirol.com/grawa-alm/,,OSM,
-Sulzenauhütte,Norbert Schöpf,117966153,46.9958568,11.1819125,2191,,+43 5226 2432,https://www.sulzenauhuette.at/,,OSM,
+Sulzenauhütte,Norbert Schöpf,117966153,46.9958568,11.1819125,2191,,+43 5226 2432,https://www.sulzenauhuette.at/,,OSM,648
 Capanna Santa Barbara,Comune di Riva del Garda,118218390,45.8839248,10.8300583,568,,,https://www.satrivadelgarda.it/0/capannasantabarbara/1/1905/page.aspx,,OSM,
 Rifugio Castelberto,,118382776,45.7183285,11.017261,1765,info@rifugiocastelberto.it,+39 045 5116652,https://www.rifugiocastelberto.it/,,OSM,
 Rifugio Bindesi - Pino Prati,Società degli Alpinisti Tridentini,118394979,46.0361712,11.1539403,611,weber.fede@gmail.com,+39 0461 923344,,,OSM,
@@ -1859,10 +1859,10 @@ Malga Alta di Pellizzano,,122054743,46.2937626,10.776461,1558,,+39 348 4876411,,
 Rifugio Stella Alpina,,122118920,46.4474911,11.6391872,1958.0,,,,,OSM,
 Zufallhütte - Rifugio Nino Corsi,Familie Müller,122266665,46.4814953,10.6792103,2264,,+39 0473 744 785,https://zufallhuette.com/,,OSM,
 Rifugio Passo delle Selle,private,122374773,46.3967405,11.7625526,2530,,,,,OSM,
-Rifugio Taramelli,Società degli Alpinisti Tridentini,122374780,46.3946206,11.7403115,2045,info@rifugiotaramelli.it,+39 360 879719,https://www.rifugiotaramelli.it/,12,OSM,
+Rifugio Taramelli,Società degli Alpinisti Tridentini,122374780,46.3946206,11.7403115,2045,info@rifugiotaramelli.it,+39 360 879719,https://www.rifugiotaramelli.it/,12,OSM,609
 Winnebachseehütte,DAV Sektion Hof,122398641,47.0875574,11.0544475,2362,,+43 5253 5197,https://www.winnebachseehuette.com/,,OSM,
 Simonyhütte,Sektion Austria,122404162,47.50,13.62,2203,,00436802196374,http://www.simonyhuette.com/home.html,94,OSM,219
-Siegerlandhütte,,122409746,46.9408102,11.1477008,2710,,,https://www.dav-siegerland.de/,,OSM,
+Siegerlandhütte,,122409746,46.9408102,11.1477008,2710,,,https://www.dav-siegerland.de/,,OSM,705
 Sarsteinalm Bad Goisern,,122411732,47.6085329,13.6942127,1711,,,www.sarstein.at,,OSM,
 Fiegls Gasthaus auf der Windachalm,private,122426014,46.9597111,11.0632344,1940,,,,,OSM,
 Grasserhütte,,122472292,47.6000545,15.1883499,1472,,+43 664 78069267,https://grasserhuette.jimdofree.com/,,OSM,
@@ -2072,13 +2072,13 @@ Trattnerhütte - Tenneralm,,131780608,47.6766396,13.2223609,1270,,,,,OSM,
 Silvrettahütte SAC,Schweizer Alpen-Club Sektion St. Gallen,131889155,46.8545229,10.0414464,2341,info@silvrettahuette.ch,+41 81 422 13 06,https://www.silvrettahuette.ch/,69,OSM,80
 Fredl-Müller-Hütte,Bergrettung Köflach,131898458,47.0735741,14.941005,1520,,,https://www.bergrettung-koeflach.at/,,OSM,
 Douglasshütte,Österreichischer Alpenverein Sektion Vorarlberg,131906872,47.059684,9.754765,1979,,00436644412378,https://www.douglasshuette.at,86,OSM,393
-Oberzalimhütte,DAV Mannheim,132073459,47.0799283,9.6933703,1889,,,,,OSM,
+Oberzalimhütte,DAV Mannheim,132073459,47.0799283,9.6933703,1889,,,,,OSM,655
 Clarahütte,DAV Sektion Essen,132127112,47.01,12.14,2038,venedigerjupp-hatzer@aon.at,+43 664 9758893,https://www.virgental.at/unterkuenfte/unterkunft-suche/detail/unterkunft/clarahuette-2038-m/,47,OSM,132
 Rifugio Gheza,,132131941,45.96285,10.4162419,2087,,,,,OSM,
 Rifugio Prandini Franco,,132131944,45.9660945,10.4106593,1979,,,,,OSM,
 Rifugio Carlo Tassara,,132132101,45.9163985,10.3943126,1802,,,,,OSM,
 Rifugio Stuetta,,132260638,46.4678487,9.3505408,1890,stuetta@gmail.com,+39034353174,http://rifugiostuetta.altervista.org/,,OSM,
-Capanna Alpe Sponda,SAT Chiasso,132278115,46.4174495,8.7860246,2000,info@satchiasso.ch,+41 91 864 23 52,http://www.satchiasso.ch,35,OSM,
+Capanna Alpe Sponda,SAT Chiasso,132278115,46.4174495,8.7860246,2000,info@satchiasso.ch,+41 91 864 23 52,http://www.satchiasso.ch,35,OSM,447
 Rifugio degli Angeli,,132311481,45.6245201,7.0294713,2916,info@rifugiodegliangeli.it,+39 329 2320 123,,49,OSM,
 Alpe Ganatsch,,132367082,47.1369031,10.3982482,1854,,,,,OSM,
 Gepatschhaus,DAV Sektion Franfurt/Main,132367703,46.901389,10.7375,1928,info@gepatschhaus.at,+43 6604610244,https://www.gepatschhaus.at,87,OSM,173
@@ -2127,7 +2127,7 @@ Neue Bonner Hütte,Vanessa Laurito & Christian Lüders,135564755,47.037222,13.68
 Gite d'alpage de la Molière,,135630671,45.1799186,5.5901368,1565,,+336 09 38 42 42,https://gitedelamoliere.aufilduvercors.org/,,OSM,
 Casa Reale di caccia di Orvieille,,135675043,45.5792199,7.1912569,2173.0,,,,,OSM,
 Carschinahütte SAC,SAC - CAS,135931766,47.0070754,9.8273532,2236,info@carschina.ch,+41 79 418 22 80,https://www.carschina.ch/,80,OSM,46
-Enderlinhütte SAC,SAC - CAS,135931767,47.0388236,9.5515198,1501,enderlin@sac-piz-sol.ch,+41 79 681 61 29,https://www.sac-piz-sol.ch/html/a46b96ee-d135-11df-94da-deec044f7f8f/information_enderlinhuette,30,OSM,
+Enderlinhütte SAC,SAC - CAS,135931767,47.0388236,9.5515198,1501,enderlin@sac-piz-sol.ch,+41 79 681 61 29,https://www.sac-piz-sol.ch/html/a46b96ee-d135-11df-94da-deec044f7f8f/information_enderlinhuette,30,OSM,729
 Tschuiggn Hütte,,135967540,46.8748609,12.4412757,2204.0,,,,,OSM,
 Obergasteigalm,,135967541,46.8697762,12.4376863,1885.0,,,https://www.obergasteigalm.eu,,OSM,
 Taletalmhütte,,135967544,46.8535794,12.4644521,1732.0,,,https://www.huettenland.com,,OSM,
@@ -2362,7 +2362,7 @@ Rifugio Claudio e Bruno,Operazione Mato Grosso,152002397,46.4148264,8.3247566,27
 Rifugio Pietro Crosta,Club Alpino Italiano,152003351,46.2364178,8.2571238,1750,,,https://rifugiocrosta.info,,OSM,
 Rifugio CAI Fantoli,CAI Pallanza,152004021,45.9851317,8.4620165,1033.0,info@rifugiofantoli.it,+39 340 5783883,http://www.rifugiofantoli.it,,OSM,
 Rifugio Miryam,ACLI Nord-Milano,152004559,46.378274,8.393968,2045,,+39 339 4046395,http://rifugiomiryam.org/,,OSM,
-Rifugio Maria Luisa,CAI Sezione di Busto Arsizio,152004899,46.4347141,8.4279292,2160,info@rifugiomarialuisa.it,+39 0324 63086,http://www.rifugiomarialuisa.it/,72,OSM,
+Rifugio Maria Luisa,CAI Sezione di Busto Arsizio,152004899,46.4347141,8.4279292,2160,info@rifugiomarialuisa.it,+39 0324 63086,http://www.rifugiomarialuisa.it/,72,OSM,517
 Rifugio CAI Pian Cavallone,CAI Verbano,152004978,46.0133423,8.5393326,1530,lorenzalolli68@gmail.com,+39 0323 407482; +39 334 989 4081,,,OSM,
 Rifugio Mondovì - Havis De Giorgio,CAI Mondovì,152008386,44.1915265,7.7317297,1761,info@rifugiomondovi.com,,https://www.rifugiomondovi.com,42,OSM,
 Rifugio Mongioie,Club Alpino Italiano sezione di Albenga,152008782,44.1521362,7.7755157,1520,,,,,OSM,
@@ -2461,7 +2461,7 @@ Rifugio A.N.A. Piateda,,163359093,46.1317445,9.9316281,1550,,+39 0342 484277;+39
 Leutkircher Hütte,DAV Sektion Leutkirch,163539999,47.1631953,10.2855547,2251,info@leutkircher-huette.at,+436649857849,https://www.leutkircher-huette.at,,OSM,
 Schwarzwaldhütte,,163711579,47.3772365,10.5985401,1140,,,,,OSM,
 Rifugio Aldo Vitali,Associazione Nazionale Alpini - Gruppo di Rezzato,163792471,45.5243394,10.3243456,300,,,,,OSM,
-Konstanzer Hütte,DAV,163922893,47.0694957,10.1889569,1688,info@konstanzerhuette.com,+43 664 73621816,https://www.konstanzerhuette.com/,,OSM,
+Konstanzer Hütte,DAV,163922893,47.0694957,10.1889569,1688,info@konstanzerhuette.com,+43 664 73621816,https://www.konstanzerhuette.com/,,OSM,502
 Rifugio Gemba,,163946903,45.7128253,9.9371516,940.0,,,,,OSM,
 Rifugio Gilodi-Cà Mea,CAI Borgosesia,164512486,45.7537365,8.2261817,1145,,,,,OSM,
 Chalet du Perron,Patricia Charvin,164666547,45.1510315,6.3024672,2116.0,,+336 72 80 61 79,https://chaletduperron.fr/index.html,,OSM,
@@ -2497,7 +2497,7 @@ Gîte-refuge de l'École,,167795076,44.737585,6.444502,1765.0,,+33 4 92 20 90 01
 Bertahütte,ÖAV Sektion Villach,168314465,46.5182519,13.9604794,1527,office.bertahuette@gmail.com,+43 664 7943057,https://www.facebook.com/bertahuettemittagskogel,,OSM,
 Beita De Sura,,168403207,45.9165888,9.8633723,1299.0,,,,,OSM,
 Rifugio Scoiattolo,,168485242,46.3703908,10.66101,2008,,,,,OSM,
-Gmundner Hütte,ÖAV - Sektion Gmunden,168530342,47.8729939,13.8337803,1660,GAuinger@hotmail.com,+43 699 12643190,http://www.gmundnerhuette.at,,OSM,
+Gmundner Hütte,ÖAV - Sektion Gmunden,168530342,47.8729939,13.8337803,1660,GAuinger@hotmail.com,+43 699 12643190,http://www.gmundnerhuette.at,,OSM,718
 Traunsteinhaus,Kurt Resch,168530343,47.8695213,13.8283245,1580,Kurt_Birgit@Traunsteinhaus.at,+43 699 12045560,http://www.traunsteinhaus.at/,,OSM,
 Franz-Fischer-Hütte,OeAV Sektion Lungau,168866551,47.200214,13.364550,2020,,+43 664 7957960,https://www.franzfischer-huette.at,45,OSM,317
 Werfener Hütte,ÖTK Österreichischer Touristenklub,168877614,47.4881328,13.2428056,1969,,,https://werfener.schutz.haus/,,OSM,
@@ -2555,7 +2555,7 @@ Rugghubelhütte SAC,SAC - CAS,173798810,46.846222,8.462765,2296,info@rugghubel.c
 Rauriser Tauernhaus,,173841944,47.1202489,12.8769958,1526,,,,,OSM,
 Oberreintalhütte,DAV Sektion Garmisch-Partenkirchen,173934334,47.4075416,11.1044247,1525,,+49 160 6949648,https://oberreintal-huette.de/,40,OSM,
 Refuge de Bostan,Froissard Bastien,173940317,46.1234166,6.7792023,1763,,,,,OSM,
-Welser Hütte,OeAV Sektion Wels,174282665,47.7235477,14.049297,1725,welserhuette@gmail.com,+43 7616 8088,https://www.welserhuette-gruenau.com/,,OSM,
+Welser Hütte,OeAV Sektion Wels,174282665,47.7235477,14.049297,1725,welserhuette@gmail.com,+43 7616 8088,https://www.welserhuette-gruenau.com/,,OSM,508
 Rifugio Camposecco,,174322188,45.8274817,9.4292751,608,,,,,OSM,
 Schönleitenhütte,,174345630,47.4030082,12.6958696,1810.0,,,,,OSM,
 Bivacco Alpe Piazza,Protezione Civile Rogolo,174464038,46.1055777,9.4958356,1840,,,,,OSM,
@@ -2601,7 +2601,7 @@ Silberkarhütte,,177575425,47.4437564,13.7126782,1250,,,,,OSM,
 Hörnerhaus,,177943539,47.4605375,10.2119105,1383.0,,+49 8326 639,https://www.hoernerhaus.de/,,OSM,
 Breitlahnhütte,,177949546,47.3166166,13.8881758,1100,,,,,OSM,
 Kerschbaumeralm Schutzhaus,,178005496,46.7594317,12.7665427,1902,,,,,OSM,
-Ludwigsburger Hütte,DAV Sektion Ludwigsburg,178125170,47.1146932,10.8235573,1935,,,,65,OSM,
+Ludwigsburger Hütte,DAV Sektion Ludwigsburg,178125170,47.1146932,10.8235573,1935,,,,65,OSM,546
 Stöcklalm,,178205564,47.4275353,12.7127273,1300.0,,,https://www.stoecklalm.eu/,,OSM,
 AsitzBräu,,178208516,47.4096829,12.7139182,1755.7,,,https://www.asitzbraeu.com/de/,,OSM,
 Refuge du Plan de l'Aar,,178290155,45.8610078,6.5441692,1735,,,,,OSM,
@@ -2664,7 +2664,7 @@ Rifugio Sommariva al Pramperet,CAI Oderzo,183315385,46.2889775,12.163645,1857,,,
 Rifugio Furio Bianchet,CAI Belluno,183317591,46.2434585,12.1613464,1245,,,,,OSM,
 Rifugio Tommaso Pedrotti,Società degli Alpinisti Tridentini,183878988,46.1541551,10.8987399,2491,info@rifugiotosapedrotti.it,+39 0461 948115,http://www.rifugiotosapedrotti.it/,,OSM,
 Vernagthütte,Deutscher Alpenverein Sektion Würzburg,183971836,46.853611,10.823889,2755,info@wieshof.at,00436647980757,http://www.vernagthuette.de,74,OSM,238
-Capanna Gambarögn,Amis dala Capanna Gambarögn,184716169,46.1123241,8.8305547,1698.0,booking@capannagambarogno.ch,+41 79 2513249,https://www.capannagambarogno.ch,,OSM,
+Capanna Gambarögn,Amis dala Capanna Gambarögn,184716169,46.1123241,8.8305547,1698.0,booking@capannagambarogno.ch,+41 79 2513249,https://www.capannagambarogno.ch,,OSM,674
 Berggasthaus Rotsteinpass,Cäcilia und Albert Wyss-Räss,184748934,47.2430689,9.3651143,2120,info@rotsteinpass.ch,+41 71 799 11 41,https://www.rotsteinpass.ch/,80,OSM,
 Refuge du Col du Palet,SARL les-juloli,184939055,45.4582962,6.8611827,2582.0,refuge.coldupalet@vanoise-parcnational.fr,+33 6 70 46 92 35,https://refuge-coldupalet.vanoise.com,,OSM,
 Refuge Entre-le-Lac,,184939911,45.4805552,6.8386845,2158.0,,,https://refugeentrelelac.fr,,OSM,
@@ -2727,7 +2727,7 @@ Refuge de la Valmasque,Club Alpin Français,192300091,44.1081521,7.4466629,2233,
 Asile Arnaldi,,192300186,44.1279887,7.5174271,1928.0,,,,,OSM,
 Refuge des Merveilles,Club Alpin Français,192300253,44.0574483,7.4518303,2130,refugedesmerveilles@ffcam.fr,+33 4 93 04 64 64,https://refugedesmerveilles.ffcam.fr/,,OSM,
 Lammersdorfer Hütte,,192314372,46.8161872,13.626205,1650,,,,,OSM,
-Arthur-von-Schmid-Haus,ÖAV Sektion Graz,192496838,46.9891868,13.2673129,2281,,,https://www.arthurvonschmidhaus.at/,,OSM,
+Arthur-von-Schmid-Haus,ÖAV Sektion Graz,192496838,46.9891868,13.2673129,2281,,,https://www.arthurvonschmidhaus.at/,,OSM,711
 Almrauschhütte,Naturerlebnis Bürgeralm GmbH&CoKG,192600556,47.5718229,15.2297985,1531.0,office@aflenz-buergeralm.at,,,,OSM,
 ,,192600569,47.5713019,15.2290236,1530.0,,,,,OSM,
 Gasthof Schönleitenblick,,192600581,47.5687638,15.2289118,1527.0,,,,,OSM,
@@ -2857,7 +2857,7 @@ Camillo Giussani,Club Alpino Italiano,200336782,46.5446625,12.0608051,2580,,+39 
 Rifugio Angelo Dibona,,200336783,46.5323971,12.0699062,2037,rifugiodibona@gmail.com,+39 0436 860294,,,OSM,
 Rifugio Pomedes,Fam. Ghedina,200336784,46.5363659,12.0777489,2303,rifugio.pomedes@dolomiti.org,+39 0436 862061,https://rifugiopomedescortina.com/,,OSM,
 Rifugio Dosso Rotondo,,200444832,45.8164438,10.2204244,1777,,,,,OSM,
-Spitzmeilenhütte,SAC - CAS,200501526,47.0342443,9.2505754,2087,info@spitzmeilenhuette.ch,+41 81 733 22 32,https://www.spitzmeilenhuette.ch/,50,OSM,
+Spitzmeilenhütte,SAC - CAS,200501526,47.0342443,9.2505754,2087,info@spitzmeilenhuette.ch,+41 81 733 22 32,https://www.spitzmeilenhuette.ch/,50,OSM,682
 Rifugio Gola di Gouta,,200516010,43.9392299,7.6088106,1225.0,,+39 3480305996,,,OSM,
 Alphütte Gross Feldrederten,,200715432,47.1274256,8.9576755,1300,,,http://feldrederten.ch/,8,OSM,
 Rifugio Fonda Savio,,200785535,46.5852879,12.2874071,2367,,+39 043539036,https://www.fonda-savio.it/,,OSM,
@@ -2934,7 +2934,7 @@ Refuge de l'Écondu,,207804141,45.6260775,6.5927125,1874.0,,,,,OSM,
 Refuge de la Balme,,208039495,45.6322284,6.6691304,2009,,,http://www.refuge-balme-tarentaise.fr,,OSM,
 Chalet du Mont Rosset,,208039932,45.6100218,6.6592975,2117,,,,,OSM,
 Refuge du Chambeyron,Club Alpin Français,208049323,44.5301107,6.8360671,2626,,+33 4 92 84 33 83,https://refugeduchambeyron.ffcam.fr/,,OSM,
-Cabane de Prafleuri,,208112909,46.074943,7.3787888,2662,,,http://www.prafleuri.ch/,,OSM,
+Cabane de Prafleuri,,208112909,46.074943,7.3787888,2662,,,http://www.prafleuri.ch/,,OSM,473
 Cabane des Aiguilles Rouges,,208112911,46.0563746,7.4574594,2810,aiguillesrouges@bluewin.ch,+41 27 283 16 49,https://www.aiguillesrouges.ch/,70,OSM,
 Cabane des Dix,SAC - CAS Sektion Monte Rosa,208112912,46.011066,7.417683,2928,info@cabanedesdix.ch,+41 027 281 15 23,http://www.cabanedesdix.ch,90,OSM,10
 Refuge de la Barmaz,,208112913,46.0614205,7.3860544,2460,,+41 79 869 70 17,https://www.cabanedelabarmaz.ch/,,OSM,
@@ -2946,7 +2946,7 @@ Cabane de Louvie,Bourgeoisie de Bagnes,208621319,46.0468511,7.3064353,2207,,,,,O
 ,,208629490,46.0401458,12.197926,752.0,,,,,OSM,
 Mindener Hütte,DAV Sektion Minden,208708270,47.0236254,13.1551111,2431,,,,,OSM,
 ,,208885817,46.1922223,12.3537017,1518.0,,,,,OSM,
-Läntahütte SAC,SAC - CAS,208921136,46.5415754,9.0417841,2090,info@laentahuette.ch,+41 81 935 17 13,http://www.laentahuette.ch,33,OSM,
+Läntahütte SAC,SAC - CAS,208921136,46.5415754,9.0417841,2090,info@laentahuette.ch,+41 81 935 17 13,http://www.laentahuette.ch,33,OSM,689
 Terrihütte SAC,SAC - CAS,208921142,46.6345273,9.0050792,2170,terrihuette@bluewin.ch,+41 81 943 12 05,https://www.terrihuette.ch/,110,OSM,16
 Casera Crosetta,,209014263,46.1944217,12.4195494,1166,,,,,OSM,
 Rifugio Carlo e Massimo Semenza,,209017858,46.134085,12.4896933,2020,,,,,OSM,
@@ -3004,8 +3004,8 @@ Grünsee Mountain Lodge,,217957565,46.0060039,7.7797243,2296,,+41 79 900 23 00,h
 Rifugio Scarpon,,218175533,45.8745699,11.7931807,1580.0,rifugioscarpon@gmail.com,+39 328 1021027,http://www.rifugioscarpon.it/,,OSM,
 Malga Fontana Secca,,218492162,45.9226044,11.842614,1460.0,,,,,OSM,
 Achental Grundalm,,218564237,47.3463437,12.4677529,1640,,,,,OSM,
-Ringelspitzhütte SAC,SAC - CAS,218924350,46.8657998,9.380717,2000,info@ringelspitzhuette.ch,+41 79 632 24 34,https://www.ringelspitzhuette.ch/,36,OSM,
-Erlanger Hütte,DAV Sektion Erlangen,218941198,47.144739,10.8472784,2550,rimmlchristian@gmx.at,+436643920268,https://www.alpenverein.at/huetten/?huette_nr=0532,,OSM,
+Ringelspitzhütte SAC,SAC - CAS,218924350,46.8657998,9.380717,2000,info@ringelspitzhuette.ch,+41 79 632 24 34,https://www.ringelspitzhuette.ch/,36,OSM,514
+Erlanger Hütte,DAV Sektion Erlangen,218941198,47.144739,10.8472784,2550,rimmlchristian@gmx.at,+436643920268,https://www.alpenverein.at/huetten/?huette_nr=0532,,OSM,721
 Vordere Fundusalm,,218948551,47.1336752,10.8946537,1611,,,,,OSM,
 Rifugio Alpini fratelli Pedercini,,218963552,45.8359191,10.7390484,1182.0,,,,,OSM,
 Malga Campiglio di Fondo,ERSAF,219011484,45.6938726,10.5755298,788,,,,,OSM,
@@ -3043,7 +3043,7 @@ Rottalhütte SAC,SAC - CAS,222981226,46.52612,7.9447219,2755,rottalhuette@sac-in
 Schmadrihütte,AACB,222982916,46.4991505,7.8923079,2262,,,https://www.aacb.ch/huetten/schmadrihuette/,8,OSM,
 Plotscherbauer,,223063536,47.2601548,15.2033638,1133,,,,,OSM,
 Altelshütte,SAC,223108813,46.4560977,7.647928,1933,,,,,OSM,
-Lämmerenhütte,SAC,223110652,46.4002937,7.5744861,2507,info@laemmeren.ch,+41 27 470 25 15,https://www.laemmeren.ch/,96,OSM,
+Lämmerenhütte,SAC,223110652,46.4002937,7.5744861,2507,info@laemmeren.ch,+41 27 470 25 15,https://www.laemmeren.ch/,96,OSM,453
 Lötschenpass Hütte,,223275306,46.4163197,7.7168873,2690,info@loetschenpass.ch,+41 27 939 19 81,https://www.loetschenpass.ch/,86,OSM,
 Reisseckhütte,Sektion Oesterr. Gebirgsverein,223387409,46.9155334,13.3740196,2287,,,,,OSM,
 Geltenhütte SAC,SAC - CAS,224085264,46.3695986,7.3390598,2002,info@gelten.ch,+41 33 765 32 20,https://www.gelten.ch/,70,OSM,17
@@ -3055,7 +3055,7 @@ Gleinalm Schutzhaus,?,225005220,47.2159454,15.0526824,1586,,+43 680 143 6773,,,O
 Baita Santamaria in Leten,,225006480,45.9245762,9.8500449,1757,,,,,OSM,
 Maison forestière de la Servette,,225019445,46.2296145,6.3482835,1193,,,,,OSM,
 Rinderalphütte,SAC,225032578,46.6283244,7.5165438,1703,godi.knutti@rinderalp.ch,+41 33 681 27 68,http://www.rinderalp.ch/,,OSM,
-Balmhornhütte,SAC - CAS,225203557,46.4512074,7.6896204,1956,,,,,OSM,
+Balmhornhütte,SAC - CAS,225203557,46.4512074,7.6896204,1956,,,,,OSM,579
 Refuge de Sales,,225320182,45.9894739,6.7529152,1870.0,,,,,OSM,
 Refuge de Sales,,225321189,45.989303,6.7528413,1870.0,,,,,OSM,
 Refuge des Fonts,Nathalie et Benoît Bouvet,225321306,46.0211725,6.8109073,1368,,,,,OSM,
@@ -3066,7 +3066,7 @@ Gingerhütte,,225671058,46.7473948,13.7145452,1700,,,,,OSM,
 Obere Pussorhütte,,225777245,47.1974183,15.0543427,1508.0,,,,,OSM,
 Cabane du Mont-Noble,,225855274,46.2105871,7.4746321,2244,,,https://www.mtnoble.ch/zwook,,OSM,
 Wieser Alm,,226056573,46.7279413,12.7445247,1621.0,,,,,OSM,
-Schilthornhütte,,226981814,46.5700427,7.862723,2432,,+41 33 855 50 53,https://www.schilthornhuette.com/,,OSM,
+Schilthornhütte,,226981814,46.5700427,7.862723,2432,,+41 33 855 50 53,https://www.schilthornhuette.com/,,OSM,446
 Refuge Albert 1er,Club Alpin Français,226994017,45.9967536,6.9866309,2704,,+33 4 50 54 06 20,https://refugealbert1er.ffcam.fr/,130,OSM,
 Spechtenseehütte,ÖAV Sektion Stainach,227108236,47.562186,14.1003171,1045,,,,,OSM,
 Sohlenalm,,227339284,47.6726821,15.3865059,1352,,,,,OSM,
@@ -3093,7 +3093,7 @@ Rifugio Cimon della Bagozza,,229883846,46.024186,10.2272062,1574,,,,,OSM,
 Rifugio Gianpace,,229892368,45.9660827,9.8819936,1331,,,,,OSM,
 Ochsenalm,Thomas Danklmaier,229925990,47.4166618,13.5708168,1197.0,pretscher@a1.net,+43 650 4764308,https://www.rittisberg.at/de/huetten/ochsenalm.html,,OSM,
 Heubergalm,,230032449,47.2528242,12.8631953,1665,,,,,OSM,
-Cesa da Sett,,230145321,46.4154132,9.6369865,2308.0,,+41 81 684 19 23,https://www.cesa-da-sett.ch/,,OSM,
+Cesa da Sett,,230145321,46.4154132,9.6369865,2308.0,,+41 81 684 19 23,https://www.cesa-da-sett.ch/,,OSM,551
 Rifugio Baita Iseo,Club Alpino Italiano,230147364,46.0234867,10.3046711,1335,,,,,OSM,
 Wiesmahd Alm,,230164648,47.4116287,13.5876605,1233.0,,,,,OSM,
 ,,230382589,45.775796,6.0880465,1539.0,,,,,OSM,
@@ -3208,7 +3208,7 @@ Bregenzer Hütte,Naturfreunde Vorarlberg,239985798,47.3867606,9.8283796,1320.0,b
 Almagelleralp,,240432026,46.1011253,7.9847741,2194,,,,,OSM,
 ,,240533101,46.6863138,10.9032223,2152,,+39 329 6785550,,19,OSM,
 Baita Altissimo,,240642851,45.9144183,10.1736608,1703,,,,,OSM,
-"Rifugio Rosetta ""Giovanni Pedrotti""",Società degli Alpinisti Tridentini,240938276,46.2674386,11.8390215,2580,lottmariano@libero.it,+39 0439 68308,https://www.rifugiorosetta.it/,70,OSM,
+"Rifugio Rosetta ""Giovanni Pedrotti""",Società degli Alpinisti Tridentini,240938276,46.2674386,11.8390215,2580,lottmariano@libero.it,+39 0439 68308,https://www.rifugiorosetta.it/,70,OSM,619
 Bächlitalhütte SAC,SAC - CAS,241105805,66.4688,15.9878,2328,info@baechlitalhuette.ch,+41339731114,http://www.baechlital.ch,70,OSM,23
 ,,241170026,45.8973692,11.392715,1551.0,,,,,OSM,
 Rifugio Monte Stino,Righetti Daniele,241279629,45.7638323,10.5499865,1396.0,,,,,OSM,
@@ -3344,7 +3344,7 @@ Rifugio Malghette,,266025884,46.2666309,10.8223671,1890,,,,,OSM,
 Gîte de la Léchère,,266138362,45.92018,7.0987042,1699.0,info@gitedelalechere.ch,+41 27 783 30 64,https://www.gitedelalechere.ch/,,OSM,
 Märchenkarhütte,Naturfreunde Rauris,266354640,47.0709435,12.9947067,1900,lorenz.egger@sbg.at,+43 664 1623361,https://www.naturfreunde-huetten.at/salzburg/maerchenkarhuette/,24,OSM,
 Hochreicharthütte,,266358077,47.3773212,14.7088802,1513.0,,,,,OSM,
-Grialetschhütte,,266727741,46.7101286,9.9605868,2542,grialetsch@sac-davos.ch,+41 81 416 34 36,https://www.grialetsch.ch/,58,OSM,
+Grialetschhütte,,266727741,46.7101286,9.9605868,2542,grialetsch@sac-davos.ch,+41 81 416 34 36,https://www.grialetsch.ch/,58,OSM,444
 Amstettner Hütte,OeAv Sektion Amstetten,267672194,47.8863891,14.7707724,923,,,,,OSM,
 Rifugio La Maralsina,,267672492,46.2384897,10.4998404,1764.0,,,,,OSM,
 Gletscherstube Märjelen,,271284021,46.440448,8.1020431,2360,aletsch@gletscherstube.ch,+41 27 971 47 83,http://www.gletscherstube.ch,34,OSM,
@@ -3402,7 +3402,7 @@ Rifugio Sandro Pertini,private,291725843,46.5020842,11.7246156,2300,,,https://ww
 Pastirska koča na planini Planinica,,291857681,46.4090116,14.2149782,1142.0,,,,,OSM,
 Tomčeva koča,,291857682,46.409775,14.2088218,1185,,,,,OSM,
 Krekova koča na Ratitovcu,PD za Selško dolino Železniki,292444927,46.2366433,14.090702,1642,,+386 31 669 944,https://planinske-koce.si/krekova_koca_na_ratitovcu,,OSM,
-Rifugio Roda di Vael,Società degli Alpinisti Tridentini,292970157,46.4201666,11.630125,2283,info@rodadivael.it,+39 0462 764450,https://www.rodadivael.it/,49,OSM,
+Rifugio Roda di Vael,Società degli Alpinisti Tridentini,292970157,46.4201666,11.630125,2283,info@rodadivael.it,+39 0462 764450,https://www.rodadivael.it/,49,OSM,624
 ,,293179352,46.3790957,13.8491069,2503.0,,,,,OSM,
 Triglavski dom na Kredarici,PD Ljubljana-Matica,293182613,46.3789379,13.8487827,2515,,,,,OSM,
 Koča na planini Razor,PD Tolmin,293211596,46.2356798,13.793192,1315,pdtolmin@gmail.com,+386 5 828 07 07,https://planinske-koce.si/koca_na_planini_razor,,OSM,
@@ -3466,7 +3466,7 @@ Rifugio Alpe Caviano,Patriziato di Castel S. Pietro,302929835,45.8770821,9.00834
 Rifugio Colonnello Ferruccio Lorenzini,,303110360,45.9285885,10.1529014,1478,,,,,OSM,
 Rifugio Fonteghi,Gobber Franca,303193375,46.1392164,11.8572842,1100,,,,,OSM,
 Refuge Durier,Club Alpin Français,303225740,45.8253659,6.8118237,3358,,,,12,OSM,
-Domhütte SAC,SAC - CAS,303244800,46.1027954,7.8176645,2940,info@domhuette.ch,+41 27 967 26 34,https://domhuette.ch,75,OSM,
+Domhütte SAC,SAC - CAS,303244800,46.1027954,7.8176645,2940,info@domhuette.ch,+41 27 967 26 34,https://domhuette.ch,75,OSM,697
 Jagerhütte,,303431519,47.1334235,10.6309163,1700,,,,,OSM,
 Rifugio Quintino Sella al Felik,CAI Biella,303518020,45.9011242,7.7927831,3585,info@rifugioquintinosella.com,+39 0125 366113,https://www.rifugioquintinosella.com/index_d.asp,140,OSM,
 Cabane du Pré d'Antoni,,303765563,44.638927,6.3625601,1850,,,,,OSM,
@@ -3531,7 +3531,7 @@ Maso Picosta,,319933171,46.058813,11.649146,1325,,,,,OSM,
 Rodelhütte,,320727818,47.6215902,13.5910386,835,,,,,OSM,
 Rifugio Maranza,Paolo Betti,320980323,46.0276086,11.1656518,1080,,,https://www.rifugiomaranza.it/,,OSM,
 Hoametzl Hütte,,321486131,47.4786496,12.5989506,1160,info@hoametzl.at,+43 676 6064415,https://hoametzl.at/,,OSM,
-Chamanna da Tschierva,SAC Bernina,321827379,46.4038781,9.8800845,2583,tschierva-sac@bluewin.ch,+41 81 842 63 91,https://tschierva.ch,100,OSM,
+Chamanna da Tschierva,SAC Bernina,321827379,46.4038781,9.8800845,2583,tschierva-sac@bluewin.ch,+41 81 842 63 91,https://tschierva.ch,100,OSM,487
 Rifugio Tetras Lyre,,322272031,45.5156337,7.2060602,1996,,,https://www.rifugiotetraslyre.it/,41,OSM,
 Goldberghütte,,322508137,46.9369939,13.055057,1760,,,,,OSM,
 Baita Sezionale Candido Viberti,CAI Sezione di Rivoli,322840101,45.1122387,6.9004648,1800,,,http://www.cairivoli.it,,OSM,
@@ -3552,7 +3552,7 @@ Leiterhütte,,325783875,46.8603583,13.8274773,1874.0,,,,,OSM,
 Bergeralm,,325947946,47.4005302,12.6647141,1542.0,,,,,OSM,
 Berglihütte SAC,SAC - CAS,326835390,46.5667953,8.0205381,3299,chr.nebiker@alpinice.ch,,,20,OSM,161
 Glecksteinhütte SAC,SAC - CAS,326835393,46.625111,8.096502,2317,welcome@gleckstein.ch,+41338531140,http://www.gleckstein.ch,88,OSM,2
-Bäregg,,326835394,46.6004535,8.0600386,1775,,+41 79 121 09 09,https://www.baeregg.com/,,OSM,
+Bäregg,,326835394,46.6004535,8.0600386,1775,,+41 79 121 09 09,https://www.baeregg.com/,,OSM,663
 Cabane des Clés,,326884785,46.5677489,7.0248555,1329.0,,,https://www.cas-gruyere.ch/fr/cabanes/cabane-des-cles/,,OSM,
 Chalet de la Vuagère,Club Alpin Français,328199862,46.1802723,6.4448333,1200,,+33 4 50 36 82 28,https://chaletlavuagere.ffcam.fr/,,OSM,
 Fergenhütte SAC,Schweizer Alpen-Club Sektion Prättigau,328299240,46.868973,9.9647615,2141,fergenhuette@sac-praettigau.ch,+41 79 848 08 25,https://www.sac-praettigau.ch/,21,OSM,241
@@ -3748,7 +3748,7 @@ Posto Tappa GTA,,435782585,44.2852319,7.07022,1284.0,,,,,OSM,
 Malga Fiamena,,435854700,46.194457,11.7048745,1734.0,,,,,OSM,
 Rifugio Ciao Pais,,437425745,45.0188616,6.8764787,1865.0,,+39 0122 850280,https://www.ciaopais.it/,,OSM,
 Centro Studi montani - Winter dormitory,,437455926,46.6659829,12.0834014,2314,,,,,OSM,
-Burghütte,,437909215,46.4509939,8.1353184,1751,info@burghuette.ch,+41 27 971 40 27,https://burghuette.ch/,32,OSM,
+Burghütte,,437909215,46.4509939,8.1353184,1751,info@burghuette.ch,+41 27 971 40 27,https://burghuette.ch/,32,OSM,474
 Schwarzalmhütte,,437944566,47.7488974,14.954332,1540,,,,,OSM,
 Cabane de Combe Male,,438498076,44.8343853,5.453677,1533.0,,,,,OSM,
 Koča v Krnici,PD Kranjska Gora,439853468,46.4323592,13.7876062,1113,,+386 40 457 948,https://planinske-koce.si/koca_v_krnici,,OSM,
@@ -3887,7 +3887,7 @@ Koča na Pikovem,Matija Kozlar s.p.,607319823,46.4885981,14.8366988,992,,,,,OSM,
 Falbesoner Nockalm,,608974350,47.0379824,11.234927,1634.0,,+4352263186,https://www.haus-petra.com/almhuette,,OSM,
 Hexenseehütte,DAV Sektion Rheinland-Köln,613732381,47.018826,10.481156,2588,,+4354766214,https://www.koelner-haus.at/de/die-hexenseehuette/hexenseehuette/,18,OSM,377
 Capanna Sasc Furä,SAC - CAS,614518289,46.3153267,9.5824015,1904,info@sascfura.ch,+41 81 822 12 52,https://www.sascfura.ch/,36,OSM,
-Kistenpasshütte,SAC Sektion Winterthur,616170840,46.8403926,9.0293422,2714,,+41 79 201 35 13,http://www.kistenpasshuette.ch,16,OSM,
+Kistenpasshütte,SAC Sektion Winterthur,616170840,46.8403926,9.0293422,2714,,+41 79 201 35 13,http://www.kistenpasshuette.ch,16,OSM,505
 Wieser Hütte,,616761957,46.7523437,13.4606718,1886,,,,,OSM,
 Schirchleralm,,617417696,46.7755325,15.0885293,1327.0,,,https://www.steiermark.com/de/Suedsteiermark/Urlaub-planen/Ausflugsziele/Schirchlerhuette_isd_307685,,OSM,
 Roblekov dom,,619175228,46.4178059,14.2122751,1657,,,,,OSM,
@@ -3907,7 +3907,7 @@ Rifugio Baita Checco,,664282658,46.4332587,11.6639943,1988,info@baitachecco.com,
 Rifugio Negritella,,664282659,46.433734,11.6617635,1986,,,https://www.negritella.net/,,OSM,
 Bergerseehütte,,674870317,46.9891563,12.3621314,2182,,,,,OSM,
 Lasnitzenhütte,Alois Berger,674870329,46.9942282,12.33939,1895,redlerhof@aon.de,+43 4877 5252; +43 4877 5267,https://www.virgental.at/lasnitzenhuette,,OSM,
-Neue Reichenberger Hütte,ÖAV Sektion Reichenberg,680506024,46.9713327,12.2793977,2586,neue.reichenbergerhuette@utanet.at,+43 720 884213; +43 4873 5580,https://www.alpenverein.at/reichenberg/,,OSM,
+Neue Reichenberger Hütte,ÖAV Sektion Reichenberg,680506024,46.9713327,12.2793977,2586,neue.reichenbergerhuette@utanet.at,+43 720 884213; +43 4873 5580,https://www.alpenverein.at/reichenberg/,,OSM,545
 Hundskopfhütte,,682831119,47.5554161,15.4775953,987.0,,,,,OSM,
 Refuge du Saut,,686394450,45.3371374,6.6323649,2126,,,https://www.refuges-vanoise.com/fiche-hebergement-le-saut-tour-des-glaciers-de-la-vanoise-vanoise-bql5a3s5xavw.html,25,OSM,
 Neige et Merveilles,L'association Neige et Merveilles,702454878,44.0702561,7.5129791,1539.0,,,https://www.neige-merveilles.com/,,OSM,
