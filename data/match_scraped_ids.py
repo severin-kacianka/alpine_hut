@@ -81,6 +81,10 @@ def signals(r_full, r_scraped):
     web_s = norm_url(r_scraped.get("website_url", ""))
     if web_f and web_s and web_f == web_s:
         found.append("same_web")
+    elif web_f and web_s and web_f.split("/")[0] == web_s.split("/")[0]:
+        # Domain-level match: same hostname even if paths differ.
+        # Handles scraped URLs that are just the root domain.
+        found.append("same_web_domain")
 
     return found
 
