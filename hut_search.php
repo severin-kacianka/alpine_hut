@@ -158,12 +158,9 @@ function load_and_filter_huts(
     }
     fclose($fh);
 
-    // Sort: highest elevation first, nulls at the bottom
+    // Sort: nearest first
     usort($huts, function($a, $b) {
-        if ($a['elevation_m'] === null && $b['elevation_m'] === null) return 0;
-        if ($a['elevation_m'] === null) return 1;
-        if ($b['elevation_m'] === null) return -1;
-        return $b['elevation_m'] <=> $a['elevation_m'];
+        return $a['distance_km'] <=> $b['distance_km'];
     });
 
     return $huts;
@@ -344,7 +341,7 @@ function render_results(
     $with_avail = count($date_range) > 0;
 
     echo "<div class=\"result-summary\">";
-    echo "Found <strong>$total</strong> huts within {$dist} km of <em>$dn</em>$elev_s, sorted by elevation";
+    echo "Found <strong>$total</strong> huts within {$dist} km of <em>$dn</em>$elev_s, sorted by distance";
     if ($with_avail) {
         $n = count($date_range);
         echo " &mdash; showing availability for <strong>$n</strong> day(s) (from cache)";
