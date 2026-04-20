@@ -536,7 +536,7 @@ foreach ($all_dates as $d) {
 }
 echo '</div></div>';
 
-echo '<p class="hint">Availability is read from local cache (<code>reservation_cache/</code>). Run <code>php update_cache.php 1 800</code> to refresh. Weather from <code>forecasts/</code> — run <code>php update_forecasts.php</code> to refresh.</p>';
+echo '<p class="hint">Availability is read from local cache. </p>';
 echo '</form>';
 echo '</div>';
 
