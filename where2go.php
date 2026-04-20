@@ -8,6 +8,9 @@ define('CSV_PATH',      __DIR__ . '/data/alpine_huts_full.csv');
 define('CACHE_DIR',     __DIR__ . '/reservation_cache');
 define('FORECAST_DIR',  __DIR__ . '/forecasts');
 define('BOOKING_BASE',  'https://www.hut-reservation.org/reservation/book-hut/');
+define('GEO_CACHE',     __DIR__ . '/reservation_cache/geocode_cache.json');
+define('NOMINATIM_URL', 'https://nominatim.openstreetmap.org/search');
+define('USER_AGENT',    'alpine-hut-search/1.0');
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -102,6 +105,64 @@ $WMO = [
     86 => 'Hvy snow shwrs', 95 => 'Thunderstorm',     96 => 'Tstorm+hail',
     99 => 'Tstorm+hvy hail',
 ];
+
+// ---------------------------------------------------------------------------
+// Geocoding + distance (copied from hut_search.php)
+// ---------------------------------------------------------------------------
+function parse_latlon(string $input): ?array {
+    if (preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*[,\s]\s*(-?\d+(?:\.\d+)?)\s*$/', $input, $m)) {
+        $lat = (float)$m[1];
+        $lon = (float)$m[2];
+        if ($lat >= -90 && $lat <= 90 && $lon >= -180 && $lon <= 180) {
+            return ['lat' => $lat, 'lon' => $lon, 'display_name' => $input];
+        }
+    }
+    return null;
+}
+
+function geocode(string $location): array {
+    $key   = strtolower(trim($location));
+    $cache = array();
+    if (file_exists(GEO_CACHE)) {
+        $cache = json_decode(file_get_contents(GEO_CACHE), true) ?: array();
+    }
+    if (isset($cache[$key])) {
+        return $cache[$key];
+    }
+    $url = NOMINATIM_URL . '?' . http_build_query(['q' => $location, 'format' => 'json', 'limit' => 1]);
+    $ch  = curl_init($url);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_USERAGENT      => USER_AGENT,
+        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_CONNECTTIMEOUT => 5,
+    ]);
+    $body = curl_exec($ch);
+    $err  = curl_error($ch);
+    curl_close($ch);
+    if ($body === false) {
+        throw new RuntimeException("Geocoding request failed: $err");
+    }
+    $data = json_decode($body, true);
+    if (empty($data)) {
+        throw new RuntimeException("No results found for location: " . htmlspecialchars($location, ENT_QUOTES, 'UTF-8'));
+    }
+    $result = ['lat' => (float)$data[0]['lat'], 'lon' => (float)$data[0]['lon'], 'display_name' => $data[0]['display_name']];
+    $cache[$key] = $result;
+    $tmp = GEO_CACHE . '.tmp.' . getmypid();
+    file_put_contents($tmp, json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    rename($tmp, GEO_CACHE);
+    return $result;
+}
+
+function haversine_km(float $lat1, float $lon1, float $lat2, float $lon2): float {
+    $R    = 6371.0;
+    $phi1 = deg2rad($lat1); $phi2 = deg2rad($lat2);
+    $dphi = deg2rad($lat2 - $lat1);
+    $dlam = deg2rad($lon2 - $lon1);
+    $a    = sin($dphi / 2) ** 2 + cos($phi1) * cos($phi2) * sin($dlam / 2) ** 2;
+    return $R * 2 * asin(sqrt($a));
+}
 
 // ---------------------------------------------------------------------------
 // Data loading
@@ -213,6 +274,10 @@ function min_free_beds(string $rid, int $days): ?array {
 // ---------------------------------------------------------------------------
 $min_beds_input = isset($_GET['min_beds']) && $_GET['min_beds'] !== ''
                 ? max(1, (int)$_GET['min_beds']) : null;
+$location_input = isset($_GET['location']) ? trim($_GET['location']) : '';
+$radius_km      = isset($_GET['radius']) && $_GET['radius'] !== ''
+                ? max(1.0, (float)$_GET['radius']) : 50.0;
+$use_location   = ($location_input !== '');
 
 // All 7 available dates (today + 6)
 $all_dates = [];
@@ -238,11 +303,31 @@ $stats     = ['total' => 0, 'with_forecast' => 0, 'passed_beds' => 0];
 
 if ($min_beds_input !== null) {
     try {
+        // Geocode location if provided
+        $center_lat  = null;
+        $center_lon  = null;
+        $center_name = '';
+        if ($use_location) {
+            $geo = parse_latlon($location_input) ?? geocode($location_input);
+            $center_lat  = $geo['lat'];
+            $center_lon  = $geo['lon'];
+            $center_name = $geo['display_name'];
+        }
+
         $huts = load_huts_with_reservation();
         $stats['total'] = count($huts);
 
         foreach ($huts as &$hut) {
             $rid = $hut['reservation_id'];
+
+            // Distance filter
+            if ($use_location) {
+                $dist = haversine_km($center_lat, $center_lon, $hut['latitude'], $hut['longitude']);
+                if ($dist > $radius_km) continue;
+                $hut['distance_km'] = round($dist, 1);
+            } else {
+                $hut['distance_km'] = null;
+            }
 
             // Availability check against selected dates only
             $avail = min_free_beds($rid, 7);   // always load full 7-day window
@@ -331,8 +416,10 @@ if ($min_beds_input !== null) {
     .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
     .form-group { display: flex; flex-direction: column; gap: 4px; }
     .form-group label { font-size: .8rem; font-weight: 600; color: #495057; }
-    input[type=number] { padding: 6px 10px; border: 1px solid #ced4da; border-radius: 4px;
-                         font-size: .95rem; width: 7rem; }
+    input[type=text], input[type=number] {
+      padding: 6px 10px; border: 1px solid #ced4da; border-radius: 4px; font-size: .95rem; }
+    input[type=number] { width: 7rem; }
+    input[type=text]   { width: 16rem; }
     button[type=submit] { padding: 8px 22px; background: #0d6efd; color: #fff; border: none;
                           border-radius: 4px; cursor: pointer; font-size: .95rem; font-weight: 600; }
     button[type=submit]:hover { background: #0b5ed7; }
@@ -409,11 +496,20 @@ if ($min_beds_input !== null) {
 // ---------------------------------------------------------------------------
 // Form
 // ---------------------------------------------------------------------------
-$beds_val = $min_beds_input !== null ? $min_beds_input : '';
+$beds_val   = $min_beds_input !== null ? $min_beds_input : '';
+$radius_val = $radius_km;
 echo '<div class="search-form">';
 echo '<h2>Search</h2>';
 echo '<form method="get" action="">';
 echo '<div class="form-row">';
+echo '<div class="form-group">';
+echo '<label for="location">Location <span style="font-weight:400;color:#6c757d">(optional)</span></label>';
+echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39">';
+echo '</div>';
+echo '<div class="form-group">';
+echo '<label for="radius">Radius (km)</label>';
+echo '<input type="number" id="radius" name="radius" min="1" step="1" value="' . h((string)$radius_val) . '">';
+echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="min_beds">Minimum free beds</label>';
 echo '<input type="number" id="min_beds" name="min_beds" min="1" step="1" value="' . h((string)$beds_val) . '" placeholder="e.g. 4">';
@@ -456,7 +552,11 @@ if ($error !== null) {
         $n = count($results);
         echo "<div class=\"result-summary\">";
         $nd = count($date_list);
-        echo "Showing <strong>$n</strong> hut(s) with &ge; <strong>{$min_beds_input}</strong> free bed(s) on all <strong>$nd</strong> selected day(s), ranked by average weather score.";
+        echo "Showing <strong>$n</strong> hut(s) with &ge; <strong>{$min_beds_input}</strong> free bed(s) on all <strong>$nd</strong> selected day(s)";
+        if ($use_location) {
+            echo " within <strong>" . (int)$radius_km . " km</strong> of <em>" . h($center_name) . "</em>";
+        }
+        echo ", ranked by average weather score.";
         echo " <span style=\"color:#6c757d;font-size:.85em\">(of {$stats['total']} huts with reservation IDs)</span>";
         echo "</div>\n";
 
@@ -477,6 +577,7 @@ if ($error !== null) {
         echo '<th rowspan="3">Hut</th>';
         echo '<th rowspan="3">Club</th>';
         echo '<th rowspan="3">Elevation</th>';
+        if ($use_location) echo '<th rowspan="3">Distance</th>';
         echo '<th rowspan="3">Avg score</th>';
         echo '<th rowspan="3">Book</th>';
         foreach ($day_labels as $lbl) {
@@ -526,12 +627,15 @@ if ($error !== null) {
             elseif ($score >= 35)  $score_cls = 'score-ok';
             else                   $score_cls = 'score-poor';
 
+            $dist_s = $hut['distance_km'] !== null ? $hut['distance_km'] . ' km' : '—';
+
             // Weather row
             echo "<tr>";
             echo "<td class=\"rank\" rowspan=\"2\">$rank</td>";
             echo "<td class=\"hut-name\" rowspan=\"2\">$name_td</td>";
             echo "<td rowspan=\"2\">" . h($club) . "</td>";
             echo "<td class=\"num elev\" rowspan=\"2\">$elev_s</td>";
+            if ($use_location) echo "<td class=\"num\" rowspan=\"2\">$dist_s</td>";
             echo "<td class=\"num score $score_cls\" rowspan=\"2\">" . number_format($score, 1) . "</td>";
             echo "<td class=\"reservation\" rowspan=\"2\">$book_td</td>";
 
@@ -607,6 +711,7 @@ if ($error !== null) {
         echo '<th rowspan="2">Hut</th>';
         echo '<th rowspan="2">Club</th>';
         echo '<th rowspan="2">Elevation</th>';
+        if ($use_location) echo '<th rowspan="2">Distance</th>';
         echo '<th rowspan="2">Book</th>';
         foreach ($day_labels2 as $lbl) {
             echo '<th class="day-header">' . h($lbl) . '</th>';
@@ -640,11 +745,14 @@ if ($error !== null) {
             $book_td = '<a href="' . h(BOOKING_BASE . $rid . '/wizard') . '" target="_blank">Book now</a>';
             $age_td  = $age_s !== null ? format_age((int)$age_s) : '?';
 
+            $dist_s2 = $hut['distance_km'] !== null ? $hut['distance_km'] . ' km' : '—';
+
             echo "<tr>";
             echo "<td class=\"rank\">$rank</td>";
             echo "<td class=\"hut-name\">$name_td</td>";
             echo "<td>" . h($club) . "</td>";
             echo "<td class=\"num elev\">$elev_s</td>";
+            if ($use_location) echo "<td class=\"num\">$dist_s2</td>";
             echo "<td class=\"reservation\">$book_td</td>";
 
             foreach ($date_list as $date) {
