@@ -214,15 +214,27 @@ function min_free_beds(string $rid, int $days): ?array {
 $min_beds_input = isset($_GET['min_beds']) && $_GET['min_beds'] !== ''
                 ? max(1, (int)$_GET['min_beds']) : null;
 
+// All 7 available dates (today + 6)
+$all_dates = [];
+for ($i = 0; $i < 7; $i++) {
+    $all_dates[] = date('Y-m-d', strtotime("+{$i} days"));
+}
+
+// Selected dates: from checkboxes when form was submitted, else all dates
+$submitted = isset($_GET['min_beds']);   // form has been submitted at least once
+if ($submitted && isset($_GET['days']) && is_array($_GET['days'])) {
+    $date_list = array_values(array_intersect($all_dates, $_GET['days']));
+} else {
+    $date_list = $all_dates;   // default: all 7
+}
+if (empty($date_list)) {
+    $date_list = $all_dates;   // guard: never filter on zero days
+}
+
 $results   = [];
 $too_full  = [];
 $error     = null;
 $stats     = ['total' => 0, 'with_forecast' => 0, 'passed_beds' => 0];
-// Canonical 7-day date list starting today
-$date_list = [];
-for ($i = 0; $i < 7; $i++) {
-    $date_list[] = date('Y-m-d', strtotime("+{$i} days"));
-}
 
 if ($min_beds_input !== null) {
     try {
@@ -232,13 +244,29 @@ if ($min_beds_input !== null) {
         foreach ($huts as &$hut) {
             $rid = $hut['reservation_id'];
 
-            // Availability check
-            $avail = min_free_beds($rid, 7);
+            // Availability check against selected dates only
+            $avail = min_free_beds($rid, 7);   // always load full 7-day window
             if ($avail === null) continue;
 
-            if ($avail['min_free'] < $min_beds_input) {
+            // Compute min_free restricted to $date_list
+            $sel_min = PHP_INT_MAX;
+            $sel_found = false;
+            $sel_open  = false;
+            foreach ($date_list as $date) {
+                $day = $avail['by_day'][$date] ?? null;
+                if ($day === null) continue;
+                $status = $day['status'] ?? '';
+                $free   = $day['free']   ?? null;
+                if ($status === 'CLOSED') continue;
+                $sel_open = true;
+                if ($status === 'FULL' || $free === 0) { $sel_found = true; $sel_min = 0; continue; }
+                if ($free !== null) { $sel_found = true; $sel_min = min($sel_min, (int)$free); }
+            }
+            $sel_min_free = $sel_found ? (int)$sel_min : 0;
+
+            if ($sel_min_free < $min_beds_input) {
                 // Open but not enough beds — collect for second table
-                if ($avail['is_open']) {
+                if ($sel_open) {
                     $hut['avail'] = $avail;
                     $too_full[]   = $hut;
                 }
@@ -358,13 +386,23 @@ if ($min_beds_input !== null) {
     .avail-full   { background: var(--yellow-bg) !important; color: var(--yellow); font-weight: 700; }
     .avail-closed { background: var(--red-bg)    !important; color: var(--red);    font-weight: 700; }
 
+    .day-picker       { margin-top: .9rem; }
+    .day-picker-label { font-size: .8rem; font-weight: 600; color: #495057; margin-bottom: .35rem; }
+    .toggle-btn       { margin-left: .4rem; padding: 1px 8px; font-size: .75rem; background: #e9ecef;
+                        border: 1px solid #ced4da; border-radius: 3px; cursor: pointer; }
+    .toggle-btn:hover { background: #dee2e6; }
+    .day-checks       { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin-top: .3rem; }
+    .day-check-item   { font-size: .85rem; display: flex; align-items: center; gap: .25rem;
+                        cursor: pointer; white-space: nowrap; }
+    .day-check-item input { cursor: pointer; }
+
     footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
   </style>
 </head>
 <body>
 <header>
   <h1>Where to Go</h1>
-  <p>Find huts with available beds, ranked by 7-day weather forecast quality</p>
+  <p>Find huts with available beds on selected days, ranked by weather forecast quality</p>
 </header>
 
 <?php
@@ -384,7 +422,25 @@ echo '<div class="form-group">';
 echo '<button type="submit">Search</button>';
 echo '</div>';
 echo '</div>';
-echo '<p class="hint">Availability is read from local cache </p>';
+
+// Day checkboxes
+echo '<div class="day-picker">';
+echo '<div class="day-picker-label">Days to consider: '
+   . '<button type="button" class="toggle-btn" onclick="setAllDays(true)">All</button>'
+   . '<button type="button" class="toggle-btn" onclick="setAllDays(false)">None</button>'
+   . '</div>';
+echo '<div class="day-checks">';
+foreach ($all_dates as $d) {
+    $checked = in_array($d, $date_list) ? ' checked' : '';
+    $label   = date('D d.m', strtotime($d));
+    echo '<label class="day-check-item">'
+       . '<input type="checkbox" name="days[]" value="' . h($d) . '"' . $checked . '> '
+       . h($label)
+       . '</label>';
+}
+echo '</div></div>';
+
+echo '<p class="hint">Availability is read from local cache (<code>reservation_cache/</code>). Run <code>php update_cache.php 1 800</code> to refresh. Weather from <code>forecasts/</code> — run <code>php update_forecasts.php</code> to refresh.</p>';
 echo '</form>';
 echo '</div>';
 
@@ -399,7 +455,8 @@ if ($error !== null) {
     } else {
         $n = count($results);
         echo "<div class=\"result-summary\">";
-        echo "Showing <strong>$n</strong> hut(s) with &ge; <strong>{$min_beds_input}</strong> free bed(s) over the next 7 days, ranked by average weather score.";
+        $nd = count($date_list);
+        echo "Showing <strong>$n</strong> hut(s) with &ge; <strong>{$min_beds_input}</strong> free bed(s) on all <strong>$nd</strong> selected day(s), ranked by average weather score.";
         echo " <span style=\"color:#6c757d;font-size:.85em\">(of {$stats['total']} huts with reservation IDs)</span>";
         echo "</div>\n";
 
@@ -614,6 +671,14 @@ if ($error !== null) {
     }
 }
 ?>
+
+<script>
+function setAllDays(checked) {
+    document.querySelectorAll('input[name="days[]"]').forEach(function(cb) {
+        cb.checked = checked;
+    });
+}
+</script>
 
 <footer>
   Data: <a href="https://www.sac-cas.ch" target="_blank">SAC</a> &amp;
