@@ -26,60 +26,27 @@ function format_age(int $age_s): string {
 }
 
 // ---------------------------------------------------------------------------
-// Scoring — mirrors legacy/hut_search.py exactly
+// Scoring — sunshine (40%) + precipitation (40%) + wind (20%).
+// sunshine_duration: seconds/day, max ~43200 s (12 h).
 // ---------------------------------------------------------------------------
-function lerp(float $x, float $x0, float $x1, float $y0, float $y1): float {
-    if ($x1 == $x0) return $y0;
-    $t = max(0.0, min(1.0, ($x - $x0) / ($x1 - $x0)));
-    return $y0 + $t * ($y1 - $y0);
-}
-
-function score_precipitation(?float $mm): float {
-    if ($mm === null) return 50.0;
-    if ($mm <= 0)  return 100.0;
-    if ($mm <= 5)  return lerp($mm, 0, 5, 100, 50);
-    if ($mm <= 20) return lerp($mm, 5, 20, 50, 0);
-    return 0.0;
-}
-
-function score_wind(?float $kmh): float {
-    if ($kmh === null) return 50.0;
-    if ($kmh <= 20) return 100.0;
-    if ($kmh <= 80) return lerp($kmh, 20, 80, 100, 0);
-    return 0.0;
-}
-
-function score_weathercode(?int $code): float {
-    if ($code === null) return 50.0;
-    if ($code <= 2)  return 100.0;
-    if ($code == 3)  return 80.0;
-    if ($code <= 48) return 60.0;
-    if ($code <= 57) return 40.0;
-    if ($code <= 67) return 20.0;
-    if ($code <= 82) return 10.0;
-    return 5.0;
-}
-
-function score_temperature(?float $tmax): float {
-    if ($tmax === null) return 50.0;
-    if ($tmax < 0)   return 0.0;
-    if ($tmax < 5)   return lerp($tmax, 0, 5, 0, 50);
-    if ($tmax <= 20) return lerp($tmax, 5, 20, 50, 100);
-    if ($tmax <= 25) return 100.0;
-    if ($tmax <= 35) return lerp($tmax, 25, 35, 100, 50);
-    return 0.0;
-}
-
-// Score a single day from the daily arrays; $i is the day index.
 function score_day(int $i, array $daily): float {
     $get = function(string $field) use ($i, $daily): ?float {
         $vals = $daily[$field] ?? [];
         return isset($vals[$i]) && $vals[$i] !== null ? (float)$vals[$i] : null;
     };
-    return 0.35 * score_precipitation($get('precipitation_sum'))
-         + 0.25 * score_wind($get('windspeed_10m_max'))
-         + 0.25 * score_weathercode(isset($daily['weathercode'][$i]) ? (int)$daily['weathercode'][$i] : null)
-         + 0.15 * score_temperature($get('temperature_2m_max'));
+
+    $sun_s  = $get('sunshine_duration');  // seconds, 0–43200
+    $precip = $get('precipitation_sum');  // mm
+    $wind   = $get('windspeed_10m_max');  // km/h
+
+    // 0 s → 0 pts, 43200 s → 100 pts, linear
+    $sun_score    = $sun_s  !== null ? max(0.0, min(100.0, $sun_s / 432.0))           : 50.0;
+    // 0 mm → 100 pts, ≥20 mm → 0 pts, linear
+    $precip_score = $precip !== null ? max(0.0, 100.0 - ($precip / 20.0) * 100.0)    : 50.0;
+    // ≤20 km/h → 100 pts, ≥80 km/h → 0 pts, linear
+    $wind_score   = $wind   !== null ? max(0.0, min(100.0, (80.0 - $wind) / 60.0 * 100.0)) : 50.0;
+
+    return 0.4 * $sun_score + 0.4 * $precip_score + 0.2 * $wind_score;
 }
 
 // Equal weights across all 7 days.
@@ -92,19 +59,6 @@ function score_forecast(array $daily): float {
     }
     return $total / $days;
 }
-
-$WMO = [
-    0  => 'Clear',          1  => 'Mainly clear',    2  => 'Partly cloudy',
-    3  => 'Overcast',       45 => 'Fog',              48 => 'Rime fog',
-    51 => 'Lt drizzle',     53 => 'Drizzle',          55 => 'Hvy drizzle',
-    56 => 'Frzg drizzle',   57 => 'Hvy frzg drzl',   61 => 'Lt rain',
-    63 => 'Rain',           65 => 'Hvy rain',         66 => 'Frzg rain',
-    67 => 'Hvy frzg rain',  71 => 'Lt snow',          73 => 'Snow',
-    75 => 'Hvy snow',       77 => 'Snow grains',      80 => 'Lt showers',
-    81 => 'Showers',        82 => 'Hvy showers',      85 => 'Snow showers',
-    86 => 'Hvy snow shwrs', 95 => 'Thunderstorm',     96 => 'Tstorm+hail',
-    99 => 'Tstorm+hvy hail',
-];
 
 // ---------------------------------------------------------------------------
 // Geocoding + distance (copied from hut_search.php)
@@ -589,7 +543,7 @@ if ($error !== null) {
         // Second header row — weather sub-label
         echo '<tr>';
         for ($d = 0; $d < $num_days; $d++) {
-            echo '<th class="sub-hdr">wx / temp / precip</th>';
+            echo '<th class="sub-hdr">sun / precip / wind</th>';
         }
         echo '</tr>';
 
@@ -639,11 +593,10 @@ if ($error !== null) {
             echo "<td class=\"num score $score_cls\" rowspan=\"2\">" . number_format($score, 1) . "</td>";
             echo "<td class=\"reservation\" rowspan=\"2\">$book_td</td>";
 
-            global $WMO;
             for ($i = 0; $i < $num_days; $i++) {
-                $code   = isset($daily['weathercode'][$i])        ? (int)$daily['weathercode'][$i]          : null;
-                $tmax   = isset($daily['temperature_2m_max'][$i]) ? (float)$daily['temperature_2m_max'][$i] : null;
-                $precip = isset($daily['precipitation_sum'][$i])  ? (float)$daily['precipitation_sum'][$i]  : null;
+                $sun_s  = isset($daily['sunshine_duration'][$i]) ? (float)$daily['sunshine_duration'][$i] : null;
+                $precip = isset($daily['precipitation_sum'][$i]) ? (float)$daily['precipitation_sum'][$i] : null;
+                $wind   = isset($daily['windspeed_10m_max'][$i]) ? (float)$daily['windspeed_10m_max'][$i] : null;
                 $ds     = score_day($i, $daily);
 
                 if ($ds >= 75)      $wx_cls = 'wx-great';
@@ -651,12 +604,12 @@ if ($error !== null) {
                 elseif ($ds >= 35)  $wx_cls = 'wx-ok';
                 else                $wx_cls = 'wx-poor';
 
-                $wmo_label = $code !== null ? ($WMO[$code] ?? "WMO$code") : '?';
-                $temp_s    = $tmax   !== null ? number_format($tmax, 0) . '°'    : '?';
-                $prec_s    = $precip !== null ? number_format($precip, 1) . 'mm' : '?';
+                $sun_h  = $sun_s  !== null ? number_format($sun_s / 3600, 1) . 'h☀' : '?';
+                $prec_s = $precip !== null ? number_format($precip, 1) . 'mm'        : '?';
+                $wind_s = $wind   !== null ? number_format($wind, 0) . 'km/h'        : '?';
 
                 echo "<td class=\"day-cell $wx_cls\">";
-                echo h($wmo_label) . '<br>' . h($temp_s) . ' / ' . h($prec_s);
+                echo h($sun_h) . ' ' . h($prec_s) . '<br>' . h($wind_s);
                 echo "</td>";
             }
 

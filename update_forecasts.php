@@ -13,7 +13,7 @@ define('METEO_URL',     'https://api.open-meteo.com/v1/forecast');
 define('CACHE_TTL',     6 * 3600);   // 6 h in seconds
 define('SLEEP_US',      500000);     // 0.5 s
 define('FORECAST_DAYS', 7);
-define('DAILY_VARS',    'weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,precipitation_probability_max');
+define('DAILY_VARS',    'sunshine_duration,precipitation_sum,windspeed_10m_max,weathercode,temperature_2m_max');
 
 // ---------------------------------------------------------------------------
 // Logging
