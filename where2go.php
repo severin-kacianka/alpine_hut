@@ -146,8 +146,14 @@ function load_huts_with_reservation(): array {
 }
 
 /**
- * Return the minimum free beds over the next $days days from today,
- * or null if no data is available. Also returns hutStatus for each date.
+ * Return availability info for the next $days days from today, or null if no
+ * cache data exists at all.
+ *
+ * Returned array keys:
+ *   min_free   — minimum free beds seen across open days (0 if any day is FULL)
+ *   max_free   — maximum free beds seen (useful for "too full" display)
+ *   is_open    — true if at least one day is not CLOSED
+ *   cache_age  — seconds since the cache file was written
  */
 function min_free_beds(string $rid, int $days): ?array {
     $file = CACHE_DIR . '/' . $rid;
@@ -156,14 +162,15 @@ function min_free_beds(string $rid, int $days): ?array {
     $data = json_decode(file_get_contents($file), true);
     if (!is_array($data)) return null;
 
-    $today  = date('Y-m-d');
-    $cutoff = date('Y-m-d', strtotime("+{$days} days"));
+    $today     = date('Y-m-d');
+    $cutoff    = date('Y-m-d', strtotime("+{$days} days"));
     $cache_age = time() - filemtime($file);
 
-    $min_beds   = PHP_INT_MAX;
-    $found      = false;
-    $all_closed = true;
-    $any_full   = false;
+    $min_beds = PHP_INT_MAX;
+    $max_beds = 0;
+    $found    = false;
+    $is_open  = false;
+    $by_day   = [];   // date => ['free' => int|null, 'status' => string]
 
     foreach ($data as $entry) {
         $d = substr($entry['date'] ?? '', 0, 10);
@@ -172,22 +179,32 @@ function min_free_beds(string $rid, int $days): ?array {
         $status = $entry['hutStatus'] ?? '';
         $free   = $entry['freeBeds']  ?? null;
 
-        if ($status === 'CLOSED') { $any_full = true; continue; }
-        $all_closed = false;
+        $by_day[$d] = ['free' => $free, 'status' => $status];
 
-        if ($status === 'FULL' || $free === 0) { $any_full = true; $found = true; $min_beds = 0; continue; }
+        if ($status === 'CLOSED') continue;
+        $is_open = true;
+
+        if ($status === 'FULL' || $free === 0) {
+            $found    = true;
+            $min_beds = 0;
+            continue;
+        }
 
         if ($free !== null) {
             $found    = true;
-            $min_beds = min($min_beds, $free);
+            $min_beds = min($min_beds, (int)$free);
+            $max_beds = max($max_beds, (int)$free);
         }
     }
 
-    if (!$found) return null;
+    if (!$found && !$is_open) return null;
 
     return [
-        'min_free'  => $all_closed ? 0 : (int)$min_beds,
+        'min_free'  => $found ? (int)$min_beds : 0,
+        'max_free'  => $max_beds,
+        'is_open'   => $is_open,
         'cache_age' => $cache_age,
+        'by_day'    => $by_day,
     ];
 }
 
@@ -197,9 +214,15 @@ function min_free_beds(string $rid, int $days): ?array {
 $min_beds_input = isset($_GET['min_beds']) && $_GET['min_beds'] !== ''
                 ? max(1, (int)$_GET['min_beds']) : null;
 
-$results = [];
-$error   = null;
-$stats   = ['total' => 0, 'with_forecast' => 0, 'passed_beds' => 0];
+$results   = [];
+$too_full  = [];
+$error     = null;
+$stats     = ['total' => 0, 'with_forecast' => 0, 'passed_beds' => 0];
+// Canonical 7-day date list starting today
+$date_list = [];
+for ($i = 0; $i < 7; $i++) {
+    $date_list[] = date('Y-m-d', strtotime("+{$i} days"));
+}
 
 if ($min_beds_input !== null) {
     try {
@@ -212,7 +235,15 @@ if ($min_beds_input !== null) {
             // Availability check
             $avail = min_free_beds($rid, 7);
             if ($avail === null) continue;
-            if ($avail['min_free'] < $min_beds_input) continue;
+
+            if ($avail['min_free'] < $min_beds_input) {
+                // Open but not enough beds — collect for second table
+                if ($avail['is_open']) {
+                    $hut['avail'] = $avail;
+                    $too_full[]   = $hut;
+                }
+                continue;
+            }
             $stats['passed_beds']++;
 
             // Load forecast
@@ -234,6 +265,8 @@ if ($min_beds_input !== null) {
 
         // Sort best weather first
         usort($results, fn($a, $b) => $b['score'] <=> $a['score']);
+        // Sort too_full by max free beds descending (most beds first)
+        usort($too_full, fn($a, $b) => $b['avail']['max_free'] <=> $a['avail']['max_free']);
 
     } catch (RuntimeException $e) {
         $error = $e->getMessage();
@@ -321,6 +354,10 @@ if ($min_beds_input !== null) {
     .wx-ok     { background: #fff3cd !important; color: #856404; }
     .wx-poor   { background: #f8d7da !important; color: #721c24; font-weight: 700; }
 
+    .avail-open   { background: var(--green-bg)  !important; color: var(--green);  font-weight: 700; }
+    .avail-full   { background: var(--yellow-bg) !important; color: var(--yellow); font-weight: 700; }
+    .avail-closed { background: var(--red-bg)    !important; color: var(--red);    font-weight: 700; }
+
     footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
   </style>
 </head>
@@ -347,7 +384,7 @@ echo '<div class="form-group">';
 echo '<button type="submit">Search</button>';
 echo '</div>';
 echo '</div>';
-echo '<p class="hint">Availability is read from local cache (<code>reservation_cache/</code>). Run <code>php update_cache.php 1 800</code> to refresh. Weather from <code>forecasts/</code> — run <code>php update_forecasts.php</code> to refresh.</p>';
+echo '<p class="hint">Availability is read from local cache </p>';
 echo '</form>';
 echo '</div>';
 
@@ -366,11 +403,10 @@ if ($error !== null) {
         echo " <span style=\"color:#6c757d;font-size:.85em\">(of {$stats['total']} huts with reservation IDs)</span>";
         echo "</div>\n";
 
-        // Collect day labels from first result
+        // Day labels from the canonical date list
         $day_labels = [];
-        $times = $results[0]['daily']['time'] ?? [];
-        foreach ($times as $t) {
-            $day_labels[] = date('D d.m', strtotime($t));
+        foreach ($date_list as $d) {
+            $day_labels[] = date('D d.m', strtotime($d));
         }
         $num_days = count($day_labels);
 
@@ -380,22 +416,29 @@ if ($error !== null) {
 
         // First header row
         echo '<tr>';
-        echo '<th rowspan="2">#</th>';
-        echo '<th rowspan="2">Hut</th>';
-        echo '<th rowspan="2">Club</th>';
-        echo '<th rowspan="2">Elevation</th>';
-        echo '<th rowspan="2">Avg score</th>';
-        echo '<th rowspan="2">Book</th>';
+        echo '<th rowspan="3">#</th>';
+        echo '<th rowspan="3">Hut</th>';
+        echo '<th rowspan="3">Club</th>';
+        echo '<th rowspan="3">Elevation</th>';
+        echo '<th rowspan="3">Avg score</th>';
+        echo '<th rowspan="3">Book</th>';
         foreach ($day_labels as $lbl) {
-            echo '<th class="day-header">' . h($lbl) . '</th>';
+            echo '<th colspan="1" class="day-header">' . h($lbl) . '</th>';
         }
-        echo '<th rowspan="2" class="sub-hdr" style="min-width:5rem">Avail cached</th>';
+        echo '<th rowspan="3" class="sub-hdr" style="min-width:5rem">Avail cached</th>';
         echo '</tr>';
 
-        // Second header row — sub-labels per day
+        // Second header row — weather sub-label
         echo '<tr>';
         for ($d = 0; $d < $num_days; $d++) {
             echo '<th class="sub-hdr">wx / temp / precip</th>';
+        }
+        echo '</tr>';
+
+        // Third header row — beds sub-label
+        echo '<tr>';
+        for ($d = 0; $d < $num_days; $d++) {
+            echo '<th class="sub-hdr">free beds</th>';
         }
         echo '</tr>';
 
@@ -403,13 +446,14 @@ if ($error !== null) {
         echo '<tbody>';
 
         foreach ($results as $rank0 => $hut) {
-            $rank  = $rank0 + 1;
-            $name  = h($hut['official_name']);
-            $club  = h($hut['operating_club']);
-            $url   = $hut['official_website_url'];
-            $rid   = $hut['reservation_id'];
-            $score = $hut['score'];
-            $daily = $hut['daily'];
+            $rank   = $rank0 + 1;
+            $name   = h($hut['official_name']);
+            $club   = h($hut['operating_club']);
+            $url    = $hut['official_website_url'];
+            $rid    = $hut['reservation_id'];
+            $score  = $hut['score'];
+            $daily  = $hut['daily'];
+            $by_day = $hut['avail']['by_day'] ?? [];
 
             $elev_s = $hut['elevation_m'] !== null
                     ? number_format((int)$hut['elevation_m']) . ' m' : '?';
@@ -420,27 +464,26 @@ if ($error !== null) {
 
             $book_td = '<a href="' . h(BOOKING_BASE . $rid . '/wizard') . '" target="_blank">Book now</a>';
 
-            // Score colour
             if ($score >= 75)      $score_cls = 'score-great';
             elseif ($score >= 55)  $score_cls = 'score-good';
             elseif ($score >= 35)  $score_cls = 'score-ok';
             else                   $score_cls = 'score-poor';
 
+            // Weather row
             echo "<tr>";
-            echo "<td class=\"rank\">$rank</td>";
-            echo "<td class=\"hut-name\">$name_td</td>";
-            echo "<td>" . h($club) . "</td>";
-            echo "<td class=\"num elev\">$elev_s</td>";
-            echo "<td class=\"num score $score_cls\">" . number_format($score, 1) . "</td>";
-            echo "<td class=\"reservation\">$book_td</td>";
+            echo "<td class=\"rank\" rowspan=\"2\">$rank</td>";
+            echo "<td class=\"hut-name\" rowspan=\"2\">$name_td</td>";
+            echo "<td rowspan=\"2\">" . h($club) . "</td>";
+            echo "<td class=\"num elev\" rowspan=\"2\">$elev_s</td>";
+            echo "<td class=\"num score $score_cls\" rowspan=\"2\">" . number_format($score, 1) . "</td>";
+            echo "<td class=\"reservation\" rowspan=\"2\">$book_td</td>";
 
-            // Per-day cells
             global $WMO;
             for ($i = 0; $i < $num_days; $i++) {
-                $code  = isset($daily['weathercode'][$i])        ? (int)$daily['weathercode'][$i]        : null;
-                $tmax  = isset($daily['temperature_2m_max'][$i]) ? (float)$daily['temperature_2m_max'][$i] : null;
-                $precip = isset($daily['precipitation_sum'][$i]) ? (float)$daily['precipitation_sum'][$i] : null;
-                $ds    = score_day($i, $daily);
+                $code   = isset($daily['weathercode'][$i])        ? (int)$daily['weathercode'][$i]          : null;
+                $tmax   = isset($daily['temperature_2m_max'][$i]) ? (float)$daily['temperature_2m_max'][$i] : null;
+                $precip = isset($daily['precipitation_sum'][$i])  ? (float)$daily['precipitation_sum'][$i]  : null;
+                $ds     = score_day($i, $daily);
 
                 if ($ds >= 75)      $wx_cls = 'wx-great';
                 elseif ($ds >= 55)  $wx_cls = 'wx-good';
@@ -448,7 +491,7 @@ if ($error !== null) {
                 else                $wx_cls = 'wx-poor';
 
                 $wmo_label = $code !== null ? ($WMO[$code] ?? "WMO$code") : '?';
-                $temp_s    = $tmax  !== null ? number_format($tmax, 0) . '°' : '?';
+                $temp_s    = $tmax   !== null ? number_format($tmax, 0) . '°'    : '?';
                 $prec_s    = $precip !== null ? number_format($precip, 1) . 'mm' : '?';
 
                 echo "<td class=\"day-cell $wx_cls\">";
@@ -456,11 +499,114 @@ if ($error !== null) {
                 echo "</td>";
             }
 
-            // Availability cache age
-            $age_s = $hut['avail']['cache_age'] ?? null;
+            $age_s  = $hut['avail']['cache_age'] ?? null;
             $age_td = $age_s !== null ? format_age((int)$age_s) : '?';
-            echo "<td class=\"cache-age\">$age_td</td>";
+            echo "<td class=\"cache-age\" rowspan=\"2\">$age_td</td>";
+            echo "</tr>\n";
 
+            // Beds row
+            echo "<tr>";
+            foreach ($date_list as $date) {
+                $day    = $by_day[$date] ?? null;
+                $free   = $day['free']   ?? null;
+                $status = $day['status'] ?? '';
+
+                if ($status === 'CLOSED') {
+                    echo '<td class="num avail-closed" style="font-size:.75rem">CLOSED</td>';
+                } elseif ($status === 'FULL' || $free === 0) {
+                    echo '<td class="num avail-full">0</td>';
+                } elseif ($free !== null) {
+                    $beds_cls = $free >= $min_beds_input ? 'avail-open' : 'avail-full';
+                    echo "<td class=\"num $beds_cls\">$free</td>";
+                } else {
+                    echo '<td class="num" style="color:#adb5bd">—</td>';
+                }
+            }
+            echo "</tr>\n";
+        }
+
+        echo '</tbody></table></div>';
+    }
+
+    // -------------------------------------------------------------------------
+    // Second table: open huts without enough free beds
+    // -------------------------------------------------------------------------
+    if (!empty($too_full)) {
+        $n2 = count($too_full);
+        echo "<div class=\"result-summary\" style=\"margin-top:1.5rem\">";
+        echo "<strong>$n2</strong> hut(s) are open but have fewer than <strong>{$min_beds_input}</strong> free bed(s):";
+        echo "</div>\n";
+
+        $day_labels2 = [];
+        foreach ($date_list as $d) {
+            $day_labels2[] = date('D d.m', strtotime($d));
+        }
+
+        echo '<div style="overflow-x:auto">';
+        echo '<table class="results-table">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th rowspan="2">#</th>';
+        echo '<th rowspan="2">Hut</th>';
+        echo '<th rowspan="2">Club</th>';
+        echo '<th rowspan="2">Elevation</th>';
+        echo '<th rowspan="2">Book</th>';
+        foreach ($day_labels2 as $lbl) {
+            echo '<th class="day-header">' . h($lbl) . '</th>';
+        }
+        echo '<th rowspan="2" class="sub-hdr" style="min-width:5rem">Avail cached</th>';
+        echo '</tr>';
+        echo '<tr>';
+        foreach ($day_labels2 as $lbl) {
+            echo '<th class="sub-hdr">free beds</th>';
+        }
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+
+        foreach ($too_full as $rank0 => $hut) {
+            $rank   = $rank0 + 1;
+            $name   = h($hut['official_name']);
+            $club   = h($hut['operating_club']);
+            $url    = $hut['official_website_url'];
+            $rid    = $hut['reservation_id'];
+            $age_s  = $hut['avail']['cache_age'] ?? null;
+            $by_day = $hut['avail']['by_day'] ?? [];
+
+            $elev_s = $hut['elevation_m'] !== null
+                    ? number_format((int)$hut['elevation_m']) . ' m' : '?';
+
+            $name_td = $url !== ''
+                     ? '<a href="' . h($url) . '" target="_blank">' . $name . '</a>'
+                     : $name;
+
+            $book_td = '<a href="' . h(BOOKING_BASE . $rid . '/wizard') . '" target="_blank">Book now</a>';
+            $age_td  = $age_s !== null ? format_age((int)$age_s) : '?';
+
+            echo "<tr>";
+            echo "<td class=\"rank\">$rank</td>";
+            echo "<td class=\"hut-name\">$name_td</td>";
+            echo "<td>" . h($club) . "</td>";
+            echo "<td class=\"num elev\">$elev_s</td>";
+            echo "<td class=\"reservation\">$book_td</td>";
+
+            foreach ($date_list as $date) {
+                $day    = $by_day[$date] ?? null;
+                $free   = $day['free']   ?? null;
+                $status = $day['status'] ?? '';
+
+                if ($status === 'CLOSED') {
+                    echo '<td class="num avail-closed" style="font-size:.75rem">CLOSED</td>';
+                } elseif ($status === 'FULL' || $free === 0) {
+                    echo '<td class="num avail-full">0</td>';
+                } elseif ($free !== null) {
+                    echo "<td class=\"num avail-full\">$free</td>";
+                } else {
+                    echo '<td class="num" style="color:#adb5bd">—</td>';
+                }
+            }
+
+            echo "<td class=\"cache-age\">$age_td</td>";
             echo "</tr>\n";
         }
 
