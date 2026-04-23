@@ -145,3 +145,8 @@ foreach ($huts as $hut) {
 
 log_line("Done. Fetched: $fetched  Skipped: $skipped  Failed: $failed");
 log_line("=== Run finished ===");
+// if we fetch or skip at least some values, i.e. not all fail,
+// we do not need an e-mail from CRON
+if($fetched > 0 || $skipped > 0){
+	log_line("=== NOMAIL ===");
+}
