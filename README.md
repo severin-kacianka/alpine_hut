@@ -1,5 +1,7 @@
 # Alpine Hut Weather Planner
 
+Note: This tool is entirely vibe-coded and just a vibe-code test piece. 
+
 Find alpine huts near a location and check bed availability. Uses free, no-signup APIs throughout.
 
 ## Tools
