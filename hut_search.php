@@ -323,16 +323,24 @@ function render_form(
 // ---------------------------------------------------------------------------
 // Results table
 // ---------------------------------------------------------------------------
-function render_results(
+function classify_bed_status(?int $free, ?string $status, int $min_places): string {
+    $is_open = ($status === 'OPEN' || $status === 'SERVICED');
+    if ($status === 'CLOSED') {
+        return 'avail-closed';
+    } elseif ($free !== null && $free >= $min_places && $is_open) {
+        return 'avail-open';
+    } elseif ($free === 0 || $status === 'FULL' || ($free !== null && $free < $min_places)) {
+        return 'avail-full';
+    }
+    return '';
+}
+
+function render_summary_and_header(
     array   $huts,
     string  $display_name,
     float   $distance_km,
     ?float  $min_elevation,
-    array   $date_range,
-    int     $min_places,
-    float   $center_lat,
-    float   $center_lon,
-    string  $location
+    array   $date_range
 ): void {
     $total      = count($huts);
     $dn         = h($display_name);
@@ -384,6 +392,11 @@ function render_results(
     echo '</tr>';
 
     echo '</thead>';
+}
+
+function render_table_rows(array $huts, array $date_range, int $min_places): void {
+    $with_avail = count($date_range) > 0;
+
     echo '<tbody>';
 
     foreach ($huts as $i => $hut) {
@@ -445,16 +458,8 @@ function render_results(
                     $beds_s .= ' / ' . $total_b;
                 }
 
-                $is_open = ($status === 'OPEN' || $status === 'SERVICED');
-                if ($free !== null && $free >= $min_places && $is_open) {
-                    $beds_cls = 'avail-open';
-                } elseif ($free === 0 || $status === 'FULL' || ($free !== null && $free < $min_places)) {
-                    $beds_cls = 'avail-full';
-                } else {
-                    $beds_cls = '';
-                }
-
-                if ($status === 'CLOSED') {
+                $beds_cls = classify_bed_status($free, $status, $min_places);
+                if ($beds_cls === 'avail-closed') {
                     echo '<td class="num avail-closed">CLOSED</td>';
                 } else {
                     echo "<td class=\"num $beds_cls\">$beds_s</td>";
@@ -471,7 +476,9 @@ function render_results(
     }
 
     echo '</tbody></table></div>';
+}
 
+function build_map_huts(array $huts, array $date_range, int $min_places): array {
     // Build JS data for the map
     $map_huts = array();
     foreach ($huts as $i => $hut) {
@@ -486,13 +493,10 @@ function render_results(
                 $day     = $avail[$date];
                 $free    = $day['freeBeds'];
                 $status  = $day['hutStatus'] ?? '';
-                $is_open = ($status === 'OPEN' || $status === 'SERVICED');
-                if ($status === 'CLOSED') {
-                    $has_red = true;
-                } elseif ($free === 0 || $status === 'FULL' || ($free !== null && $free < $min_places)) {
-                    $has_yellow = true;
-                } elseif ($free !== null && $free >= $min_places && $is_open) {
-                    $has_green = true;
+                switch (classify_bed_status($free, $status, $min_places)) {
+                    case 'avail-closed': $has_red    = true; break;
+                    case 'avail-full':   $has_yellow = true; break;
+                    case 'avail-open':   $has_green  = true; break;
                 }
             }
             if ($has_red)        $color = 'red';
@@ -512,6 +516,10 @@ function render_results(
             'color' => $color,
         );
     }
+    return $map_huts;
+}
+
+function render_map(float $center_lat, float $center_lon, string $location, array $map_huts): void {
     $huts_json   = json_encode($map_huts, JSON_HEX_TAG | JSON_HEX_AMP);
     $center_json = json_encode(array('lat' => $center_lat, 'lon' => $center_lon, 'name' => $location), JSON_HEX_TAG | JSON_HEX_AMP);
 
@@ -586,6 +594,23 @@ function render_results(
     })();
     </script>
     JS;
+}
+
+function render_results(
+    array   $huts,
+    string  $display_name,
+    float   $distance_km,
+    ?float  $min_elevation,
+    array   $date_range,
+    int     $min_places,
+    float   $center_lat,
+    float   $center_lon,
+    string  $location
+): void {
+    render_summary_and_header($huts, $display_name, $distance_km, $min_elevation, $date_range);
+    render_table_rows($huts, $date_range, $min_places);
+    $map_huts = build_map_huts($huts, $date_range, $min_places);
+    render_map($center_lat, $center_lon, $location, $map_huts);
 }
 
 // ---------------------------------------------------------------------------
