@@ -137,6 +137,9 @@ render_page_head(
 <style>
     .hut-picker       { margin-top: .9rem; }
     .hut-picker-label { font-size: .8rem; font-weight: 600; color: #495057; margin-bottom: .35rem; }
+    .toggle-btn       { margin-left: .4rem; padding: 1px 8px; font-size: .75rem; background: #e9ecef;
+                        border: 1px solid #ced4da; border-radius: 3px; cursor: pointer; }
+    .toggle-btn:hover { background: #dee2e6; }
     .hut-list  { max-height: 12rem; overflow-y: auto; border: 1px solid #ced4da; border-radius: 4px;
                  padding: .5rem; margin-top: .3rem; background: #fbfbfb; }
     .hut-item  { font-size: .85rem; display: flex; align-items: center; gap: .4rem;
@@ -170,7 +173,9 @@ echo '<h2>Search</h2>';
 echo '<form method="get" action="">';
 
 echo '<div class="hut-picker">';
-echo '<div class="hut-picker-label">Huts</div>';
+echo '<div class="hut-picker-label">Huts'
+   . '<button type="button" class="toggle-btn" onclick="clearHuts()">Clear</button>'
+   . '</div>';
 echo '<input type="text" id="hut-filter" placeholder="Filter by name..." oninput="filterHuts()">';
 echo '<div class="hut-list" id="hut-list">';
 $sorted = $all_huts;
@@ -268,6 +273,12 @@ if ($submitted) {
 ?>
 
 <script>
+function clearHuts() {
+    document.querySelectorAll('#hut-list input[name="huts[]"]').forEach(function(cb) {
+        cb.checked = false;
+    });
+}
+
 function filterHuts() {
     var q = document.getElementById('hut-filter').value.trim().toLowerCase();
     document.querySelectorAll('#hut-list .hut-item').forEach(function(el) {
