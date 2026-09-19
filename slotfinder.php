@@ -273,6 +273,34 @@ if ($submitted) {
 ?>
 
 <script>
+// Both date fields render pre-filled with defaults, so "empty" is tracked as "not yet
+// deliberately set" rather than a literal DOM-empty check; auto-fill fires only until
+// either field is set (by the user or by the other field's auto-fill), i.e. once.
+var startDateSet = false;
+var endDateSet   = false;
+
+document.getElementById('start_date').addEventListener('change', function() {
+    startDateSet = true;
+    if (!endDateSet) {
+        var end = document.getElementById('end_date');
+        var d = new Date(this.value + 'T00:00:00');
+        d.setDate(d.getDate() + 28);
+        end.value = d.toISOString().slice(0, 10);
+        endDateSet = true;
+    }
+});
+
+document.getElementById('end_date').addEventListener('change', function() {
+    endDateSet = true;
+    if (!startDateSet) {
+        var start = document.getElementById('start_date');
+        var d = new Date(this.value + 'T00:00:00');
+        d.setDate(d.getDate() - 28);
+        start.value = d.toISOString().slice(0, 10);
+        startDateSet = true;
+    }
+});
+
 function clearHuts() {
     document.querySelectorAll('#hut-list input[name="huts[]"]').forEach(function(cb) {
         cb.checked = false;
