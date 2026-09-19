@@ -126,44 +126,15 @@ if ($submitted && !empty($selected_rids)) {
         ];
     }
 }
+require_once __DIR__ . '/layout.php';
+render_page_head(
+    'Slot Finder — Alpine Hut Weather Planner',
+    'Slot Finder',
+    'Pick huts and a group size, find every date each hut alone has enough free beds',
+    'slotfinder'
+);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Slot Finder — Alpine Hut Weather Planner</title>
-  <style>
-    :root {
-      --border:     #dee2e6;
-      --hdr-bg:     #343a40; --hdr-fg: #fff;
-      --green:      #155724; --green-bg:  #d4edda;
-      --red:        #721c24; --red-bg:    #f8d7da;
-      --yellow:     #856404; --yellow-bg: #fff3cd;
-    }
-    * { box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 1rem;
-           background: #f0f2f5; color: #212529; }
-    header { background: var(--hdr-bg); color: var(--hdr-fg); padding: .75rem 1.25rem;
-             border-radius: 6px; margin-bottom: 1rem; }
-    header h1 { margin: 0; font-size: 1.4rem; }
-    header p  { margin: .2rem 0 0; font-size: .85rem; opacity: .75; }
-
-    .search-form { background: #fff; border: 1px solid var(--border); border-radius: 8px;
-                   padding: 1.25rem; margin-bottom: 1rem; }
-    .search-form h2 { margin: 0 0 .75rem; font-size: 1rem; }
-    .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: .8rem; font-weight: 600; color: #495057; }
-    input[type=text], input[type=number], input[type=date] {
-      padding: 6px 10px; border: 1px solid #ced4da; border-radius: 4px; font-size: .95rem; }
-    input[type=number] { width: 7rem; }
-    input[type=text]   { width: 16rem; }
-    button[type=submit] { padding: 8px 22px; background: #0d6efd; color: #fff; border: none;
-                          border-radius: 4px; cursor: pointer; font-size: .95rem; font-weight: 600; }
-    button[type=submit]:hover { background: #0b5ed7; }
-    .hint { margin: .6rem 0 0; font-size: .78rem; color: #6c757d; }
-
+<style>
     .hut-picker       { margin-top: .9rem; }
     .hut-picker-label { font-size: .8rem; font-weight: 600; color: #495057; margin-bottom: .35rem; }
     .hut-list  { max-height: 12rem; overflow-y: auto; border: 1px solid #ced4da; border-radius: 4px;
@@ -172,9 +143,6 @@ if ($submitted && !empty($selected_rids)) {
                  padding: 2px 0; cursor: pointer; }
     .hut-item input { cursor: pointer; }
     .checkbox-row { display: flex; align-items: center; gap: .4rem; margin-top: .6rem; font-size: .85rem; }
-
-    .warn-box  { background: var(--yellow-bg); color: var(--yellow); border: 1px solid #ffeeba;
-                 border-radius: 6px; padding: .75rem 1rem; margin-bottom: 1rem; }
 
     .hut-result { background: #fff; border: 1px solid var(--border); border-radius: 6px;
                   padding: .9rem 1.1rem; margin-bottom: 1rem; }
@@ -190,15 +158,7 @@ if ($submitted && !empty($selected_rids)) {
     .avail-open { background: var(--green-bg) !important; color: var(--green); font-weight: 700; }
     .tag-weekend { background: #cfe2ff; color: #084298; border-radius: 3px; padding: 1px 6px; font-size: .72rem; }
     .tag-weekday { background: #e9ecef; color: #495057; border-radius: 3px; padding: 1px 6px; font-size: .72rem; }
-
-    footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
-  </style>
-</head>
-<body>
-<header>
-  <h1>Slot Finder</h1>
-  <p>Pick huts and a group size, find every date each hut alone has enough free beds</p>
-</header>
+</style>
 
 <?php
 // ---------------------------------------------------------------------------
@@ -316,10 +276,6 @@ function filterHuts() {
 }
 </script>
 
-<footer>
-  Data: <a href="https://www.sac-cas.ch" target="_blank">SAC</a> &amp;
-  <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a> &mdash;
-  Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a>
-</footer>
-</body>
-</html>
+<?php render_page_foot([
+    'Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a>',
+]); ?>

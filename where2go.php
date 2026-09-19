@@ -340,53 +340,15 @@ if ($min_beds_input !== null) {
     }
 }
 
+require_once __DIR__ . '/layout.php';
+render_page_head(
+    'Where to Go — Alpine Hut Weather Ranker',
+    'Where to Go',
+    'Find huts with available beds on selected days, ranked by weather forecast quality',
+    'where2go'
+);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Where to Go — Alpine Hut Weather Ranker</title>
-  <style>
-    :root {
-      --border:     #dee2e6;
-      --hdr-bg:     #343a40; --hdr-fg: #fff;
-      --sub-bg:     #495057;
-      --green:      #155724; --green-bg:  #d4edda;
-      --red:        #721c24; --red-bg:    #f8d7da;
-      --yellow:     #856404; --yellow-bg: #fff3cd;
-    }
-    * { box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 1rem;
-           background: #f0f2f5; color: #212529; }
-    header { background: var(--hdr-bg); color: var(--hdr-fg); padding: .75rem 1.25rem;
-             border-radius: 6px; margin-bottom: 1rem; }
-    header h1 { margin: 0; font-size: 1.4rem; }
-    header p  { margin: .2rem 0 0; font-size: .85rem; opacity: .75; }
-
-    .search-form { background: #fff; border: 1px solid var(--border); border-radius: 8px;
-                   padding: 1.25rem; margin-bottom: 1rem; }
-    .search-form h2 { margin: 0 0 .75rem; font-size: 1rem; }
-    .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: .8rem; font-weight: 600; color: #495057; }
-    input[type=text], input[type=number] {
-      padding: 6px 10px; border: 1px solid #ced4da; border-radius: 4px; font-size: .95rem; }
-    input[type=number] { width: 7rem; }
-    input[type=text]   { width: 16rem; }
-    button[type=submit] { padding: 8px 22px; background: #0d6efd; color: #fff; border: none;
-                          border-radius: 4px; cursor: pointer; font-size: .95rem; font-weight: 600; }
-    button[type=submit]:hover { background: #0b5ed7; }
-    .hint { margin: .6rem 0 0; font-size: .78rem; color: #6c757d; }
-
-    .error-box { background: var(--red-bg); color: var(--red); border: 1px solid #f5c6cb;
-                 border-radius: 6px; padding: .75rem 1rem; margin-bottom: 1rem; }
-    .warn-box  { background: var(--yellow-bg); color: var(--yellow); border: 1px solid #ffeeba;
-                 border-radius: 6px; padding: .75rem 1rem; margin-bottom: 1rem; }
-
-    .result-summary { background: #fff; border: 1px solid var(--border); border-radius: 6px;
-                      padding: .6rem 1rem; margin-bottom: .75rem; font-size: .9rem; }
-
+<style>
     .results-table { border-collapse: collapse; width: 100%; font-size: .82rem;
                      background: #fff; border-radius: 6px; overflow: hidden; }
     .results-table th { background: var(--hdr-bg); color: var(--hdr-fg);
@@ -436,15 +398,7 @@ if ($min_beds_input !== null) {
     .day-check-item   { font-size: .85rem; display: flex; align-items: center; gap: .25rem;
                         cursor: pointer; white-space: nowrap; }
     .day-check-item input { cursor: pointer; }
-
-    footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
-  </style>
-</head>
-<body>
-<header>
-  <h1>Where to Go</h1>
-  <p>Find huts with available beds on selected days, ranked by weather forecast quality</p>
-</header>
+</style>
 
 <?php
 // ---------------------------------------------------------------------------
@@ -741,11 +695,7 @@ function setAllDays(checked) {
 }
 </script>
 
-<footer>
-  Data: <a href="https://www.sac-cas.ch" target="_blank">SAC</a> &amp;
-  <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a> &mdash;
-  Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a> &mdash;
-  Weather: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a>
-</footer>
-</body>
-</html>
+<?php render_page_foot([
+    'Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a>',
+    'Weather: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a>',
+]); ?>

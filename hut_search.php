@@ -616,56 +616,22 @@ function render_results(
 // ---------------------------------------------------------------------------
 // HTML page
 // ---------------------------------------------------------------------------
+require_once __DIR__ . '/layout.php';
+$extra_head = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">' . "\n"
+            . '  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>';
+render_page_head(
+    'Alpine Hut Finder',
+    'Alpine Hut Finder',
+    'List huts near a location, sorted by elevation — availability served from local cache',
+    'hut_search',
+    $extra_head
+);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alpine Hut Finder</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <style>
-    :root {
-      --border:  #dee2e6;
-      --hdr-bg:  #343a40; --hdr-fg: #fff;
-      --sub-bg:  #495057;
-      --green:   #155724; --green-bg:  #d4edda;
-      --red:     #721c24; --red-bg:    #f8d7da;
-      --yellow:  #856404; --yellow-bg: #fff3cd;
-    }
-    * { box-sizing: border-box; }
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 1rem;
-           background: #f0f2f5; color: #212529; }
-    header { background: var(--hdr-bg); color: var(--hdr-fg); padding: .75rem 1.25rem;
-             border-radius: 6px; margin-bottom: 1rem; }
-    header h1 { margin: 0; font-size: 1.4rem; }
-    header p  { margin: .2rem 0 0; font-size: .85rem; opacity: .75; }
-
-    .search-form { background: #fff; border: 1px solid var(--border); border-radius: 8px;
-                   padding: 1.25rem; margin-bottom: 1rem; }
-    .search-form h2 { margin: 0 0 .75rem; font-size: 1rem; }
-    .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: .8rem; font-weight: 600; color: #495057; }
-    input[type=text], input[type=number], input[type=date] {
-      padding: 6px 10px; border: 1px solid #ced4da; border-radius: 4px; font-size: .95rem; }
-    button[type=submit] { padding: 8px 22px; background: #0d6efd; color: #fff; border: none;
-                          border-radius: 4px; cursor: pointer; font-size: .95rem; font-weight: 600; }
-    button[type=submit]:hover { background: #0b5ed7; }
+<style>
     .input-clear { display: flex; align-items: center; gap: 4px; }
     .clear-btn { padding: 0 5px; background: none; border: none; color: #adb5bd;
                  cursor: pointer; font-size: 1.1rem; line-height: 1; }
     .clear-btn:hover { color: #495057; }
-    .hint { margin: .6rem 0 0; font-size: .78rem; color: #6c757d; }
-
-    .error-box { background: var(--red-bg); color: var(--red); border: 1px solid #f5c6cb;
-                 border-radius: 6px; padding: .75rem 1rem; margin-bottom: 1rem; }
-    .warn-box  { background: var(--yellow-bg); color: var(--yellow); border: 1px solid #ffeeba;
-                 border-radius: 6px; padding: .75rem 1rem; margin-bottom: 1rem; }
-
-    .result-summary { background: #fff; border: 1px solid var(--border); border-radius: 6px;
-                      padding: .6rem 1rem; margin-bottom: .75rem; font-size: .9rem; }
 
     .results-table { border-collapse: collapse; width: 100%; font-size: .82rem;
                      background: #fff; border-radius: 6px; overflow: hidden; }
@@ -701,19 +667,11 @@ function render_results(
     .avail-closed { background: var(--red-bg)    !important; color: var(--red);    font-weight: 700; }
     .avail-full   { background: var(--yellow-bg) !important; color: var(--yellow); font-weight: 700; }
 
-    footer { margin-top: 1.5rem; text-align: center; font-size: .78rem; color: #6c757d; }
-
     #hut-map { height: 500px; margin-top: 1rem; border-radius: 8px;
                border: 1px solid var(--border); }
     .map-popup b { font-size: .9rem; }
     .map-popup a { color: #0d6efd; }
-  </style>
-</head>
-<body>
-<header>
-  <h1>Alpine Hut Finder</h1>
-  <p>List huts near a location, sorted by elevation — availability served from local cache</p>
-</header>
+</style>
 
 <?php
 
@@ -840,11 +798,7 @@ function sortTable(th) {
 }
 </script>
 
-<footer>
-  Data: <a href="https://www.sac-cas.ch" target="_blank">SAC</a> &amp;
-  <a href="https://www.openstreetmap.org" target="_blank">OpenStreetMap</a> &mdash;
-  Geocoding: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a> &mdash;
-  Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a>
-</footer>
-</body>
-</html>
+<?php render_page_foot([
+    'Geocoding: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>',
+    'Availability: <a href="https://www.hut-reservation.org" target="_blank">hut-reservation.org</a>',
+]); ?>
