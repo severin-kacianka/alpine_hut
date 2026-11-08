@@ -209,7 +209,7 @@ function upcoming_fridays(): array {
 // Input
 // ---------------------------------------------------------------------------
 
-// Unticked checkboxes are not sent, so "all_huts" defaults to on only before the first search
+// Only the "All huts" submit button sends "all_huts"; before the first search all huts are shown
 $submitted      = isset($_GET['submitted']);
 $all_huts       = !$submitted || isset($_GET['all_huts']);
 $location_input = isset($_GET['location']) ? trim($_GET['location']) : '';
@@ -229,7 +229,7 @@ if ($submitted) {
         if ($all_huts) {
             $huts = load_huts(null, 0.0)['res'];
         } elseif ($location_input === '') {
-            $error = 'Enter a location or tick "All huts".';
+            $error = 'Enter a location or click "All huts".';
         } elseif ($radius_km < 1 || $radius_km > 500) {
             $error = 'Radius must be between 1 and 500 km.';
         } else {
@@ -569,9 +569,6 @@ render_page_head(
     .unserviced   { font-size: .68rem; font-weight: 400; color: #6c757d; }
     .stale        { color: var(--yellow); font-weight: 600; }
 
-    .checkbox-row { display: flex; align-items: center; gap: .4rem; font-size: .85rem; padding-bottom: 8px; }
-    input.inactive { background: #e9ecef; color: #adb5bd; }
-
     .weekend-title { font-size: 1.15rem; margin: 1.25rem 0 .2rem; }
     .section-title { font-size: 1rem; margin: 1.1rem 0 .2rem; }
     .section-count { font-weight: 400; color: #6c757d; }
@@ -601,30 +598,35 @@ render_page_head(
 // Form
 // ---------------------------------------------------------------------------
 
-// Greyed out via a class, not "disabled": disabled inputs fire no focus event for useLocation()
-$inactive = $all_huts ? ' class="inactive"' : '';
 echo '<div class="search-form">';
 echo '<h2>Search</h2>';
-echo '<form method="get" action="">';
+echo '<form method="get" action="" id="search-form">';
 echo '<input type="hidden" name="submitted" value="1">';
+
+// Row 1: group size + all huts
 echo '<div class="form-row">';
-echo '<div class="form-group">';
-echo '<label for="location">Location or Lat/Lon</label>';
-echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39"' . $inactive . ' onfocus="useLocation()">';
-echo '</div>';
-echo '<div class="form-group">';
-echo '<label for="distance">Radius (km)</label>';
-echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '"' . $inactive . ' onfocus="useLocation()">';
-echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="people">Free beds needed</label>';
 echo '<input type="number" id="people" name="people" min="1" step="1" value="' . h((string)$people) . '">';
 echo '</div>';
 echo '<div class="form-group">';
-echo '<button type="submit">Search</button>';
+echo '<button type="submit" name="all_huts" value="1" title="Ignore location/radius and list all huts">All huts</button>';
 echo '</div>';
-echo '<label class="checkbox-row"><input type="checkbox" id="all_huts" name="all_huts" value="1"'
-   . ($all_huts ? ' checked' : '') . ' onchange="toggleLocation()"> All huts (ignore location/radius)</label>';
+echo '</div>';
+
+// Row 2: location + radius search
+echo '<div class="form-row" style="margin-top:.75rem">';
+echo '<div class="form-group">';
+echo '<label for="location">Location or Lat/Lon</label>';
+echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39">';
+echo '</div>';
+echo '<div class="form-group">';
+echo '<label for="distance">Radius (km)</label>';
+echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '">';
+echo '</div>';
+echo '<div class="form-group">';
+echo '<button type="submit" id="radius-btn" title="Search huts within the radius around the location">Radius</button>';
+echo '</div>';
 echo '</div>';
 echo '<p class="hint">Checks the Friday and Saturday nights of every weekend in the next year that has cached data. '
    . 'Availability is read from local cache.</p>';
@@ -690,17 +692,13 @@ if ($error !== null) {
 ?>
 
 <script>
-function toggleLocation() {
-    var all = document.getElementById('all_huts').checked;
-    document.getElementById('location').classList.toggle('inactive', all);
-    document.getElementById('distance').classList.toggle('inactive', all);
-}
-
-// Clicking into Location or Radius switches from "All huts" to a location search
-function useLocation() {
-    document.getElementById('all_huts').checked = false;
-    toggleLocation();
-}
+/*  Enter in Location/Radius runs the radius search (the default button would be "All huts", first in the form)  */
+document.getElementById("search-form").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && (e.target.id === "location" || e.target.id === "distance")) {
+        e.preventDefault();
+        document.getElementById("radius-btn").click();
+    }
+});
 
 /*  sort the clicked table by this column: first click uses data-first, then toggles; unknown values always last  */
 function sortTable(th) {
