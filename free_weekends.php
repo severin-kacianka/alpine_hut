@@ -329,7 +329,7 @@ function render_section(string $title, string $intro, array $rows, bool $show_di
 
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table"><thead><tr>'
-       . '<th>#</th><th>Hut</th><th>Club</th>' . ($show_dist ? '<th>Distance</th>' : '') . '<th>Elevation</th>'
+       . '<th>#</th><th>Hut</th><th>Club</th>' . ($show_dist ? '<th>Distance</th>' : '') . '<th class="sortable" onclick="sortByElevation(this)" title="Sort by elevation">Elevation <span class="sort-arrow sort-idle">&#8645;</span></th>'
        . '<th>Fri night</th><th>Sat night</th><th>Map</th><th>Book</th><th>Cached</th>'
        . '</tr></thead><tbody>';
 
@@ -371,7 +371,7 @@ function render_no_reservation(array $huts): void {
 
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table"><thead><tr>'
-       . '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th>Elevation</th>'
+       . '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th class="sortable" onclick="sortByElevation(this)" title="Sort by elevation">Elevation <span class="sort-arrow sort-idle">&#8645;</span></th>'
        . '<th>Beds</th><th>Phone</th><th>Email</th><th>Map</th>'
        . '</tr></thead><tbody>';
 
@@ -543,6 +543,10 @@ render_page_head(
     .results-table td.reservation a:hover { text-decoration: underline; }
     .results-table td.avail-unknown { color: #adb5bd; font-style: italic; }
     .results-table td.muted     { color: #adb5bd; text-align: center; }
+    .results-table th.sortable  { cursor: pointer; user-select: none; }
+    .results-table th.sortable:hover { background: #23272b; }
+    .sort-arrow           { font-size: .7rem; opacity: .7; }
+    .sort-arrow.sort-idle { opacity: .35; }
     .results-table td.contact   { white-space: nowrap; }
     .results-table td.contact a { color: #0d6efd; text-decoration: none; }
     .results-table td.contact a:hover { text-decoration: underline; }
@@ -684,6 +688,35 @@ function toggleLocation() {
 function useLocation() {
     document.getElementById('all_huts').checked = false;
     toggleLocation();
+}
+
+/*  sort the clicked table by elevation: first click highest first, then toggle; unknown ("?") always last  */
+function sortByElevation(th) {
+    var table = th.closest("table");
+    var tbody = table.tBodies[0];
+    var col   = th.cellIndex;
+    var desc  = th.dataset.dir !== "desc";
+    th.dataset.dir = desc ? "desc" : "asc";
+
+    var arrow = th.querySelector(".sort-arrow");
+    arrow.innerHTML = desc ? "&#9660;" : "&#9650;";
+    arrow.classList.remove("sort-idle");
+
+    var elev = (row) => {
+        var v = parseFloat(row.cells[col].textContent.replace(/[^\d.]/g, ""));
+        return isNaN(v) ? null : v;
+    };
+    var rows = Array.prototype.slice.call(tbody.rows);
+    rows.sort((a, b) => {
+        var av = elev(a), bv = elev(b);
+        if (av === null || bv === null)
+            return (av === null) - (bv === null);
+        return desc ? bv - av : av - bv;
+    });
+    rows.forEach((r, i) => {
+        r.cells[0].textContent = i + 1;
+        tbody.appendChild(r);
+    });
 }
 </script>
 
