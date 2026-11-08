@@ -1,117 +1,113 @@
 # Alpine Hut Weather Planner
 
-Note: This tool is entirely vibe-coded and just a vibe-code test piece. 
+Note: This tool is entirely vibe-coded and just a vibe-code test piece.
 
-Find alpine huts near a location and check bed availability. Uses free, no-signup APIs throughout.
+Find alpine huts near a location, check their bed availability and pick the best weekend or weather. All APIs used are free and need no sign-up.
 
-## Tools
+## Pages
 
-| Tool | Purpose |
+| Page | What it does |
 |---|---|
-| `hut_search.php` | Web UI: elevation-sorted table + cached bed availability + OSM map |
-| `update_cache.php` | CLI/web: bulk-download reservation availability into `reservation_cache/` |
-| `data/get_huts.py` | Data collection: fetch hut data from SAC API and OpenStreetMap Overpass |
-| `data/scrape_hut_reservation.py` | Data collection: scrape hut metadata from hut-reservation.org |
+| `hut_search.php` | Huts near a location, sorted by elevation, with cached availability per day and an OSM map |
+| `where2go.php` | Huts with free beds on chosen days, ranked by a 7-day weather score |
+| `slotfinder.php` | Pick huts and a group size; lists every date each hut has enough free beds (weekends / weekdays) |
+| `free_weekends.php` | Weekend calendar, then the huts with N free beds on Fri + Sat night (both / one / almost) with a map; all huts or a location + radius |
 
-## Web UI — hut_search.php
+The location field accepts a place name (geocoded via Nominatim) or a raw `lat,lon` pair.
 
-Drop `hut_search.php` alongside the `data/` and `reservation_cache/` directories on any PHP 8.0+ web server.
+## Setup
 
-Features:
-- Search by location name **or** raw `lat,lon` coordinates (skips geocoding)
-- Filter by radius and optional minimum elevation
-- Results sorted by elevation (highest first), sortable by name/distance/elevation
-- Optional date range (up to 14 days): shows cached bed availability per hut per day
-- Colour-coded availability cells: green = open & beds free, yellow = full, red = closed
-- Interactive OSM map (Leaflet.js) below the table:
-  - Crosshair icon marks the search center
-  - Pin markers colour-coded by availability (green/yellow/red/blue)
-  - Click a marker or table row to open the hut popup
-- Direct booking link and map links (Google Maps, OSM, GEO) per hut
-- Requires outbound HTTPS to `nominatim.openstreetmap.org` (port 443) for place name searches
+**Web UI:** PHP 8.0+ with the `curl` extension, no Composer packages.
+- `reservation_cache/` and `forecasts/` must be writable by the user running PHP.
+- The machine needs outbound HTTPS (port 443) to the APIs below.
 
-### update_cache.php — Bulk availability downloader
-
-Pre-downloads availability data for a range of hut IDs from hut-reservation.org into `reservation_cache/<id>` files (raw JSON, 12 h TTL).
+**Data scripts (optional):** Python 3.10+.
 
 ```bash
-# CLI: fetch IDs 1 through 800
-php update_cache.php 1 800
-
-# Web: update_cache.php?start_id=1&end_id=800
-```
-
-Output per ID: `OK`, `SKIP` (still fresh), `NF` (not found in CSV), or `FAIL` with reason.
-
-Rate-limiting: 0.5 s between requests, 5 s pause every 10 successful fetches, 5 s pause after any HTTP 403.
-
-Logs are written to `reservation_cache/update_log-1.txt`. Three rotated log files are kept (`update_log-1.txt` through `update_log-3.txt`), with timestamps on every line.
-
-## Data
-
-### alpine_huts_full.csv
-
-~4,160 alpine huts across the Alps, built by merging:
-- **SAC API** — official Swiss Alpine Club huts
-- **OpenStreetMap Overpass API** — `tourism=alpine_hut` nodes and ways within the Alps
-- **hut-reservation.org scrape** — adds `reservation_id` for ~300 huts
-
-Columns: `official_name`, `operating_club`, `hut_id`, `latitude`, `longitude`, `elevation_m`, `email`, `phone_number`, `official_website_url`, `capacity_beds`, `source_url`, `reservation_id`
-
-About 1,200 rows have `elevation_m = NaN`.
-
-### Rebuilding the hut database
-
-**Step 1 — fetch hut list from SAC + OSM:**
-```bash
-python data/get_huts.py
-# → data/alpine_huts_full.csv
-```
-
-Calls the SAC API (`https://huts.web.sac-cas.ch/api/1/huts?language=en`) and the Overpass API (`https://overpass-api.de/api/interpreter`) for all `tourism=alpine_hut` elements in the Alps. Merges and deduplicates by name + coordinates.
-
-**Step 2 — scrape reservation IDs and metadata from hut-reservation.org:**
-```bash
-.venv/bin/pip install playwright
-.venv/bin/python -m playwright install chromium
-python data/scrape_hut_reservation.py
-# → data/hut_reservation_scraped.csv
-```
-
-Uses Playwright (headless Chromium) to load each booking page at `https://www.hut-reservation.org/reservation/book-hut/<id>/wizard` and extract: name, warden, phone, beds, elevation, coordinates, website. IDs that return no hut page are recorded as `NOT_FOUND`. Re-running resumes from the last known state; a timestamped backup of the existing CSV is created before each run.
-
-Configure `ID_FETCH_FROM` and `ID_END` at the top of the script to control which ID range to scrape.
-
-## APIs used
-
-| API | Endpoint | Used by | Key required |
-|---|---|---|---|
-| Nominatim | `https://nominatim.openstreetmap.org/search` | `hut_search.php` | No |
-| hut-reservation.org availability | `https://www.hut-reservation.org/api/v1/reservation/getHutAvailability` | `update_cache.php` | No |
-| hut-reservation.org booking pages | `https://www.hut-reservation.org/reservation/book-hut/<id>/wizard` | `data/scrape_hut_reservation.py` | No |
-| SAC API | `https://huts.web.sac-cas.ch/api/1/huts` | `data/get_huts.py` | No |
-| Overpass API | `https://overpass-api.de/api/interpreter` | `data/get_huts.py` | No |
-
-**Nominatim** requires a `User-Agent: alpine-hut-search/1.0` header. Results are cached in `reservation_cache/geocode_cache.json` by the web UI. Geocoding is skipped when the user enters coordinates directly.
-
-**hut-reservation.org availability** returns a JSON array of `{ date, freeBeds, hutStatus, totalSleepingPlaces }` objects for roughly 90 days ahead. `update_cache.php` writes the raw response to `reservation_cache/<id>`.
-
-**hut-reservation.org scraper** (`scrape_hut_reservation.py`) uses Playwright to render JavaScript-heavy booking pages and parses the resulting DOM for hut metadata.
-
-**SAC API + Overpass API** are called once by `data/get_huts.py` to build the hut database and are not used at runtime.
-
-## Dependencies
-
-**PHP web UI:** PHP 8.0+, `curl` extension. No Composer packages.
-
-**Data collection scripts:**
-```bash
-pip install requests pandas
-```
-Python 3.10+ required.
-
-**Hut-reservation scraper** (additional):
-```bash
+python -m venv .venv
+.venv/bin/pip install requests pandas
+# only for data/scrape_hut_reservation.py:
 .venv/bin/pip install playwright
 .venv/bin/python -m playwright install chromium
 ```
+
+## Run
+
+1. Download bed availability into `reservation_cache/`:
+   ```bash
+   php update_cache.php 1 800                 # CLI: hut-reservation IDs 1..800
+   # web: update_cache.php?start_id=1&end_id=800
+   ```
+   - Each ID prints `OK`, `SKIP` (still fresh), `NF` (not in CSV) or `FAIL`.
+   - Logs go to `reservation_cache/update_log-1.txt`; the last 3 logs are kept.
+2. Download weather forecasts into `forecasts/`, needed by `where2go.php`:
+   ```bash
+   php update_forecasts.php
+   ```
+3. Serve the pages:
+   ```bash
+   php -S localhost:8080
+   # open http://localhost:8080/hut_search.php
+   ```
+   Or copy the repo to any PHP web server.
+4. Keep the caches fresh, e.g. with cron. Re-running is cheap because files still within their TTL are skipped.
+   ```cron
+   0 */6 * * *  cd /path/to/alpine_hut && php update_cache.php 1 800 && php update_forecasts.php
+   ```
+
+## How caching works
+
+The pages never call the availability or weather APIs while rendering. They only read local files that the update scripts fill.
+
+```mermaid
+flowchart LR
+    HR["hut-reservation.org<br/>getHutAvailability"] -->|"update_cache.php<br/>skip if &lt; 12 h old<br/>0.5 s between calls"| RC[("reservation_cache/&lt;id&gt;")]
+    OM["Open-Meteo<br/>7-day forecast"] -->|"update_forecasts.php<br/>skip if &lt; 6 h old"| FC[("forecasts/&lt;id&gt;")]
+    SC["data/hut_reservation_scraped.csv<br/>(IDs to fetch)"] -.-> HR
+    CSV[("data/alpine_huts_full.csv")] --> P
+    RC --> P["Web pages<br/>hut_search · where2go<br/>slotfinder · free_weekends"]
+    FC --> P
+    P <-->|"place name only;<br/>cached on first lookup"| GC[("reservation_cache/<br/>geocode_cache.json")]
+    GC <-.->|"cache miss"| NOM["Nominatim"]
+```
+
+- **Availability:** one JSON file per hut, holding `date`, `freeBeds`, `hutStatus` and `totalSleepingPlaces` for each day.
+- **Cache age:** `slotfinder.php` and `free_weekends.php` show how old each hut's data is and flag it as stale after 12 h.
+- **Geocoding:** each place name is resolved once and then read from `geocode_cache.json`. Entering `lat,lon` skips geocoding entirely.
+
+## Hut data
+
+- `data/alpine_huts_full.csv` holds about 4,160 huts across the Alps, merged from the SAC API, OpenStreetMap and hut-reservation.org. About 300 of them have a `reservation_id`, which is what availability is fetched for.
+- `data/hut_reservation_scraped.csv` holds the hut metadata from hut-reservation.org (ID, name, coordinates, …). `update_cache.php` reads the IDs to fetch from it and skips rows marked `NOT_FOUND`.
+
+**Check for new or changed huts on hut-reservation.org:** stdlib only, no Playwright needed.
+```bash
+python3 data/check_hut_reservation.py            # probe unknown/missing IDs + 50 beyond the highest
+python3 data/check_hut_reservation.py --all      # also re-check known huts (CHANGED / GONE)
+python3 data/check_hut_reservation.py --all --apply   # write NEW/REVIVED/CHANGED rows (CSV is backed up first)
+```
+Exit code: 0 = nothing new, 1 = findings, 2 = request errors only.
+
+**Rebuild the hut database from scratch:** run the steps in this order.
+```bash
+cd data && ../.venv/bin/python get_huts.py && cd ..         # SAC API + Overpass → alpine_huts_full.csv
+.venv/bin/python data/scrape_hut_reservation.py             # → hut_reservation_scraped.csv (set ID_FETCH_FROM / ID_END in the script)
+cd data
+../.venv/bin/python match_scraped_ids.py                    # assign scraped IDs to OSM rows (unclear ones → match_scraped_review.csv)
+../.venv/bin/python merge_reservation_ids.py                # copy IDs onto duplicate OSM rows
+../.venv/bin/python deduplicate.py                          # drop SAC/OSM duplicates sharing an ID
+../.venv/bin/python fill_elevation.py                       # fill missing elevations via Open-Meteo
+```
+The helper scripts use paths relative to the current directory, so run them inside `data/` as shown. The scraper is the exception and runs from the repo root.
+
+## APIs
+
+These are all free and need no key:
+- [Nominatim](https://nominatim.openstreetmap.org) for geocoding;
+- [hut-reservation.org](https://www.hut-reservation.org) for availability and hut metadata;
+- [Open-Meteo](https://open-meteo.com) for forecasts and elevation;
+- the [SAC API](https://huts.web.sac-cas.ch/api/1/huts) and [Overpass](https://overpass-api.de) to build the hut list.
+
+## Legacy
+
+`legacy/` holds the earlier Python CLI tools (`hut_search.py`, `hut_weather.py`, `filter_huts.py`) and old PHP versions. They are kept for reference and are not maintained.
