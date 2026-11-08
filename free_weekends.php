@@ -317,6 +317,16 @@ function render_night_cell(?array $night, ?string $cls): string {
     return '<td class="night ' . $css . '">' . $txt . '</td>';
 }
 
+/**
+ * Render a client-side sortable <th> (see sortTable()). $first is the direction of the first click;
+ * $active marks the column the server already sorted by (ascending).
+ */
+function sort_th(string $label, string $type, string $first, bool $active = false): string {
+    $arrow = $active ? '<span class="sort-arrow">&#9660;</span>' : '<span class="sort-arrow sort-idle">&#8645;</span>';
+    return '<th class="sortable" data-type="' . $type . '" data-first="' . $first . '"' . ($active ? ' data-dir="asc"' : '')
+         . ' onclick="sortTable(this)" title="Sort by ' . strtolower($label) . '">' . $label . ' ' . $arrow . '</th>';
+}
+
 /** Render one group of the selected weekend as a table. */
 function render_section(string $title, string $intro, array $rows, bool $show_dist): void {
     echo '<h3 class="section-title">' . h($title) . ' <span class="section-count">(' . count($rows) . ')</span></h3>';
@@ -329,7 +339,8 @@ function render_section(string $title, string $intro, array $rows, bool $show_di
 
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table"><thead><tr>'
-       . '<th>#</th><th>Hut</th><th>Club</th>' . ($show_dist ? '<th>Distance</th>' : '') . '<th class="sortable" onclick="sortByElevation(this)" title="Sort by elevation">Elevation <span class="sort-arrow sort-idle">&#8645;</span></th>'
+       . '<th>#</th>' . sort_th('Hut', 'text', 'asc', !$show_dist) . '<th>Club</th>'
+       . ($show_dist ? sort_th('Distance', 'num', 'asc', true) : '') . sort_th('Elevation', 'num', 'desc')
        . '<th>Fri night</th><th>Sat night</th><th>Map</th><th>Book</th><th>Cached</th>'
        . '</tr></thead><tbody>';
 
@@ -371,7 +382,8 @@ function render_no_reservation(array $huts): void {
 
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table"><thead><tr>'
-       . '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th class="sortable" onclick="sortByElevation(this)" title="Sort by elevation">Elevation <span class="sort-arrow sort-idle">&#8645;</span></th>'
+       . '<th>#</th>' . sort_th('Hut', 'text', 'asc') . '<th>Club</th>'
+       . sort_th('Distance', 'num', 'asc', true) . sort_th('Elevation', 'num', 'desc')
        . '<th>Beds</th><th>Phone</th><th>Email</th><th>Map</th>'
        . '</tr></thead><tbody>';
 
@@ -690,28 +702,38 @@ function useLocation() {
     toggleLocation();
 }
 
-/*  sort the clicked table by elevation: first click highest first, then toggle; unknown ("?") always last  */
-function sortByElevation(th) {
-    var table = th.closest("table");
-    var tbody = table.tBodies[0];
+/*  sort the clicked table by this column: first click uses data-first, then toggles; unknown values always last  */
+function sortTable(th) {
+    var tbody = th.closest("table").tBodies[0];
     var col   = th.cellIndex;
-    var desc  = th.dataset.dir !== "desc";
-    th.dataset.dir = desc ? "desc" : "asc";
+    var num   = th.dataset.type === "num";
+    var dir   = th.dataset.dir ? (th.dataset.dir === "asc" ? "desc" : "asc") : th.dataset.first;
 
+    th.closest("tr").querySelectorAll("th.sortable").forEach((el) => {
+        var arrow = el.querySelector(".sort-arrow");
+        arrow.innerHTML = "&#8645;";
+        arrow.classList.add("sort-idle");
+        delete el.dataset.dir;
+    });
+    th.dataset.dir = dir;
     var arrow = th.querySelector(".sort-arrow");
-    arrow.innerHTML = desc ? "&#9660;" : "&#9650;";
+    arrow.innerHTML = dir === "desc" ? "&#9650;" : "&#9660;";
     arrow.classList.remove("sort-idle");
 
-    var elev = (row) => {
-        var v = parseFloat(row.cells[col].textContent.replace(/[^\d.]/g, ""));
+    var key = (row) => {
+        var s = row.cells[col].textContent.trim();
+        if (!num)
+            return s;
+        var v = parseFloat(s.replace(/[^\d.]/g, ""));
         return isNaN(v) ? null : v;
     };
+    var sign = dir === "desc" ? -1 : 1;
     var rows = Array.prototype.slice.call(tbody.rows);
     rows.sort((a, b) => {
-        var av = elev(a), bv = elev(b);
+        var av = key(a), bv = key(b);
         if (av === null || bv === null)
             return (av === null) - (bv === null);
-        return desc ? bv - av : av - bv;
+        return sign * (num ? av - bv : av.localeCompare(bv, "de", { sensitivity: "base" }));
     });
     rows.forEach((r, i) => {
         r.cells[0].textContent = i + 1;
