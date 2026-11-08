@@ -512,8 +512,9 @@ function render_calendar(array $weekends, string $selected, array $query): void 
                      . ' · almost: ' . count($wk['groups']['almost']);
             $cls     = 'cal-chip ' . ($n_both > 0 ? 'cal-free' : 'cal-none') . ($fri === $selected ? ' cal-selected' : '');
             $href    = '?' . http_build_query($query + ['weekend' => $fri]);
+            $sun     = date('Y-m-d', strtotime($fri . ' +2 days'));
             echo '<a class="' . $cls . '" href="' . h($href) . '" title="' . h($tooltip) . '">'
-               . h(date('D d.m', strtotime($fri))) . ' <b>' . $n_both . '</b></a>';
+               . h(date('d.m.', strtotime($fri)) . ' – ' . date('d.m.', strtotime($sun))) . ' <b>' . $n_both . '</b></a>';
         }
         echo '</div>';
     }
