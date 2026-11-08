@@ -17,7 +17,7 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 16,Terrihütte SAC,Verena Kuhle und Jochen Schirmann,+41 81 943 12 05,92,2170,46.634529,9.005067,http://www.terrihuette.ch
 17,Geltenhütte SAC,Susanne Brand,+41337653220,85,2002,46.36,07.33,http://www.gelten.ch
 18,Capanna del Forno CAS,Alena Placha und Beat Kühnis,+41818243182,67,2574,46.331498,9.709716,http://www.fornohuette.ch
-19,Fründenhütte SAC,Stefanie Bieri,+41 33 675 14 33,58,2562,7.44,31.1,http://www.fruendenhuette.ch
+19,Fründenhütte SAC,Stefanie Bieri,+41 33 675 14 33,58,2562,46.483632,7.741809,http://www.fruendenhuette.ch
 20,Capanna Cristallina CAS,Emanuele Vellati,+41 91 869 23 30,72,2575,46.472528,8.526301,http://capannacristallina.casticino.ch
 21,Badushütte,Alessandro Barbon / Olaf Stähli,+41325128384,18,2503,46.636553,8.668352,https://www.badushuette.ch
 22,Cabane des Diablerets CAS,Céline Ballieux,+4124 492 21 02,32,2486,46.346472,7.214233,http://www.cabane-diablerets.ch
@@ -36,7 +36,7 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 35,Hörnlihütte - Matterhorn Base Camp,Kurt Lauber,+41 27 967 22 64,50,2880,619.500,093.100,http://www.hörnlihütte.ch
 36,Capanna Campo Tencia CAS,Valeria e Paco,+41 91 867 15 44,50,2140,69.9440,14.4470,http://www.campotencia.ch
 37,Brunnihütte,Käthi Joller,041 637 37 32,40,1860,46.50273,8.24384,http://www.brunnihütte.ch
-38,Capanna Sasc Furä CAS,Daniela Rota,+41818221252,36,1904,2.765110,1.131580,http://www.sascfura.ch
+38,Capanna Sasc Furä CAS,Daniela Rota,+41818221252,36,1904,46.315321,9.582431,http://www.sascfura.ch
 39,Glattalphütte SAC,Franziska Gwerder,+41 41 830 19 39,51,1896,46.916885,8.875034,http://www.glattalphuette.ch
 40,Bärgbeizli Underbärgli,Toni & Elsi Ryter,+41 (0)79 764 40 76,20,1800,E622.614,N150.578,http://www.holiday-swiss.ch
 41,Rugghubelhütte SAC,Claudia Künzli & Niklaus Stalder,+41793664369,85,2296,46.846222,8.462765,http://www.rugghubel.ch
@@ -136,7 +136,7 @@ Milos Mitic",0043 2858 5293,38,1.000,UTM Y (Nord) 5.391.117,UTM X (Ost) 483.718,
 Maurertal 1 - 9974 Prägraten am Großvenediger
 http:\\www.essener-rostocker-huette.com
 Eigentümer: Sektion ESSEN des Deutschen Alpenvereins (DAV) e.V.",+43 4877 5101,106,2208,47.055000,12.297778,https://www.essener-rostocker-huette.de
-135,Capanna Scaletta,Pagani Ilaria +4179 943 68 62,+4191 872 26 28,54,2205,2.715043,1.162932,www.satlucomagno.ch/wordpress/capanna-scaletta
+135,Capanna Scaletta,Pagani Ilaria +4179 943 68 62,+4191 872 26 28,54,2205,46.607743,8.940347,www.satlucomagno.ch/wordpress/capanna-scaletta
 136,Richterhütte,Martin Falkner,+43524221328,44,2.374,47.123845,12.133851,www.richterhuette.com
 138,Oberlandhütte,Goran und Thomas,+4353578113,61,1014,47.37979,12.30752,https://www.alpenverein-muenchen-oberland.de/huetten/alpenvereinshuetten/oberlandhuette
 139,Lenggrieser Hütte,Florian Durach,08042 5633096,47,1338,47.65,11.63,www.lenggrieserhuette.de
@@ -360,7 +360,7 @@ Am Steinweg 28
 347,Berghaus Alpenrösli,"Markus Zimmerling
 
 
-BEI FRAGEN 081 332 12 18",+41813321218,60,1775,46.87,89.37,https://www.berghaus-alpenroesli.ch
+BEI FRAGEN 081 332 12 18",+41813321218,60,1775,46.998341,9.857840,https://www.berghaus-alpenroesli.ch
 348,Schalijochbiwak SAC,unbewartet,+41775282362,7,3786,46.093315,7.709522,https://www.sac-basel.ch/deutsch/huetten/schalijoch-biwak/
 349,Baltschiederklause SAC,Jolanda Stettler,+41 79 541 65 75,50,2783,46.395051,7.889815,https://www.baltschiederklause.ch
 350,Fromatthütte,Heidi Gempeler,+41775020935,20,1800,46.54601,7.43279,https://www.sac-wildhorn.ch/huetten/fromatthuette/

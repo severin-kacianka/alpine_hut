@@ -9,7 +9,7 @@ Blüemlisalphütte SAC,SAC,2147000036,46.3036,7.4617,2840,info@bluemlisalphuette
 Brisenhaus,SAC,2147000044,46.914916904107415,8.464166076567334,1753,info@brisenhaus.ch,,http://www.brisenhaus.ch,46,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000044,
 Camona da Cavardiras CAS,SAC,2147000059,46.742467829354055,8.814231303181124,2649,info@cavardirashuette.ch,,http://www.cavardirashuette.ch,50,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000059,
 Capanna Piansecco CAS,SAC,2147000204,46.294,8.281,1982,info@capannapiansecco.ch,+41 91 869 12 14,https://www.capannapiansecco.ch,42,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000204,399
-Capanna Sasc Furä CAS,SAC,2147000235,2.765110,1.131580,1904,info@sascfura.ch,+41818221252,http://www.sascfura.ch,36,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000235,38
+Capanna Sasc Furä CAS,SAC,2147000235,46.315321,9.582431,1904,info@sascfura.ch,+41818221252,http://www.sascfura.ch,36,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000235,38
 Chamanna da Grialetsch CAS,SAC,2147000122,46.71010798573334,9.960529990163984,2542,grialetsch@sac-davos.ch,,http://www.grialetsch.ch,58,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000122,
 Chamanna dal Linard CAS,SAC,2147000155,46.77943071392273,10.082868998561676,2327,linard@alpinist.ch,,https://www.alpinist.ch/rm/chamonnas/chamonna-linard,38,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000155,
 Chamanna da Tschierva CAS,SAC,2147000279,46.40388163544959,9.880065518983711,2583,tschierva@sac-bernina.ch,,https://tschierva.ch/,100,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000279,
@@ -23,7 +23,7 @@ Cresta-Biwak SAC,SAC,2147425514,46.04476909558431,8.030220023170205,3032,crestab
 Domhütte SAC,SAC,2147000081,46.102662297858686,7.817608761999371,2940,info@domhuette.ch,,https://domhuette.ch,75,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000081,
 Enderlinhütte SAC,SAC,2147000087,47.03876766644046,9.551605939927788,1501,enderlin@sac-piz-sol.ch,,http://www.sac-piz-sol.ch,30,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000087,
 Fridolinshütten SAC,SAC,2147000101,46.821274000572494,8.950063359838234,2111,fridolinshuette-sac@bluewin.ch,,http://www.fridolinshuette.ch,50,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000101,
-Fründenhütte SAC,SAC,2147000102,46.483632393033496,7.74180856093144,2562,info@fruendenhuette.ch,,http://www.fruendenhuette.ch,58,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000102,
+Fründenhütte SAC,SAC,2147000102,46.483632393033496,7.74180856093144,2562,info@fruendenhuette.ch,+41 33 675 14 33,http://www.fruendenhuette.ch,58,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000102,19
 Glärnischhütte SAC,SAC,2147000116,47.001575603403786,8.96342626797513,1990,info@glhuette.ch,,http://www.glhuette.ch,90,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000116,
 Grassenbiwak SAC,SAC,2147000120,46.770144464475244,8.446747926946987,2647,grassen.biwak@gmail.com,,https://www.sac-engelberg.ch/grassen-biwak/,18,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000120,567
 Grathaus Moron,SAC,2140505062,47.26307981892374,7.269090980046482,1313,,,https://www.sac-angenstein.ch/huetten/grathaus-moron/,33,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2140505062,
@@ -3038,7 +3038,6 @@ Cabane Rambert,Schweizer Alpen Club SAC,222618403,46.230205,7.134205,2582,ramber
 Kroisen Alm,,222620468,47.6052758,14.6670817,884.0,,,,,OSM,
 Grünangerhütte,ÖAV Sektion Deutschlandsberg,222786307,46.8125264,15.0116907,1575,,,https://www.alpenverein.at/gruenangerhuette/,,OSM,
 Doldenhornhütte SAC,SAC Sektion Emmental,222825784,46.48704,7.69739,1915,info@doldenhornhuette.ch,+41 33 675 16 60,http://www.doldenhornhuette.ch,40,OSM,11
-Fründenhütte SAC,,222873495,7.44,31.1,2562,info@fruendenhuette.ch,+41 33 675 14 33,http://www.fruendenhuette.ch,58,OSM,19
 Rottalhütte SAC,SAC - CAS,222981226,46.52612,7.9447219,2755,rottalhuette@sac-interlaken.ch,+41 33 855 24 45,https://www.sac-interlaken.ch/index.php/huetten/rottalhuette,28,OSM,
 Schmadrihütte,AACB,222982916,46.4991505,7.8923079,2262,,,https://www.aacb.ch/huetten/schmadrihuette/,8,OSM,
 Plotscherbauer,,223063536,47.2601548,15.2033638,1133,,,,,OSM,
@@ -3581,7 +3580,7 @@ Capanna Bovarina,UTOE sezione di Bellinzona,333351720,46.56027,8.88841,1870,capa
 Capanna Cristallina,CAS Ticino,333473508,46.472528,8.526301,2575,cristallina@casticino.ch,+41 91 869 23 30,http://capannacristallina.casticino.ch,108,OSM,20
 Capanna Alpe di Lèis,Patriziato di Preonzo,333481247,46.2483485,8.9329981,1801,,,https://www.ticino.ch/de/alpineHuts/details/Capanna-L%C3%A8is/13392.html,14,OSM,
 Capanna del Pairolo,SAT Lugano,333538952,46.0627768,9.0448677,1347,,,https://www.capanna-pairolo.ch,40,OSM,
-Capanna Scaletta,SAT Lucomagno,333541371,2.715043,1.162932,2205,scaletta@satlucomagno.ch,+4191 872 26 28,https://www.satlucomagno.ch/wordpress/capanna-scaletta,54,OSM,135
+Capanna Scaletta,SAT Lucomagno,333541371,46.607743,8.940347,2205,scaletta@satlucomagno.ch,+4191 872 26 28,https://www.satlucomagno.ch/wordpress/capanna-scaletta,54,OSM,135
 Rifugio Vallè,,333851988,45.9044712,7.9939367,2180,,,,20,OSM,
 Wildbachhütte,,334658809,46.9510526,13.8668446,1370,,,,,OSM,
 Rifugio Spanna-Osella,Associazione Nazionale Alpini di Varallo,334666078,45.7937623,8.2167116,1623,,,,20,OSM,
@@ -3885,7 +3884,6 @@ Planinski dom na Peci,Planinsko društvo Mežica,607319820,46.4911147,14.7940599
 Koča na Pikovem,Matija Kozlar s.p.,607319823,46.4885981,14.8366988,992,,,,,OSM,
 Falbesoner Nockalm,,608974350,47.0379824,11.234927,1634.0,,+4352263186,https://www.haus-petra.com/almhuette,,OSM,
 Hexenseehütte,DAV Sektion Rheinland-Köln,613732381,47.018826,10.481156,2588,,+4354766214,https://www.koelner-haus.at/de/die-hexenseehuette/hexenseehuette/,18,OSM,377
-Capanna Sasc Furä,SAC - CAS,614518289,46.3153267,9.5824015,1904,info@sascfura.ch,+41 81 822 12 52,https://www.sascfura.ch/,36,OSM,
 Kistenpasshütte,SAC Sektion Winterthur,616170840,46.8403926,9.0293422,2714,,+41 79 201 35 13,http://www.kistenpasshuette.ch,16,OSM,505
 Wieser Hütte,,616761957,46.7523437,13.4606718,1886,,,,,OSM,
 Schirchleralm,,617417696,46.7755325,15.0885293,1327.0,,,https://www.steiermark.com/de/Suedsteiermark/Urlaub-planen/Ausflugsziele/Schirchlerhuette_isd_307685,,OSM,
@@ -4075,7 +4073,7 @@ Oberwalder-Hütte,,,47.105367,12.715533,2973,,+43 660 1308530,https://www.alpenv
 Cabane du Mont d’Or,,,46.722757,6.336052,1377,,+41 79 740 12 75,https://www.cas-vallorbe.ch/cabane/,20,,311
 Jugendbildungsstätte Winterraum,,,47.506154,10.385326,857,,0832493010,https://www.jubi-hindelang.de/,8,,344
 ZZZ TEST Monbijouhütte,,,46.944618,7.435092,1256,,000 000 00 00,https://www.sac-cas.ch,80,,346
-Berghaus Alpenrösli,,,46.87,89.37,1775,,+41813321218,https://www.berghaus-alpenroesli.ch,60,,347
+Berghaus Alpenrösli,,,46.998341,9.857840,1775,,+41813321218,https://www.berghaus-alpenroesli.ch,60,,347
 Mischabeljochbiwak SAC,,,46.074210,7.865815,3855,,+41797579916,https://mischabeljochbiwak.ch,24,,378
 Sylvan-Hütte,,,49.902413,9.479421,374,,015146626864,https://www.dav-main-spessart.de,1,,387
 Valentinalm,,,46.6816,13.0097,1215,,+43 660 6799784,https://www.valentinalm.at,35,,396

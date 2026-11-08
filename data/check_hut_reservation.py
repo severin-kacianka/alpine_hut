@@ -41,7 +41,11 @@ SSL_CTX.verify_flags &= ~getattr(ssl, "VERIFY_X509_STRICT", 0)
 
 #  manually verified coordinates for IDs whose hut-reservation.org coordinates are wrong (2026-11-08)
 COORD_OVERRIDES = {
+    19:  ("46.483632", "7.741809"),    # Fründenhütte SAC: API 7.44/31.1; SAC API + OSM
     23:  ("46.587038", "8.282682"),    # Bächlitalhütte SAC: API 66.4688/15.9878; SAC API + OSM
+    38:  ("46.315321", "9.582431"),    # Capanna Sasc Furä CAS: API has LV95 2'765'110/1'131'580 as 2.765110/1.131580
+    347: ("46.998341", "9.857840"),    # Berghaus Alpenrösli (Partnun): API 46.87/89.37; SAC API + OSM
+    135: ("46.607743", "8.940347"),    # Capanna Scaletta: API has LV95 2'715'043/1'162'932 as 2.715043/1.162932
     405: ("46.922457", "9.142993"),    # Skihütte Elm: API has LV95 2'729'805/1'198'227 as 2.729805/1.198227
 }
 
