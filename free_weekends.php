@@ -405,6 +405,84 @@ function render_no_reservation(array $huts): void {
     echo '</tbody></table></div>';
 }
 
+/** Render an OSM map of the huts with both nights free (green pins), plus the search centre in radius mode. */
+function render_both_map(array $rows, ?array $center): void {
+    if (empty($rows)) return;
+
+    $huts = [];
+    foreach ($rows as $e) {
+        $hut    = $e['hut'];
+        $huts[] = [
+            'lat'  => $hut['latitude'],
+            'lon'  => $hut['longitude'],
+            'name' => h($hut['official_name']),
+            'club' => h($hut['operating_club']),
+            'elev' => $hut['elevation_m'] !== null ? number_format((int)$hut['elevation_m']) . ' m' : null,
+            'dist' => $hut['distance_km'],
+            'fri'  => $e['fri']['free'] ?? '?',
+            'sat'  => $e['sat']['free'] ?? '?',
+            'book' => h(BOOKING_BASE . $hut['reservation_id'] . '/wizard'),
+        ];
+    }
+    $huts_json   = json_encode($huts, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    $center_json = json_encode($center !== null
+        ? ['lat' => $center['lat'], 'lon' => $center['lon'], 'name' => h($center['display_name'] ?? '')]
+        : null, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+
+    echo '<div id="hut-map"></div>';
+    echo <<<JS
+    <script>
+    (function() {
+        var CENTER = $center_json;
+        var HUTS   = $huts_json;
+
+        var map = L.map("hut-map");
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
+            maxZoom: 18,
+        }).addTo(map);
+
+        /*  green SVG pin, same shape as on hut_search.php  */
+        var pinSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">'
+                   + '<path d="M12.5 0C5.6 0 0 5.6 0 12.5c0 9.4 12.5 28.5 12.5 28.5S25 21.9 25 12.5C25 5.6 19.4 0 12.5 0z" fill="#28a745" stroke="#fff" stroke-width="1.5"/>'
+                   + '<circle cx="12.5" cy="12.5" r="5" fill="rgba(255,255,255,0.7)"/>'
+                   + '</svg>';
+        var pinIcon = L.divIcon({ html: pinSvg, className: "", iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [0, -38] });
+
+        var points = [];
+        if (CENTER) {
+            var starSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 30 30">'
+                        + '<circle cx="15" cy="15" r="10" fill="none" stroke="#dc3545" stroke-width="2.5"/>'
+                        + '<circle cx="15" cy="15" r="2.5" fill="#dc3545"/>'
+                        + '<line x1="15" y1="0" x2="15" y2="8" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                        + '<line x1="15" y1="22" x2="15" y2="30" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                        + '<line x1="0" y1="15" x2="8" y2="15" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                        + '<line x1="22" y1="15" x2="30" y2="15" stroke="#dc3545" stroke-width="2.5" stroke-linecap="round"/>'
+                        + '</svg>';
+            var centerIcon = L.divIcon({ html: starSvg, className: "", iconSize: [45, 45], iconAnchor: [22, 22], popupAnchor: [0, -22] });
+            L.marker([ CENTER.lat, CENTER.lon ], { icon: centerIcon }).addTo(map)
+                .bindPopup('<div class="map-popup"><b>' + CENTER.name + '</b><br><em>Search center</em></div>');
+            points.push([ CENTER.lat, CENTER.lon ]);
+        }
+
+        HUTS.forEach((h) => {
+            var info  = [ h.club, h.elev, h.dist != null ? h.dist + " km away" : null ].filter((s) => s).join(" &bull; ");
+            var popup = '<div class="map-popup">'
+                      + '<b><a href="' + h.book + '" target="_blank">' + h.name + '</a></b><br>'
+                      + (info ? info + '<br>' : '')
+                      + 'Fri ' + h.fri + ' / Sat ' + h.sat + ' free<br>'
+                      + '<a href="' + h.book + '" target="_blank">Reservation</a>'
+                      + '</div>';
+            L.marker([ h.lat, h.lon ], { icon: pinIcon }).addTo(map).bindPopup(popup);
+            points.push([ h.lat, h.lon ]);
+        });
+
+        map.fitBounds(points, { padding: [ 30, 30 ], maxZoom: 12 });
+    })();
+    </script>
+    JS;
+}
+
 /** Render the weekend calendar: one row per month, one chip per weekend selecting that weekend. */
 function render_calendar(array $weekends, string $selected, array $query): void {
     $months = [];
@@ -431,11 +509,14 @@ function render_calendar(array $weekends, string $selected, array $query): void 
 }
 
 require_once __DIR__ . '/layout.php';
+$extra_head = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">' . "\n"
+            . '  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>';
 render_page_head(
     'Free Weekends — Alpine Hut Weather Planner',
     'Free Weekends',
     'Find huts with enough free beds on Friday and Saturday nights, weekend by weekend',
-    'free_weekends'
+    'free_weekends',
+    $extra_head
 );
 ?>
 <style>
@@ -492,6 +573,11 @@ render_page_head(
     .cal-none       { background: #e9ecef; color: #6c757d; border: 1px solid #dee2e6; }
     .cal-none:hover { background: #dee2e6; }
     .cal-selected   { outline: 2px solid var(--hdr-bg); outline-offset: 1px; font-weight: 700; }
+
+    #hut-map { height: 500px; margin: .6rem 0 1rem; border-radius: 8px;
+               border: 1px solid var(--border); }
+    .map-popup b { font-size: .9rem; }
+    .map-popup a { color: #0d6efd; }
 </style>
 
 <?php
@@ -569,6 +655,7 @@ if ($error !== null) {
         $wk  = $weekends[$selected];
         $sun = date('Y-m-d', strtotime($selected . ' +2 days'));
         echo '<h2 class="weekend-title">' . h(date('D d.m', strtotime($selected)) . ' – ' . date('D d.m.Y', strtotime($sun))) . '</h2>';
+        render_both_map($wk['groups']['both'], $all_huts ? null : $geo);
         render_section('Both nights free',
             "At least $people free bed(s) on Friday and Saturday night.", $wk['groups']['both'], !$all_huts);
         render_section('One night free',
