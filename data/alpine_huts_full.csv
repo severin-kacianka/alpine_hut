@@ -2,7 +2,7 @@ official_name,operating_club,hut_id,latitude,longitude,elevation_m,email,phone_n
 Aarbiwak SAC,SAC,2147000001,46.55555404703093,8.15222678796981,2731,k.brefin@livenet.ch,,http://www.sac-pilatus.ch,17,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000001,603
 Albert-Heim-Hütte SAC,SAC,2147000006,46.60890792501105,8.463518795919578,2542,info@albertheimhuette.ch,,https://www.albertheimhuette.ch/,60,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000006,710
 Arbenbiwak SAC,SAC,2147000016,46.031364,7.665059,3224,rinaldo.amacker@bluewin.ch,+41794090644,https://sac.zermatt.org/verein/arbenbiwak/,15,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000016,381
-Bächlitalhütte SAC,SAC,2147000021,46.587037979835685,8.282681550901897,2328,info@baechlitalhuette.ch,,http://www.baechlitalhuette.ch,71,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000021,
+Bächlitalhütte SAC,SAC,2147000021,46.587037979835685,8.282681550901897,2328,info@baechlitalhuette.ch,+41339731114,http://www.baechlitalhuette.ch,71,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000021,23
 Balmhornhütte SAC,SAC,2147000024,46.45128542486783,7.689567354207958,1956,balmhornhuette@sac-altels.ch,,http://www.balmhornhuette.ch,20,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000024,
 Bergseehütte SAC,SAC,2147000030,46.6574378278801,8.484887428513561,2370,huettenwart@bergsee.ch,,http://www.bergsee.ch,65,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000030,
 Blüemlisalphütte SAC,SAC,2147000036,46.3036,7.4617,2840,info@bluemlisalphuette.com,+41 33 676 14 37,http://www.bluemlisalphuette.com,100,https://www.sac-cas.ch/en/huts-and-tours/sac-route-portal/2147000036,1
@@ -3209,7 +3209,6 @@ Almagelleralp,,240432026,46.1011253,7.9847741,2194,,,,,OSM,
 ,,240533101,46.6863138,10.9032223,2152,,+39 329 6785550,,19,OSM,
 Baita Altissimo,,240642851,45.9144183,10.1736608,1703,,,,,OSM,
 "Rifugio Rosetta ""Giovanni Pedrotti""",Società degli Alpinisti Tridentini,240938276,46.2674386,11.8390215,2580,lottmariano@libero.it,+39 0439 68308,https://www.rifugiorosetta.it/,70,OSM,619
-Bächlitalhütte SAC,SAC - CAS,241105805,66.4688,15.9878,2328,info@baechlitalhuette.ch,+41339731114,http://www.baechlital.ch,70,OSM,23
 ,,241170026,45.8973692,11.392715,1551.0,,,,,OSM,
 Rifugio Monte Stino,Righetti Daniele,241279629,45.7638323,10.5499865,1396.0,,,,,OSM,
 Jauchza! Hütte,Maria Hartl,241494807,46.9628332,13.7421969,1904.0,info@jauchzahuette-nockberge.at,+43 664 4553350,https://www.jauchzahuette-nockberge.at,,OSM,
@@ -4080,7 +4079,7 @@ Berghaus Alpenrösli,,,46.87,89.37,1775,,+41813321218,https://www.berghaus-alpen
 Mischabeljochbiwak SAC,,,46.074210,7.865815,3855,,+41797579916,https://mischabeljochbiwak.ch,24,,378
 Sylvan-Hütte,,,49.902413,9.479421,374,,015146626864,https://www.dav-main-spessart.de,1,,387
 Valentinalm,,,46.6816,13.0097,1215,,+43 660 6799784,https://www.valentinalm.at,35,,396
-Skihütte Elm,,,2.729805,1.198227,1745,,+41 79 864 79 88,https://sac-olten.ch/huetten/skihuette-elm,15,,405
+Skihütte Elm,,,46.922457,9.142993,1745,,+41 79 864 79 88,https://sac-olten.ch/huetten/skihuette-elm,15,,405
 Cabane du Carroz,,,46.2840,6.0721,1508,,+41797566827,https://www.cas-geneve.ch/mCabCarroz.php?choix=2,18,,406
 Rieserfernerhütte,,,46.89,12.07,2798,,+390474492125,https://alpenverein.it/huette/rieserfernerhuette/,59,,412
 Habsburg-Haus,,,47.42795,15.41917,1785,,02665 219,https://das-habsburghaus.at,69,,424

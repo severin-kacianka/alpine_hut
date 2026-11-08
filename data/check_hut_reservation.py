@@ -38,6 +38,13 @@ MAX_ERR_RUN  = 5      # abort after this many consecutive request errors
 SSL_CTX = ssl.create_default_context()
 SSL_CTX.verify_flags &= ~getattr(ssl, "VERIFY_X509_STRICT", 0)
 
+
+#  manually verified coordinates for IDs whose hut-reservation.org coordinates are wrong (2026-11-08)
+COORD_OVERRIDES = {
+    23:  ("46.587038", "8.282682"),    # Bächlitalhütte SAC: API 66.4688/15.9878; SAC API + OSM
+    405: ("46.922457", "9.142993"),    # Skihütte Elm: API has LV95 2'729'805/1'198'227 as 2.729805/1.198227
+}
+
 FIELDNAMES = [ "id", "name", "warden", "phone", "beds",
                "elevation_m", "latitude", "longitude", "website_url" ]
 NUMERIC    = { "elevation_m", "latitude", "longitude" }
@@ -82,6 +89,7 @@ def to_row(hut_id: int, info: dict) -> dict:
     """Map a hutInfo response onto the scraped-CSV schema."""
     coords = re.split(r"[,/]", info.get("coordinates") or "")
     lat, lon = (coords[0].strip(), coords[1].strip()) if len(coords) == 2 else ("", "")
+    lat, lon = COORD_OVERRIDES.get(hut_id, (lat, lon))
     return {
         "id":          str(hut_id),
         "name":        (info.get("hutName")       or "").strip(),

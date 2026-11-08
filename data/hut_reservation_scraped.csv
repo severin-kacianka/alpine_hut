@@ -21,7 +21,7 @@ id,name,warden,phone,beds,elevation_m,latitude,longitude,website_url
 20,Capanna Cristallina CAS,Emanuele Vellati,+41 91 869 23 30,72,2575,46.472528,8.526301,http://capannacristallina.casticino.ch
 21,Badushütte,Alessandro Barbon / Olaf Stähli,+41325128384,18,2503,46.636553,8.668352,https://www.badushuette.ch
 22,Cabane des Diablerets CAS,Céline Ballieux,+4124 492 21 02,32,2486,46.346472,7.214233,http://www.cabane-diablerets.ch
-23,Bächlitalhütte SAC,Bernhard und Marianne Winkler,+41339731114,70,2328,66.4688,15.9878,http://www.baechlital-huette.ch
+23,Bächlitalhütte SAC,Bernhard und Marianne Winkler,+41339731114,70,2328,46.587038,8.282682,http://www.baechlital-huette.ch
 24,Hohganthütte,Markus Thommen,+41 76  408 54 50,24,1805,46.78547,7.90609,http://www.sac-emmental.ch/hohganthuette/
 25,Chamanna d'Es-cha CAS,Schwab Silvana & Nicola Passiun da Muntagna GMBH,+41 81 854 17 55,42,2594,46.611490,9.902741,www.es-cha.ch
 26,Camona da Maighels CAS,Nora Honegger und Mauro Loretz,+41819491551,83,2310,46.62547,8.69007,http://www.maighelshuette.ch
@@ -413,7 +413,7 @@ sylvan@dav-main-spessart.de",015146626864,1,374,49.902413,9.479421,www.dav-main-
 402,Preintalerhütte,Rita und Wolfgang Höflehner,+436641448881,144,1656,47.3131,13.8133,http://www.preintaler.at/agp/index.php/unsere-huetten/preintalerhuette
 403,Theodor-Körner-Hütte,Robin und Marion,+436802216024,32,1456,47.5055,13.4783,https://koerner-huette.at/
 404,Rotondohütte SAC,Pia Biondi,+41 41 887 16 16,70,2571,46.54494,8.48383,https://www.rotondohuette.ch
-405,Skihütte Elm,Thomas Jäggin,+41 79 864 79 88,15,1745,2.729805,1.198227,https://sac-olten.ch/huetten/skihuette-elm
+405,Skihütte Elm,Thomas Jäggin,+41 79 864 79 88,15,1745,46.922457,9.142993,https://sac-olten.ch/huetten/skihuette-elm
 406,Cabane du Carroz,Gardien.e.s bénévoles*la cabane est ouverte uniquement les week-ends*,+41797566827,18,1508,46.2840,6.0721,https://www.cas-geneve.ch/mCabCarroz.php?choix=2
 407,Priener Hütte,Rosa Lohrmann,+498057428,82,1410,47.702107,12.327922,http://www.priener-huette.de
 408,Adolf-Noßberger-Hütte,Christian Krüger,0043 676 49 66 931,20,2488,46.953985,12.781181,https://www.nossberger.at
