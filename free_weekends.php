@@ -90,8 +90,9 @@ function haversine_km(float $lat1, float $lon1, float $lat2, float $lon2): float
 // ---------------------------------------------------------------------------
 
 /**
- * Load huts with a reservation_id. With a $center (['lat', 'lon']) only huts within $radius_km
- * are kept, nearest first; without one all huts are returned, sorted by name.
+ * Load huts as ['res' => huts with a reservation_id, 'no_res' => huts without one]. With a $center
+ * (['lat', 'lon']) only huts within $radius_km are kept, nearest first, and 'no_res' is filled;
+ * without one all reservation huts are returned, sorted by name, and 'no_res' stays empty.
  */
 function load_huts(?array $center, float $radius_km): array {
     $fh = fopen(CSV_PATH, 'r');
@@ -102,11 +103,17 @@ function load_huts(?array $center, float $radius_km): array {
     if ($header === false) { fclose($fh); throw new RuntimeException('CSV is empty'); }
     $col = array_flip($header);
 
-    $huts = [];
+    $field = function(array $row, string $key) use ($col): string {
+        $v = trim($row[$col[$key] ?? -1] ?? '');
+        return strtolower($v) === 'nan' ? '' : $v;
+    };
+
+    $huts   = [];
+    $no_res = [];
     while (($row = fgetcsv($fh)) !== false) {
         $rid = isset($col['reservation_id'], $row[$col['reservation_id']])
              ? trim($row[$col['reservation_id']]) : '';
-        if ($rid === '') continue;
+        if ($rid === '' && $center === null) continue;
 
         $name = trim($row[$col['official_name']] ?? '');
         $lat  = trim($row[$col['latitude']]      ?? '');
@@ -122,7 +129,7 @@ function load_huts(?array $center, float $radius_km): array {
         $elev_raw = trim($row[$col['elevation_m']] ?? '');
         $elev     = ($elev_raw !== '' && strtolower($elev_raw) !== 'nan') ? (float)$elev_raw : null;
 
-        $huts[] = [
+        $hut = [
             'official_name'        => $name,
             'operating_club'       => trim($row[$col['operating_club']]       ?? ''),
             'latitude'             => (float)$lat,
@@ -131,15 +138,23 @@ function load_huts(?array $center, float $radius_km): array {
             'official_website_url' => trim($row[$col['official_website_url']] ?? ''),
             'reservation_id'       => $rid,
             'distance_km'          => $dist !== null ? round($dist, 1) : null,
+            'phone_number'         => $field($row, 'phone_number'),
+            'email'                => $field($row, 'email'),
+            'capacity_beds'        => $field($row, 'capacity_beds'),
         ];
+        if ($rid === '')
+            $no_res[] = $hut;
+        else
+            $huts[] = $hut;
     }
     fclose($fh);
 
-    if ($center !== null)
-        usort($huts, fn($a, $b) => $a['distance_km'] <=> $b['distance_km']);
-    else
-        usort($huts, fn($a, $b) => strcasecmp($a['official_name'], $b['official_name']));
-    return $huts;
+    $cmp = $center !== null
+         ? fn($a, $b) => $a['distance_km'] <=> $b['distance_km']
+         : fn($a, $b) => strcasecmp($a['official_name'], $b['official_name']);
+    usort($huts,   $cmp);
+    usort($no_res, $cmp);
+    return ['res' => $huts, 'no_res' => $no_res];
 }
 
 /**
@@ -204,6 +219,7 @@ $weekend_input  = isset($_GET['weekend'])  ? trim($_GET['weekend']) : '';
 
 $error     = null;
 $huts      = [];
+$no_res    = [];   // huts in the radius without a reservation_id (radius mode only)
 $weekends  = [];   // fri => ['sat' => date, 'groups' => ['both' => [...], 'one' => [...], 'almost' => [...]]]
 $geo       = null;
 $selected  = null;
@@ -211,16 +227,18 @@ $selected  = null;
 if ($submitted) {
     try {
         if ($all_huts) {
-            $huts = load_huts(null, 0.0);
+            $huts = load_huts(null, 0.0)['res'];
         } elseif ($location_input === '') {
             $error = 'Enter a location or tick "All huts".';
         } elseif ($radius_km < 1 || $radius_km > 500) {
             $error = 'Radius must be between 1 and 500 km.';
         } else {
             $geo  = parse_latlon($location_input) ?? geocode($location_input);
-            $huts = load_huts($geo, $radius_km);
-            if (empty($huts)) {
-                $error = 'No huts with a reservation ID found within ' . (int)$radius_km . ' km of "' . $location_input . '".';
+            $loaded = load_huts($geo, $radius_km);
+            $huts   = $loaded['res'];
+            $no_res = $loaded['no_res'];
+            if (empty($huts) && empty($no_res)) {
+                $error = 'No huts found within ' . (int)$radius_km . ' km of "' . $location_input . '".';
             }
         }
     } catch (RuntimeException $e) {
@@ -346,6 +364,47 @@ function render_section(string $title, string $intro, array $rows, bool $show_di
     echo '</tbody></table></div>';
 }
 
+/** Render the huts without a reservation_id: contact data only, no availability. */
+function render_no_reservation(array $huts): void {
+    echo '<h3 class="section-title">Not using hut-reservation <span class="section-count">(' . count($huts) . ')</span></h3>';
+    echo '<p class="section-intro">No online availability; contact the hut directly.</p>';
+
+    echo '<div style="overflow-x:auto">';
+    echo '<table class="results-table"><thead><tr>'
+       . '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th>Elevation</th>'
+       . '<th>Beds</th><th>Phone</th><th>Email</th><th>Map</th>'
+       . '</tr></thead><tbody>';
+
+    $dash = '<td class="muted">—</td>';
+    foreach ($huts as $i => $hut) {
+        $name    = h($hut['official_name']);
+        $url     = $hut['official_website_url'];
+        $name_td = $url !== '' ? '<a href="' . h($url) . '" target="_blank">' . $name . '</a>' : $name;
+        $elev_s  = $hut['elevation_m'] !== null ? number_format((int)$hut['elevation_m']) . ' m' : '?';
+        $beds    = $hut['capacity_beds'] !== '' ? (string)(int)(float)$hut['capacity_beds'] : '';
+        $phone   = $hut['phone_number'];
+        $email   = $hut['email'];
+        $lat     = $hut['latitude'];
+        $lon     = $hut['longitude'];
+        $map_td  = '<a href="' . h('https://www.google.com/maps?q=' . $lat . ',' . $lon) . '" target="_blank">G-Maps</a>'
+                 . ' <a href="' . h('https://www.openstreetmap.org/?mlat=' . $lat . '&mlon=' . $lon . '&zoom=15') . '" target="_blank">OSM</a>'
+                 . ' <a href="' . h('geo:' . $lat . ',' . $lon) . '">GEO</a>';
+
+        echo '<tr>';
+        echo '<td class="rank">' . ($i + 1) . '</td>';
+        echo '<td class="hut-name">' . $name_td . '</td>';
+        echo '<td>' . h($hut['operating_club']) . '</td>';
+        echo '<td class="num">' . h($hut['distance_km'] . ' km') . '</td>';
+        echo '<td class="num elev">' . h($elev_s) . '</td>';
+        echo $beds  !== '' ? '<td class="num">' . h($beds) . '</td>' : $dash;
+        echo $phone !== '' ? '<td class="contact"><a href="' . h('tel:' . preg_replace('/[^\d+]/', '', $phone)) . '">' . h($phone) . '</a></td>' : $dash;
+        echo $email !== '' ? '<td class="contact"><a href="' . h('mailto:' . $email) . '">' . h($email) . '</a></td>' : $dash;
+        echo '<td class="map-links">' . $map_td . '</td>';
+        echo "</tr>\n";
+    }
+    echo '</tbody></table></div>';
+}
+
 /** Render the weekend calendar: one row per month, one chip per weekend selecting that weekend. */
 function render_calendar(array $weekends, string $selected, array $query): void {
     $months = [];
@@ -402,6 +461,10 @@ render_page_head(
     .results-table td.reservation a { color: #0d6efd; text-decoration: none; font-size: .8rem; }
     .results-table td.reservation a:hover { text-decoration: underline; }
     .results-table td.avail-unknown { color: #adb5bd; font-style: italic; }
+    .results-table td.muted     { color: #adb5bd; text-align: center; }
+    .results-table td.contact   { white-space: nowrap; }
+    .results-table td.contact a { color: #0d6efd; text-decoration: none; }
+    .results-table td.contact a:hover { text-decoration: underline; }
 
     .avail-open   { background: var(--green-bg)  !important; color: var(--green);  font-weight: 700; }
     .avail-almost { background: #ffe5cc          !important; color: #8a4500;      font-weight: 700; }
@@ -410,7 +473,7 @@ render_page_head(
     .stale        { color: var(--yellow); font-weight: 600; }
 
     .checkbox-row { display: flex; align-items: center; gap: .4rem; font-size: .85rem; padding-bottom: 8px; }
-    input:disabled { background: #e9ecef; color: #adb5bd; }
+    input.inactive { background: #e9ecef; color: #adb5bd; }
 
     .weekend-title { font-size: 1.15rem; margin: 1.25rem 0 .2rem; }
     .section-title { font-size: 1rem; margin: 1.1rem 0 .2rem; }
@@ -435,7 +498,9 @@ render_page_head(
 // ---------------------------------------------------------------------------
 // Form
 // ---------------------------------------------------------------------------
-$disabled = $all_huts ? ' disabled' : '';
+
+// Greyed out via a class, not "disabled": disabled inputs fire no focus event for useLocation()
+$inactive = $all_huts ? ' class="inactive"' : '';
 echo '<div class="search-form">';
 echo '<h2>Search</h2>';
 echo '<form method="get" action="">';
@@ -443,11 +508,11 @@ echo '<input type="hidden" name="submitted" value="1">';
 echo '<div class="form-row">';
 echo '<div class="form-group">';
 echo '<label for="location">Location or Lat/Lon</label>';
-echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39"' . $disabled . '>';
+echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39"' . $inactive . ' onfocus="useLocation()">';
 echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="distance">Radius (km)</label>';
-echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '"' . $disabled . '>';
+echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '"' . $inactive . ' onfocus="useLocation()">';
 echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="people">Free beds needed</label>';
@@ -482,9 +547,14 @@ if ($error !== null) {
     if ($no_cache > 0) {
         echo ' <span style="color:#856404">(' . $no_cache . ' hut(s) without cached availability; run <code>update_cache.php</code>)</span>';
     }
+    if (!empty($no_res)) {
+        echo ' &mdash; + <strong>' . count($no_res) . '</strong> hut(s) not using hut-reservation (listed at the bottom)';
+    }
     echo '</div>';
 
-    if (empty($weekends)) {
+    if (empty($huts)) {
+        echo '<div class="warn-box">No huts using hut-reservation within this radius.</div>';
+    } elseif (empty($weekends)) {
         echo '<div class="warn-box">No cached availability for any upcoming weekend. Run <code>update_cache.php</code> first.</div>';
     } else {
 
@@ -508,14 +578,25 @@ if ($error !== null) {
                 'Neither night has enough beds, but at least one night is only 1 bed short (' . ($people - 1) . ' free).', $wk['groups']['almost'], !$all_huts);
         }
     }
+
+    // Huts without online booking are independent of the selected weekend, so they always come last
+    if (!$all_huts && !empty($no_res)) {
+        render_no_reservation($no_res);
+    }
 }
 ?>
 
 <script>
 function toggleLocation() {
     var all = document.getElementById('all_huts').checked;
-    document.getElementById('location').disabled = all;
-    document.getElementById('distance').disabled = all;
+    document.getElementById('location').classList.toggle('inactive', all);
+    document.getElementById('distance').classList.toggle('inactive', all);
+}
+
+// Clicking into Location or Radius switches from "All huts" to a location search
+function useLocation() {
+    document.getElementById('all_huts').checked = false;
+    toggleLocation();
 }
 </script>
 

@@ -35,8 +35,8 @@ except ModuleNotFoundError:
 BASE_URL         = "https://www.hut-reservation.org/reservation/book-hut/{}/wizard"
 OUTPUT_CSV       = "data/hut_reservation_scraped.csv"
 ID_START         = 1      # used only for CSV range / existing-data loading
-ID_FETCH_FROM    = 440    # first ID to actually fetch this run
-ID_END           = 770
+ID_FETCH_FROM    = 1    # first ID to actually fetch this run
+ID_END           = 900
 PAGE_TIMEOUT_OK  = 15_000  # ms — wait for h1.hutTitle
 NAV_TIMEOUT      = 30_000  # ms — page navigation timeout
 DELAY_SEC        = 2.0     # pause between pages
