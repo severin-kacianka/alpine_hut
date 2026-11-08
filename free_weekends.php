@@ -1,7 +1,7 @@
 <?php
-// free_weekends.php — For every weekend of the coming year, list huts within a radius that have
-// at least N free beds on the Friday and/or Saturday night, grouped by how well they fit.
-// Reads reservation_cache/<id> for availability, populated by update_cache.php.
+// free_weekends.php — Weekend calendar of huts with at least N free beds on the Friday and/or
+// Saturday night; picking a weekend shows its huts grouped by how well they fit. Covers all huts
+// by default, or only huts within a radius of a location. Reads reservation_cache/<id>.
 
 setlocale(LC_ALL, 'C');
 
@@ -89,8 +89,11 @@ function haversine_km(float $lat1, float $lon1, float $lat2, float $lon2): float
 // Data loading
 // ---------------------------------------------------------------------------
 
-/** Load huts with a reservation_id within $radius_km of the centre, nearest first. */
-function load_huts_in_radius(float $center_lat, float $center_lon, float $radius_km): array {
+/**
+ * Load huts with a reservation_id. With a $center (['lat', 'lon']) only huts within $radius_km
+ * are kept, nearest first; without one all huts are returned, sorted by name.
+ */
+function load_huts(?array $center, float $radius_km): array {
     $fh = fopen(CSV_PATH, 'r');
     if ($fh === false) {
         throw new RuntimeException('Cannot open CSV: ' . CSV_PATH);
@@ -110,8 +113,11 @@ function load_huts_in_radius(float $center_lat, float $center_lon, float $radius
         $lon  = trim($row[$col['longitude']]     ?? '');
         if ($name === '' || $lat === '' || $lon === '') continue;
 
-        $dist = haversine_km($center_lat, $center_lon, (float)$lat, (float)$lon);
-        if ($dist > $radius_km) continue;
+        $dist = null;
+        if ($center !== null) {
+            $dist = haversine_km($center['lat'], $center['lon'], (float)$lat, (float)$lon);
+            if ($dist > $radius_km) continue;
+        }
 
         $elev_raw = trim($row[$col['elevation_m']] ?? '');
         $elev     = ($elev_raw !== '' && strtolower($elev_raw) !== 'nan') ? (float)$elev_raw : null;
@@ -124,12 +130,15 @@ function load_huts_in_radius(float $center_lat, float $center_lon, float $radius
             'elevation_m'          => $elev,
             'official_website_url' => trim($row[$col['official_website_url']] ?? ''),
             'reservation_id'       => $rid,
-            'distance_km'          => round($dist, 1),
+            'distance_km'          => $dist !== null ? round($dist, 1) : null,
         ];
     }
     fclose($fh);
 
-    usort($huts, fn($a, $b) => $a['distance_km'] <=> $b['distance_km']);
+    if ($center !== null)
+        usort($huts, fn($a, $b) => $a['distance_km'] <=> $b['distance_km']);
+    else
+        usort($huts, fn($a, $b) => strcasecmp($a['official_name'], $b['official_name']));
     return $huts;
 }
 
@@ -184,29 +193,38 @@ function upcoming_fridays(): array {
 // ---------------------------------------------------------------------------
 // Input
 // ---------------------------------------------------------------------------
+
+// Unticked checkboxes are not sent, so "all_huts" defaults to on only before the first search
+$submitted      = isset($_GET['submitted']);
+$all_huts       = !$submitted || isset($_GET['all_huts']);
 $location_input = isset($_GET['location']) ? trim($_GET['location']) : '';
 $radius_km      = isset($_GET['distance']) && $_GET['distance'] !== '' ? (float)$_GET['distance'] : 20.0;
 $people         = isset($_GET['people'])   && $_GET['people']   !== '' ? max(1, (int)$_GET['people']) : 2;
-$submitted      = $location_input !== '';
+$weekend_input  = isset($_GET['weekend'])  ? trim($_GET['weekend']) : '';
 
 $error     = null;
 $huts      = [];
 $weekends  = [];   // fri => ['sat' => date, 'groups' => ['both' => [...], 'one' => [...], 'almost' => [...]]]
 $geo       = null;
+$selected  = null;
 
 if ($submitted) {
-    if ($radius_km < 1 || $radius_km > 500) {
-        $error = 'Radius must be between 1 and 500 km.';
-    } else {
-        try {
+    try {
+        if ($all_huts) {
+            $huts = load_huts(null, 0.0);
+        } elseif ($location_input === '') {
+            $error = 'Enter a location or tick "All huts".';
+        } elseif ($radius_km < 1 || $radius_km > 500) {
+            $error = 'Radius must be between 1 and 500 km.';
+        } else {
             $geo  = parse_latlon($location_input) ?? geocode($location_input);
-            $huts = load_huts_in_radius($geo['lat'], $geo['lon'], $radius_km);
+            $huts = load_huts($geo, $radius_km);
             if (empty($huts)) {
                 $error = 'No huts with a reservation ID found within ' . (int)$radius_km . ' km of "' . $location_input . '".';
             }
-        } catch (RuntimeException $e) {
-            $error = $e->getMessage();
         }
+    } catch (RuntimeException $e) {
+        $error = $e->getMessage();
     }
 }
 
@@ -252,6 +270,16 @@ if ($submitted && $error === null) {
             ],
         ];
     }
+
+    // Selected weekend: the requested one if known, else the first with both nights free, else the first
+    if (isset($weekends[$weekend_input])) {
+        $selected = $weekend_input;
+    } else {
+        foreach ($weekends as $fri => $wk) {
+            if (!empty($wk['groups']['both'])) { $selected = $fri; break; }
+        }
+        $selected ??= array_key_first($weekends);
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -271,87 +299,72 @@ function render_night_cell(?array $night, ?string $cls): string {
     return '<td class="night ' . $css . '">' . $txt . '</td>';
 }
 
-/** Render one section: a table with a separator row per weekend, followed by that weekend's huts. */
-function render_section(string $key, string $title, string $intro, array $weekends): void {
-    echo '<h2 class="section-title">' . h($title) . '</h2>';
+/** Render one group of the selected weekend as a table. */
+function render_section(string $title, string $intro, array $rows, bool $show_dist): void {
+    echo '<h3 class="section-title">' . h($title) . ' <span class="section-count">(' . count($rows) . ')</span></h3>';
     echo '<p class="section-intro">' . h($intro) . '</p>';
 
-    $total = 0;
-    foreach ($weekends as $wk) $total += count($wk['groups'][$key]);
-    if ($total === 0) {
-        echo '<div class="warn-box">No huts in this group on any weekend.</div>';
+    if (empty($rows)) {
+        echo '<div class="warn-box">No huts in this group on this weekend.</div>';
         return;
     }
 
     echo '<div style="overflow-x:auto">';
     echo '<table class="results-table"><thead><tr>'
-       . '<th>#</th><th>Hut</th><th>Club</th><th>Distance</th><th>Elevation</th>'
+       . '<th>#</th><th>Hut</th><th>Club</th>' . ($show_dist ? '<th>Distance</th>' : '') . '<th>Elevation</th>'
        . '<th>Fri night</th><th>Sat night</th><th>Map</th><th>Book</th><th>Cached</th>'
        . '</tr></thead><tbody>';
 
-    foreach ($weekends as $fri => $wk) {
-        $rows = $wk['groups'][$key];
-        if (empty($rows)) continue;
+    foreach ($rows as $i => $e) {
+        $hut     = $e['hut'];
+        $name    = h($hut['official_name']);
+        $url     = $hut['official_website_url'];
+        $name_td = $url !== '' ? '<a href="' . h($url) . '" target="_blank">' . $name . '</a>' : $name;
+        $elev_s  = $hut['elevation_m'] !== null ? number_format((int)$hut['elevation_m']) . ' m' : '?';
+        $lat     = $hut['latitude'];
+        $lon     = $hut['longitude'];
+        $map_td  = '<a href="' . h('https://www.google.com/maps?q=' . $lat . ',' . $lon) . '" target="_blank">G-Maps</a>'
+                 . ' <a href="' . h('https://www.openstreetmap.org/?mlat=' . $lat . '&mlon=' . $lon . '&zoom=15') . '" target="_blank">OSM</a>'
+                 . ' <a href="' . h('geo:' . $lat . ',' . $lon) . '">GEO</a>';
+        $book_td = '<a href="' . h(BOOKING_BASE . $hut['reservation_id'] . '/wizard') . '" target="_blank">Reservation</a>';
+        $age     = (int)$hut['cache']['cache_age'];
+        $age_td  = h(format_age($age)) . ($age > CACHE_TTL ? ' <span class="stale">(stale)</span>' : '');
 
-        $sun   = date('Y-m-d', strtotime($fri . ' +2 days'));
-        $label = date('D d.m', strtotime($fri)) . ' – ' . date('D d.m.Y', strtotime($sun))
-               . ' · ' . count($rows) . ' hut' . (count($rows) === 1 ? '' : 's');
-        echo '<tr class="weekend-row" id="' . h($key . '-' . $fri) . '"><th colspan="10">'
-           . h($label) . ' <a class="to-top" href="#calendar">↑ calendar</a></th></tr>';
-
-        foreach ($rows as $i => $e) {
-            $hut       = $e['hut'];
-            $name      = h($hut['official_name']);
-            $url       = $hut['official_website_url'];
-            $name_td   = $url !== '' ? '<a href="' . h($url) . '" target="_blank">' . $name . '</a>' : $name;
-            $elev_s    = $hut['elevation_m'] !== null ? number_format((int)$hut['elevation_m']) . ' m' : '?';
-            $lat       = $hut['latitude'];
-            $lon       = $hut['longitude'];
-            $map_td    = '<a href="' . h('https://www.google.com/maps?q=' . $lat . ',' . $lon) . '" target="_blank">G-Maps</a>'
-                       . ' <a href="' . h('https://www.openstreetmap.org/?mlat=' . $lat . '&mlon=' . $lon . '&zoom=15') . '" target="_blank">OSM</a>'
-                       . ' <a href="' . h('geo:' . $lat . ',' . $lon) . '">GEO</a>';
-            $book_td   = '<a href="' . h(BOOKING_BASE . $hut['reservation_id'] . '/wizard') . '" target="_blank">Reservation</a>';
-            $age       = (int)$hut['cache']['cache_age'];
-            $age_td    = h(format_age($age)) . ($age > CACHE_TTL ? ' <span class="stale">(stale)</span>' : '');
-
-            echo '<tr>';
-            echo '<td class="rank">' . ($i + 1) . '</td>';
-            echo '<td class="hut-name">' . $name_td . '</td>';
-            echo '<td>' . h($hut['operating_club']) . '</td>';
-            echo '<td class="num">' . h($hut['distance_km'] . ' km') . '</td>';
-            echo '<td class="num elev">' . h($elev_s) . '</td>';
-            echo render_night_cell($e['fri'], $e['c_fri']);
-            echo render_night_cell($e['sat'], $e['c_sat']);
-            echo '<td class="map-links">' . $map_td . '</td>';
-            echo '<td class="reservation">' . $book_td . '</td>';
-            echo '<td class="cache-age">' . $age_td . '</td>';
-            echo "</tr>\n";
-        }
+        echo '<tr>';
+        echo '<td class="rank">' . ($i + 1) . '</td>';
+        echo '<td class="hut-name">' . $name_td . '</td>';
+        echo '<td>' . h($hut['operating_club']) . '</td>';
+        if ($show_dist) echo '<td class="num">' . h($hut['distance_km'] . ' km') . '</td>';
+        echo '<td class="num elev">' . h($elev_s) . '</td>';
+        echo render_night_cell($e['fri'], $e['c_fri']);
+        echo render_night_cell($e['sat'], $e['c_sat']);
+        echo '<td class="map-links">' . $map_td . '</td>';
+        echo '<td class="reservation">' . $book_td . '</td>';
+        echo '<td class="cache-age">' . $age_td . '</td>';
+        echo "</tr>\n";
     }
     echo '</tbody></table></div>';
 }
 
-/** Render the weekend calendar: one row per month, one chip per weekend linking to section 1. */
-function render_calendar(array $weekends): void {
+/** Render the weekend calendar: one row per month, one chip per weekend selecting that weekend. */
+function render_calendar(array $weekends, string $selected, array $query): void {
     $months = [];
     foreach ($weekends as $fri => $wk) {
         $months[date('M Y', strtotime($fri))][$fri] = $wk;
     }
 
-    echo '<div class="calendar" id="calendar">';
-    echo '<div class="calendar-title">Weekends with both nights free &mdash; click to jump</div>';
+    echo '<div class="calendar">';
+    echo '<div class="calendar-title">Weekends &mdash; number = huts with both nights free; click to show</div>';
     foreach ($months as $month => $wks) {
         echo '<div class="cal-month"><span class="cal-label">' . h($month) . '</span>';
         foreach ($wks as $fri => $wk) {
-            $n_both   = count($wk['groups']['both']);
-            $tooltip  = 'both: ' . $n_both . ' · one night: ' . count($wk['groups']['one'])
-                      . ' · almost: ' . count($wk['groups']['almost']);
-            $chip_txt = h(date('D d.m', strtotime($fri))) . ' <b>' . $n_both . '</b>';
-            if ($n_both > 0) {
-                echo '<a class="cal-chip cal-free" href="#both-' . h($fri) . '" title="' . h($tooltip) . '">' . $chip_txt . '</a>';
-            } else {
-                echo '<span class="cal-chip cal-none" title="' . h($tooltip) . '">' . $chip_txt . '</span>';
-            }
+            $n_both  = count($wk['groups']['both']);
+            $tooltip = 'both: ' . $n_both . ' · one night: ' . count($wk['groups']['one'])
+                     . ' · almost: ' . count($wk['groups']['almost']);
+            $cls     = 'cal-chip ' . ($n_both > 0 ? 'cal-free' : 'cal-none') . ($fri === $selected ? ' cal-selected' : '');
+            $href    = '?' . http_build_query($query + ['weekend' => $fri]);
+            echo '<a class="' . $cls . '" href="' . h($href) . '" title="' . h($tooltip) . '">'
+               . h(date('D d.m', strtotime($fri))) . ' <b>' . $n_both . '</b></a>';
         }
         echo '</div>';
     }
@@ -362,7 +375,7 @@ require_once __DIR__ . '/layout.php';
 render_page_head(
     'Free Weekends — Alpine Hut Weather Planner',
     'Free Weekends',
-    'Find huts near a location with enough free beds on Friday and Saturday nights, weekend by weekend',
+    'Find huts with enough free beds on Friday and Saturday nights, weekend by weekend',
     'free_weekends'
 );
 ?>
@@ -389,9 +402,6 @@ render_page_head(
     .results-table td.reservation a { color: #0d6efd; text-decoration: none; font-size: .8rem; }
     .results-table td.reservation a:hover { text-decoration: underline; }
     .results-table td.avail-unknown { color: #adb5bd; font-style: italic; }
-    .results-table tr.weekend-row th { background: var(--sub-bg); text-align: left; scroll-margin-top: 1rem; }
-    .to-top { float: right; color: #ced4da; font-size: .75rem; font-weight: 400; text-decoration: none; }
-    .to-top:hover { color: #fff; }
 
     .avail-open   { background: var(--green-bg)  !important; color: var(--green);  font-weight: 700; }
     .avail-almost { background: #ffe5cc          !important; color: #8a4500;      font-weight: 700; }
@@ -399,7 +409,12 @@ render_page_head(
     .unserviced   { font-size: .68rem; font-weight: 400; color: #6c757d; }
     .stale        { color: var(--yellow); font-weight: 600; }
 
-    .section-title { font-size: 1.1rem; margin: 1.5rem 0 .2rem; }
+    .checkbox-row { display: flex; align-items: center; gap: .4rem; font-size: .85rem; padding-bottom: 8px; }
+    input:disabled { background: #e9ecef; color: #adb5bd; }
+
+    .weekend-title { font-size: 1.15rem; margin: 1.25rem 0 .2rem; }
+    .section-title { font-size: 1rem; margin: 1.1rem 0 .2rem; }
+    .section-count { font-weight: 400; color: #6c757d; }
     .section-intro { font-size: .82rem; color: #6c757d; margin: 0 0 .6rem; }
 
     .calendar       { background: #fff; border: 1px solid var(--border); border-radius: 6px;
@@ -411,24 +426,28 @@ render_page_head(
                       white-space: nowrap; text-decoration: none; }
     .cal-free       { background: var(--green-bg); color: var(--green); border: 1px solid #b7dfc2; }
     .cal-free:hover { background: #c3e6cb; }
-    .cal-none       { background: #e9ecef; color: #adb5bd; border: 1px solid #dee2e6; }
+    .cal-none       { background: #e9ecef; color: #6c757d; border: 1px solid #dee2e6; }
+    .cal-none:hover { background: #dee2e6; }
+    .cal-selected   { outline: 2px solid var(--hdr-bg); outline-offset: 1px; font-weight: 700; }
 </style>
 
 <?php
 // ---------------------------------------------------------------------------
 // Form
 // ---------------------------------------------------------------------------
+$disabled = $all_huts ? ' disabled' : '';
 echo '<div class="search-form">';
 echo '<h2>Search</h2>';
 echo '<form method="get" action="">';
+echo '<input type="hidden" name="submitted" value="1">';
 echo '<div class="form-row">';
 echo '<div class="form-group">';
 echo '<label for="location">Location or Lat/Lon</label>';
-echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39" required>';
+echo '<input type="text" id="location" name="location" value="' . h($location_input) . '" placeholder="e.g. Innsbruck or 47.26,11.39"' . $disabled . '>';
 echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="distance">Radius (km)</label>';
-echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '">';
+echo '<input type="number" id="distance" name="distance" min="1" max="500" step="1" value="' . h((string)(int)$radius_km) . '"' . $disabled . '>';
 echo '</div>';
 echo '<div class="form-group">';
 echo '<label for="people">Free beds needed</label>';
@@ -437,6 +456,8 @@ echo '</div>';
 echo '<div class="form-group">';
 echo '<button type="submit">Search</button>';
 echo '</div>';
+echo '<label class="checkbox-row"><input type="checkbox" id="all_huts" name="all_huts" value="1"'
+   . ($all_huts ? ' checked' : '') . ' onchange="toggleLocation()"> All huts (ignore location/radius)</label>';
 echo '</div>';
 echo '<p class="hint">Checks the Friday and Saturday nights of every weekend in the next year that has cached data. '
    . 'Availability is read from local cache.</p>';
@@ -451,9 +472,13 @@ if ($error !== null) {
 } elseif ($submitted) {
     $no_cache = count(array_filter($huts, fn($hut) => $hut['cache'] === null));
     echo '<div class="result-summary">';
-    echo '<strong>' . count($huts) . '</strong> hut(s) with a reservation ID within <strong>' . (int)$radius_km
-       . ' km</strong> of <em>' . h($geo['display_name']) . '</em>, needing <strong>' . $people
-       . '</strong> free bed(s) &mdash; <strong>' . count($weekends) . '</strong> weekend(s) with cached data';
+    if ($all_huts)
+        echo '<strong>' . count($huts) . '</strong> hut(s) with a reservation ID (all locations)';
+    else
+        echo '<strong>' . count($huts) . '</strong> hut(s) with a reservation ID within <strong>' . (int)$radius_km
+           . ' km</strong> of <em>' . h($geo['display_name']) . '</em>';
+    echo ', needing <strong>' . $people . '</strong> free bed(s) &mdash; <strong>' . count($weekends)
+       . '</strong> weekend(s) with cached data';
     if ($no_cache > 0) {
         echo ' <span style="color:#856404">(' . $no_cache . ' hut(s) without cached availability; run <code>update_cache.php</code>)</span>';
     }
@@ -462,18 +487,37 @@ if ($error !== null) {
     if (empty($weekends)) {
         echo '<div class="warn-box">No cached availability for any upcoming weekend. Run <code>update_cache.php</code> first.</div>';
     } else {
-        render_calendar($weekends);
-        render_section('both', 'Both nights free',
-            "At least $people free bed(s) on Friday and Saturday night.", $weekends);
-        render_section('one', 'One night free',
-            "At least $people free bed(s) on only one night: Saturday-only huts first, then Friday-only.", $weekends);
+
+        // Chip links repeat the current search so that only the weekend changes
+        $query = ['submitted' => 1, 'people' => $people];
+        if ($all_huts)
+            $query['all_huts'] = 1;
+        else
+            $query += ['location' => $location_input, 'distance' => (int)$radius_km];
+        render_calendar($weekends, $selected, $query);
+
+        $wk  = $weekends[$selected];
+        $sun = date('Y-m-d', strtotime($selected . ' +2 days'));
+        echo '<h2 class="weekend-title">' . h(date('D d.m', strtotime($selected)) . ' – ' . date('D d.m.Y', strtotime($sun))) . '</h2>';
+        render_section('Both nights free',
+            "At least $people free bed(s) on Friday and Saturday night.", $wk['groups']['both'], !$all_huts);
+        render_section('One night free',
+            "At least $people free bed(s) on only one night: Saturday-only huts first, then Friday-only.", $wk['groups']['one'], !$all_huts);
         if ($people > 1) {
-            render_section('almost', 'Almost',
-                'Neither night has enough beds, but at least one night is only 1 bed short (' . ($people - 1) . ' free).', $weekends);
+            render_section('Almost',
+                'Neither night has enough beds, but at least one night is only 1 bed short (' . ($people - 1) . ' free).', $wk['groups']['almost'], !$all_huts);
         }
     }
 }
 ?>
+
+<script>
+function toggleLocation() {
+    var all = document.getElementById('all_huts').checked;
+    document.getElementById('location').disabled = all;
+    document.getElementById('distance').disabled = all;
+}
+</script>
 
 <?php render_page_foot([
     'Geocoding: <a href="https://nominatim.openstreetmap.org" target="_blank">Nominatim</a>',

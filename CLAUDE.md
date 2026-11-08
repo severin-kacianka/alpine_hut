@@ -8,6 +8,7 @@ Tools for finding and ranking alpine huts by weather forecast and bed availabili
 
 ```
 hut_search.php               Web UI (elevation-sorted table + cached bed availability + OSM map)
+free_weekends.php            Web UI: weekend calendar + huts with N free beds on Fri/Sat nights for the selected weekend (3 groups); all huts by default, optional location/radius filter
 update_cache.php             CLI/web: bulk-download reservation availability to reservation_cache/
 hut_search.py                CLI main tool (geocode + filter + weather + rank)
 hut_weather.py               CLI rank huts from a CSV by weather (no location filter)

@@ -1,5 +1,5 @@
 <?php
-// layout.php — shared page head/nav/footer for hut_search.php, where2go.php, and slotfinder.php.
+// layout.php — shared page head/nav/footer for hut_search.php, where2go.php, slotfinder.php, and free_weekends.php.
 // Each page keeps its own PHP logic and page-specific <style> block; this file only unifies the
 // shared shell (doctype/head/header/nav/footer) and the common stylesheet link.
 
@@ -9,9 +9,10 @@
  */
 function render_page_head(string $title, string $heading, string $subtitle, string $active, string $extra_head = ''): void {
     $pages = [
-        'hut_search' => ['href' => 'hut_search.php', 'label' => 'Hut Search'],
-        'where2go'   => ['href' => 'where2go.php',   'label' => 'Where to Go'],
-        'slotfinder' => ['href' => 'slotfinder.php', 'label' => 'Slot Finder'],
+        'hut_search'    => ['href' => 'hut_search.php',    'label' => 'Hut Search'],
+        'where2go'      => ['href' => 'where2go.php',      'label' => 'Where to Go'],
+        'slotfinder'    => ['href' => 'slotfinder.php',    'label' => 'Slot Finder'],
+        'free_weekends' => ['href' => 'free_weekends.php', 'label' => 'Free Weekends'],
     ];
     ?>
 <!DOCTYPE html>
